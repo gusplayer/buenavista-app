@@ -1,0 +1,3 @@
+rootProject.name = 'Buenavista'
+
+include ':app'
