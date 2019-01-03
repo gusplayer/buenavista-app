@@ -1,0 +1,15 @@
+<svg id="outline-brightness_1-24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #9f2022;
+      }
+    </style>
+  </defs>
+  <path id="Path_2088" data-name="Path 2088" class="cls-1" d="M0,0H24V24H0Z"/>
+  <path id="Path_2089" data-name="Path 2089" class="cls-2" d="M12,4a8,8,0,1,1-8,8,8.011,8.011,0,0,1,8-8m0-2A10,10,0,1,0,22,12,10,10,0,0,0,12,2Z"/>
+</svg>

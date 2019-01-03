@@ -1,0 +1,15 @@
+<svg id="outline-picture_in_picture-24px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #b4b4b4;
+      }
+    </style>
+  </defs>
+  <path id="Path_2107" data-name="Path 2107" class="cls-1" d="M0,0H24V24H0Z"/>
+  <path id="Path_2108" data-name="Path 2108" class="cls-2" d="M19,7H11v6h8Zm-2,4H13V9h4Zm4-8H3A2.006,2.006,0,0,0,1,5V19a1.989,1.989,0,0,0,2,1.98H21A1.989,1.989,0,0,0,23,19V5A2.006,2.006,0,0,0,21,3Zm0,16.01H3V4.98H21Z"/>
+</svg>
