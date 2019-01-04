@@ -1,5 +1,5 @@
 import React from "react";
-import API from "../../utils/api";
+import API from "../utils/api";
 import {
   StyleSheet,
   Text,
@@ -8,11 +8,12 @@ import {
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
-  ActivityIndicator
+  ActivityIndicator,
+  ImageBackground
 } from "react-native";
 import { connect } from "react-redux";
 
-class LoginMail extends React.Component {
+class Login extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -53,7 +54,7 @@ class LoginMail extends React.Component {
           style={styles.buttonLogin}
         >
           <View style={styles.alignButton}>
-            <Text style={styles.buttonText}>Iniciar Sesión</Text>
+            <Text style={styles.buttonText}>INGRESAR</Text>
           </View>
         </TouchableOpacity>
       );
@@ -65,63 +66,56 @@ class LoginMail extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <KeyboardAvoidingView
-        style={styles.container}
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        scrollEnabled={false}
+      <ImageBackground
+        source={require("../src/assets/background.jpg")}
+        style={{ width: "100%", height: "100%" }}
       >
-        <View style={styles.header}>
-          <Image
-            style={{
-              width: 130,
-              height: 23,
-              alignSelf: "center",
-              marginBottom: 50
-            }}
-            source={require("../../src/assets/komercianegro.png")}
-          />
-          <Image
-            resizeMode={"cover"}
-            style={{ width: 280, height: 150 }}
-            source={{
-              uri:
-                "https://www.tibco.com/blog/wp-content/uploads/2017/09/rsz_bigstock-mobile-app-design-and-user-int-172296434.jpg"
-            }}
-          />
-        </View>
-
-        <View style={styles.textWelcome}>
-          <Text style={styles.subtitle}>Ingresa a tu panel de control</Text>
-        </View>
-
-        <View style={styles.form}>
-          <View>
-            <TextInput
-              placeholderTextColor="#59617b"
-              placeholder={"Correo Electrónico"}
-              style={styles.input}
-              underlineColorAndroid="rgba(0,0,0,0)"
-              onChangeText={email => this.setState({ email })}
+        <KeyboardAvoidingView
+          style={styles.container}
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled={false}
+        >
+          <View style={styles.header}>
+            <Image
+              style={{
+                width: 130,
+                height: 23,
+                alignSelf: "center",
+                marginBottom: 50
+              }}
+              source={require("../src/assets/Logo.svg")}
             />
           </View>
-          <View>
-            <TextInput
-              placeholderTextColor="#59617b"
-              placeholder={"Tu Contraseña"}
-              style={styles.input}
-              underlineColorAndroid="transparent"
-              onChangeText={password => this.setState({ password })}
-            />
-          </View>
-          {this._getButtonLogin()}
-        </View>
 
-        {/* <View style={styles.footer}>
-          <Text style={styles.link} onPress={() => navigate("ForgetPass")}>
-            ¿Olvidaste tu contraseña?
-          </Text>
-        </View> */}
-      </KeyboardAvoidingView>
+          <View style={styles.form}>
+            <View>
+              <TextInput
+                placeholderTextColor="#59617b"
+                placeholder={"Cédula"}
+                style={styles.input}
+                underlineColorAndroid="rgba(0,0,0,0)"
+                onChangeText={email => this.setState({ email })}
+              />
+            </View>
+            <View>
+              <TextInput
+                placeholderTextColor="#59617b"
+                placeholder={"Contraseña"}
+                style={styles.input}
+                underlineColorAndroid="transparent"
+                onChangeText={password => this.setState({ password })}
+              />
+            </View>
+            {this._getButtonLogin()}
+          </View>
+
+          <View style={styles.footer}>
+            <Text style={styles.link} onPress={() => navigate("ForgetPass")}>
+              ¿Olvidé contraseña?
+            </Text>
+          </View>
+        </KeyboardAvoidingView>
+      </ImageBackground>
     );
   }
 }
@@ -130,7 +124,14 @@ const mapStateToProps = state => {
   return { auth: state };
 };
 
-export default connect(mapStateToProps)(LoginMail);
+export default connect(mapStateToProps)(Login);
+
+// Dorado #c3b381
+// Rojo  #9e2523
+// Azul    #004584
+// Naranja #db5d2a
+// Cafe    #7d4a25
+// Verde   #4d4f27
 
 const styles = StyleSheet.create({
   container: {
@@ -177,10 +178,10 @@ const styles = StyleSheet.create({
     color: "#59617b"
   },
   link: {
-    color: "#59617b",
+    color: "#ffffff",
     alignSelf: "center",
-    fontSize: 14,
-    fontWeight: "600"
+    fontSize: 15,
+    fontWeight: "500"
   },
   footer: {
     flex: 2,
@@ -196,7 +197,7 @@ const styles = StyleSheet.create({
     paddingLeft: 45,
     borderRadius: 5,
     color: "#59617b",
-    fontWeight: "600",
+    fontWeight: "300",
     marginBottom: 10,
     shadowOpacity: 0.3,
     shadowRadius: 3,
@@ -211,12 +212,12 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   buttonLogin: {
-    width: 300,
-    backgroundColor: "#f14b5a",
-    height: 45,
+    width: 280,
+    backgroundColor: "#c3b381",
+    height: 50,
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 5,
+    borderRadius: 25,
     marginBottom: 8
   },
   buttonText: {
@@ -225,6 +226,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     fontSize: 16,
-    fontWeight: "900"
+    fontWeight: "300"
   }
 });

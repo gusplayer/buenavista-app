@@ -9,7 +9,7 @@ export default class Terms extends React.Component {
   render() {
     return (
       <View>
-        <Text>Terminos y condiciones</Text>
+        <Text>Terminos y condiciones asksdkkmslm</Text>
       </View>
     );
   }

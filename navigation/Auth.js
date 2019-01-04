@@ -9,7 +9,7 @@ class Auth extends React.Component {
     // } else {
     //   return <LoginNavigator />;
     // }
-    return <DashNavigator />;
+    return <LoginNavigator />;
   }
 }
 
@@ -18,5 +18,4 @@ const mapStateToProps = state => {
     auth: state.auth
   };
 };
-
 export default connect(mapStateToProps)(Auth);
