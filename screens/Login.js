@@ -12,6 +12,8 @@ import {
   ImageBackground
 } from "react-native";
 import { connect } from "react-redux";
+import { CheckBox } from "native-base";
+import { Bold } from "../utils/const";
 
 class Login extends React.Component {
   constructor() {
@@ -68,10 +70,9 @@ class Login extends React.Component {
     return (
       <ImageBackground
         source={require("../src/assets/background.jpg")}
-        style={{ width: "100%", height: "100%" }}
+        style={styles.container}
       >
         <KeyboardAvoidingView
-          style={styles.container}
           resetScrollToCoords={{ x: 0, y: 0 }}
           scrollEnabled={false}
         >
@@ -114,6 +115,13 @@ class Login extends React.Component {
               ¿Olvidé contraseña?
             </Text>
           </View>
+
+          <View style={styles.terms}>
+            <CheckBox checked={true} color="#c3b381" />
+            <Text style={styles.termsText} onPress={() => navigate("Terms")}>
+              Al ingresar aceptarás los <Bold>términos y condiciones</Bold>
+            </Text>
+          </View>
         </KeyboardAvoidingView>
       </ImageBackground>
     );
@@ -144,10 +152,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#dcf4fb"
   },
   header: {
-    flex: 7,
+    flex: 4,
     alignContent: "center",
     justifyContent: "center",
-    backgroundColor: "#dcf4fb",
     paddingTop: 20,
     flexDirection: "column"
   },
@@ -159,9 +166,26 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   form: {
-    flex: 5,
+    flex: 4,
     alignContent: "center",
-    justifyContent: "center"
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  footer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingBottom: 10,
+    marginTop: 5,
+    marginBottom: 10,
+    width: 300
+  },
+  terms: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    width: "85%"
   },
   title: {
     fontSize: 18,
@@ -181,14 +205,14 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     alignSelf: "center",
     fontSize: 15,
-    fontWeight: "500"
+    fontWeight: "400"
   },
-  footer: {
-    flex: 2,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingBottom: 10,
-    width: 300
+  termsText: {
+    color: "#ffffff",
+    alignSelf: "center",
+    fontSize: 12,
+    fontWeight: "400",
+    marginLeft: 5
   },
   input: {
     backgroundColor: "#ffffff",
@@ -218,7 +242,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 25,
-    marginBottom: 8
+    marginTop: 15
   },
   buttonText: {
     color: "#fff",
