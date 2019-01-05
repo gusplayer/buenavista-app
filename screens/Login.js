@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   TextInput,
   TouchableOpacity,
   KeyboardAvoidingView,
@@ -13,7 +12,8 @@ import {
 } from "react-native";
 import { connect } from "react-redux";
 import { CheckBox } from "native-base";
-import { Bold } from "../utils/const";
+import { Bold, Colors } from "../utils/const";
+import Image from "react-native-remote-svg";
 
 class Login extends React.Component {
   constructor() {
@@ -47,12 +47,14 @@ class Login extends React.Component {
       });
   };
   _getButtonLogin() {
+    const { navigate } = this.props.navigation;
     if (this.state.loading) {
       return <ActivityIndicator size="large" color="#0000ff" />;
     } else {
       return (
         <TouchableOpacity
-          onPress={this.onPressLogin}
+          // onPress={this.onPressLogin}
+          onPress={() => navigate("HotelList")}
           style={styles.buttonLogin}
         >
           <View style={styles.alignButton}>
@@ -78,13 +80,8 @@ class Login extends React.Component {
         >
           <View style={styles.header}>
             <Image
-              style={{
-                width: 130,
-                height: 23,
-                alignSelf: "center",
-                marginBottom: 50
-              }}
               source={require("../src/assets/Logo.svg")}
+              style={{ width: 200, height: 100 }}
             />
           </View>
 
@@ -134,13 +131,6 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(Login);
 
-// Dorado #c3b381
-// Rojo  #9e2523
-// Azul    #004584
-// Naranja #db5d2a
-// Cafe    #7d4a25
-// Verde   #4d4f27
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -154,6 +144,7 @@ const styles = StyleSheet.create({
   header: {
     flex: 4,
     alignContent: "center",
+    alignItems: "center",
     justifyContent: "center",
     paddingTop: 20,
     flexDirection: "column"
@@ -237,7 +228,7 @@ const styles = StyleSheet.create({
   },
   buttonLogin: {
     width: 280,
-    backgroundColor: "#c3b381",
+    backgroundColor: Colors.gold,
     height: 50,
     alignItems: "center",
     justifyContent: "center",

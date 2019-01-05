@@ -21,9 +21,7 @@ export const LoginNavigator = StackNavigator(
     },
     Terms: {
       screen: Terms,
-      navigationOptions: {
-        header: null
-      }
+      navigationOptions: { title: "Terminos y condiciones" }
     },
     HotelList: {
       screen: HotelList,
