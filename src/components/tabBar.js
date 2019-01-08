@@ -1,36 +1,64 @@
-import * as React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import Image from "react-native-remote-svg";
-import Icon from "react-native-vector-icons/Feather";
+import * as React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Image from 'react-native-remote-svg';
+import Icon from 'react-native-vector-icons/Feather';
+import { Colors } from '../../utils/const';
 
-const TabBar = () => {
+const TabBar = ({ navigation }) => {
   return (
     <View style={styles.tabBar}>
-      <TouchableOpacity style={styles.tabItem} onPress={() => navigate("Dash")}>
-        <Icon name="home" style={styles.tabIcon} />
-        <Text style={styles.tabTitle}> CATÁLOGO</Text>
+      <TouchableOpacity
+        style={styles.tabItem}
+        onPress={() => navigate('HotelList')}
+      >
+        <Image
+          source={require('../assets/iconos/bar-bottom/active/domain.svg')}
+          style={styles.imageIcon}
+        />
+        <Text style={styles.tabTitleActive}> CATÁLOGO</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.tabItem} onPress={() => navigate("Soon")}>
-        <Icon name="message-circle" style={styles.tabIcon} />
+      <TouchableOpacity
+        style={styles.tabItem}
+        onPress={() => navigation.navigate('Booking')}
+      >
+        <Image
+          source={require('../assets/iconos/bar-bottom/gray/search.svg')}
+          style={{ width: 25, height: 25 }}
+        />
         <Text style={styles.tabTitle}> RESERVAR</Text>
       </TouchableOpacity>
 
       <TouchableOpacity
         style={styles.tabItem}
-        onPress={() => navigate("Sales")}
+        onPress={() => navigate('CouponAvalible')}
       >
-        <Icon name="trending-up" style={styles.tabIcon} />
+        <Image
+          source={require('../assets/iconos/bar-bottom/gray/cupon.svg')}
+          style={{ width: 25, height: 25 }}
+        />
         <Text style={styles.tabTitle}> CUPONES</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.tabItem} onPress={() => navigate("Soon")}>
-        <Icon name="settings" style={styles.tabIcon} />
+      <TouchableOpacity
+        style={styles.tabItem}
+        onPress={() => navigate('Terms')}
+      >
+        <Image
+          source={require('../assets/iconos/bar-bottom/gray/notifications.svg')}
+          style={{ width: 25, height: 25 }}
+        />
         <Text style={styles.tabTitle}> NOTIFICACIÓN</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity style={styles.tabItem} onPress={() => navigate("Soon")}>
-        <Icon name="settings" style={styles.tabIcon} />
+      <TouchableOpacity
+        style={styles.tabItem}
+        onPress={() => navigate('Terms')}
+      >
+        <Image
+          source={require('../assets/iconos/bar-bottom/gray/circle.svg')}
+          style={{ width: 25, height: 25 }}
+        />
         <Text style={styles.tabTitle}> MEMEBRESIA</Text>
       </TouchableOpacity>
     </View>
@@ -40,45 +68,34 @@ const TabBar = () => {
 const styles = StyleSheet.create({
   tabBar: {
     height: 60,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
     paddingHorizontal: 5,
     elevation: 4,
-    backgroundColor: "white"
+    backgroundColor: 'white'
   },
   tabItem: {
-    alignItems: "center"
+    alignItems: 'center'
   },
   tabIcon: {
-    color: "#90a4ae",
+    color: '#90a4ae',
     fontSize: 23,
-    fontWeight: "100"
+    fontWeight: '100'
   },
   tabTitle: {
     marginTop: 3,
     fontSize: 10,
-    color: "#90a4ae"
+    color: '#90a4ae'
   },
-  tabCart: {
-    backgroundColor: "#f1c40f",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 30,
-    height: 55,
-    width: 55,
-    elevation: 3,
-    marginTop: 0
-  },
-  tabCartIcon: {
-    color: "black",
-    fontSize: 26,
-    fontWeight: "100"
-  },
-  tabCartTitle: {
+  tabTitleActive: {
     marginTop: 3,
     fontSize: 10,
-    color: "#90a4ae"
+    color: Colors.red
+  },
+  imageIcon: {
+    height: 23,
+    width: 23
   }
 });
 

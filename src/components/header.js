@@ -1,27 +1,40 @@
-import * as React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import Image from "react-native-remote-svg";
+import React from 'react';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Image from 'react-native-remote-svg';
+import { Container, Header, Left, Body, Right } from 'native-base';
+import Icon from 'react-native-vector-icons/Feather';
 
-const Header = () => {
-  return (
-    <View style={styles.container}>
-      <Image
-        source={require("../assets/Logo.svg")}
-        style={{ width: 200, height: 70 }}
-      />
-    </View>
-  );
-};
+export default class HeaderTab extends React.Component {
+  render() {
+    const { navigate } = this.props.navigation;
+    return (
+      <Container style={styles.container}>
+        <Header style={styles.header}>
+          <Left />
+          <Body>
+            <Image
+              source={require('../assets/Logo.svg')}
+              style={{ width: 200, height: 70 }}
+            />
+          </Body>
+          <Right>
+            <TouchableOpacity onPress={() => navigate('Profile')}>
+              <Icon name="align-center" size={23} color="gray" />
+            </TouchableOpacity>
+          </Right>
+        </Header>
+      </Container>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
-    elevation: 2,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "white",
-    height: 65
+    height: 60
+  },
+  header: {
+    width: '100%',
+    backgroundColor: 'white',
+    alignItems: 'center'
   }
 });
-
-export default Header;
