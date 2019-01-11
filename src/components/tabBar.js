@@ -9,7 +9,7 @@ const TabBar = ({ navigation }) => {
     <View style={styles.tabBar}>
       <TouchableOpacity
         style={styles.tabItem}
-        onPress={() => navigate('HotelList')}
+        onPress={() => navigation.navigate('HotelList')}
       >
         <Image
           source={require('../assets/iconos/bar-bottom/active/domain.svg')}
@@ -31,7 +31,7 @@ const TabBar = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.tabItem}
-        onPress={() => navigate('CouponAvalible')}
+        onPress={() => navigation.navigate('CouponAvalible')}
       >
         <Image
           source={require('../assets/iconos/bar-bottom/gray/cupon.svg')}
@@ -42,7 +42,7 @@ const TabBar = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.tabItem}
-        onPress={() => navigate('Terms')}
+        onPress={() => navigation.navigate('Terms')}
       >
         <Image
           source={require('../assets/iconos/bar-bottom/gray/notifications.svg')}
@@ -53,7 +53,7 @@ const TabBar = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.tabItem}
-        onPress={() => navigate('Terms')}
+        onPress={() => navigation.navigate('Terms')}
       >
         <Image
           source={require('../assets/iconos/bar-bottom/gray/circle.svg')}

@@ -43,9 +43,7 @@ export const LoginNavigator = StackNavigator(
     },
     Filter: {
       screen: Filter,
-      navigationOptions: {
-        header: null
-      }
+      navigationOptions: { title: 'Filtrar' }
     },
     Benefits: {
       screen: Benefits,
