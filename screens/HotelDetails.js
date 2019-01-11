@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import HeaderTab from "../src/components/header";
 
 export default class HotelDetails extends React.Component {
   constructor() {
@@ -7,8 +8,18 @@ export default class HotelDetails extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
+    const leftHeader = { data: true, icon: "arrow-left", path: "HotelList" };
+    const rigthHeader = { data: false };
+
     return (
-      <View>
+      <View style={styles.container}>
+        <HeaderTab
+          navigation={this.props.navigation}
+          left={leftHeader}
+          right={rigthHeader}
+        />
+
         <Text>Terminos y condiciones</Text>
       </View>
     );
@@ -18,11 +29,6 @@ export default class HotelDetails extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
-    backgroundColor: "transparent",
-    alignItems: "center",
-    justifyContent: "space-around",
-    flexDirection: "column",
-    backgroundColor: "#dcf4fb"
+    width: "100%"
   }
 });
