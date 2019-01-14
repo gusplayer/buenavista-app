@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Colors, Bold } from '../utils/const';
-import { Item, Input, Label } from 'native-base';
+import { Item, Input, Label, Form } from 'native-base';
 
 export default class Filter extends React.Component {
   constructor() {
@@ -9,16 +9,28 @@ export default class Filter extends React.Component {
   }
 
   render() {
+    const { navigate } = this.props.navigation;
+
     return (
       <View style={styles.container}>
         <View style={styles.contentText}>
           <Text style={styles.textBold}>Filtrar por:</Text>
-          <Item stackedLabel last>
-            <Label>Password</Label>
-            <Input />
-          </Item>
+          <View style={styles.form}>
+            <Item inlineLabel>
+              <Label>Selecciona el país</Label>
+              <Input />
+            </Item>
+            <Item inlineLabel>
+              <Label>Selecciona la ciudad o provincia</Label>
+              <Input />
+            </Item>
+          </View>
 
           <Text style={styles.textBold}>Ordenar precios:</Text>
+          <View style={styles.form}>
+            <Text style={styles.filterPrice}>Precio de mayor a menor</Text>
+            <Text style={styles.filterPrice}>Precio de menor a mayor</Text>
+          </View>
         </View>
         <TouchableOpacity
           onPress={() => navigate('HotelList')}
@@ -52,10 +64,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: 'black'
   },
-
+  form: {
+    marginVertical: 15,
+    marginBottom: 22
+  },
   alignButton: {
     flexDirection: 'row',
     alignItems: 'center'
+  },
+  filterPrice: {
+    fontSize: 16,
+    marginBottom: 10
   },
   buttonLogin: {
     width: 280,

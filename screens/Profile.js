@@ -1,7 +1,7 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-export default class Profile extends React.Component {
+export default class Benefits extends React.Component {
   constructor() {
     super();
   }
@@ -9,7 +9,7 @@ export default class Profile extends React.Component {
   render() {
     return (
       <View>
-        <Text>Terminos y condiciones</Text>
+        <Text>Perfil</Text>
       </View>
     );
   }
@@ -18,11 +18,11 @@ export default class Profile extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
-    backgroundColor: "transparent",
-    alignItems: "center",
-    justifyContent: "space-around",
-    flexDirection: "column",
-    backgroundColor: "#dcf4fb"
+    width: '100%',
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'column',
+    backgroundColor: '#dcf4fb'
   }
 });

@@ -42,7 +42,7 @@ const TabBar = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.tabItem}
-        onPress={() => navigation.navigate('Terms')}
+        onPress={() => navigation.navigate('Notification')}
       >
         <Image
           source={require('../assets/iconos/bar-bottom/gray/notifications.svg')}
@@ -53,7 +53,7 @@ const TabBar = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.tabItem}
-        onPress={() => navigation.navigate('Terms')}
+        onPress={() => navigation.navigate('Membership')}
       >
         <Image
           source={require('../assets/iconos/bar-bottom/gray/circle.svg')}

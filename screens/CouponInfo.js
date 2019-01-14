@@ -9,7 +9,7 @@ export default class Benefits extends React.Component {
   render() {
     return (
       <View>
-        <Text>Veneficios</Text>
+        <Text>Cupones</Text>
       </View>
     );
   }
