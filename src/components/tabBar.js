@@ -1,18 +1,18 @@
-import * as React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Image from 'react-native-remote-svg';
-import Icon from 'react-native-vector-icons/Feather';
-import { Colors } from '../../utils/const';
+import * as React from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import Image from "react-native-remote-svg";
+import Icon from "react-native-vector-icons/Feather";
+import { Colors } from "../../utils/const";
 
 const TabBar = ({ navigation }) => {
   return (
     <View style={styles.tabBar}>
       <TouchableOpacity
         style={styles.tabItem}
-        onPress={() => navigation.navigate('HotelList')}
+        onPress={() => navigation.navigate("HotelList")}
       >
         <Image
-          source={require('../assets/iconos/bar-bottom/active/domain.svg')}
+          source={require("../assets/iconos/bar-bottom/active/domain.svg")}
           style={styles.imageIcon}
         />
         <Text style={styles.tabTitleActive}> CATÁLOGO</Text>
@@ -20,10 +20,10 @@ const TabBar = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.tabItem}
-        onPress={() => navigation.navigate('Booking')}
+        onPress={() => navigation.navigate("Booking")}
       >
         <Image
-          source={require('../assets/iconos/bar-bottom/gray/search.svg')}
+          source={require("../assets/iconos/bar-bottom/gray/search.svg")}
           style={{ width: 25, height: 25 }}
         />
         <Text style={styles.tabTitle}> RESERVAR</Text>
@@ -31,10 +31,10 @@ const TabBar = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.tabItem}
-        onPress={() => navigation.navigate('CouponAvalible')}
+        onPress={() => navigation.navigate("CouponsView")}
       >
         <Image
-          source={require('../assets/iconos/bar-bottom/gray/cupon.svg')}
+          source={require("../assets/iconos/bar-bottom/gray/cupon.svg")}
           style={{ width: 25, height: 25 }}
         />
         <Text style={styles.tabTitle}> CUPONES</Text>
@@ -42,10 +42,10 @@ const TabBar = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.tabItem}
-        onPress={() => navigation.navigate('Notification')}
+        onPress={() => navigation.navigate("Notification")}
       >
         <Image
-          source={require('../assets/iconos/bar-bottom/gray/notifications.svg')}
+          source={require("../assets/iconos/bar-bottom/gray/notifications.svg")}
           style={{ width: 25, height: 25 }}
         />
         <Text style={styles.tabTitle}> NOTIFICACIÓN</Text>
@@ -53,10 +53,10 @@ const TabBar = ({ navigation }) => {
 
       <TouchableOpacity
         style={styles.tabItem}
-        onPress={() => navigation.navigate('Membership')}
+        onPress={() => navigation.navigate("Membership")}
       >
         <Image
-          source={require('../assets/iconos/bar-bottom/gray/circle.svg')}
+          source={require("../assets/iconos/bar-bottom/gray/circle.svg")}
           style={{ width: 25, height: 25 }}
         />
         <Text style={styles.tabTitle}> MEMEBRESIA</Text>
@@ -67,30 +67,32 @@ const TabBar = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   tabBar: {
+    width: "100%",
     height: 60,
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-    paddingHorizontal: 5,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 4,
     elevation: 4,
-    backgroundColor: 'white'
+    backgroundColor: "white"
   },
   tabItem: {
-    alignItems: 'center'
+    flex: 1,
+    alignItems: "center"
   },
   tabIcon: {
-    color: '#90a4ae',
+    color: "#90a4ae",
     fontSize: 23,
-    fontWeight: '100'
+    fontWeight: "100"
   },
   tabTitle: {
     marginTop: 3,
     fontSize: 10,
-    color: '#90a4ae'
+    color: "#90a4ae"
   },
   tabTitleActive: {
     marginTop: 3,
-    fontSize: 10,
+    fontSize: 9,
     color: Colors.red
   },
   imageIcon: {

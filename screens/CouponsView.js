@@ -5,9 +5,8 @@ import Image from "react-native-remote-svg";
 import { Container, Tab, Tabs, TabHeading } from "native-base";
 import TabBar from "../src/components/tabBar";
 import HeaderTab from "../src/components/header";
-import Profile from "./Profile";
-import Benefits from "./Benefits";
-import CouponInfo from "./CouponInfo";
+import CouponAvalible from "./CouponInfo";
+import CouponUsed from "./CouponUsed";
 
 export default class Membreship extends React.Component {
   constructor() {
@@ -28,39 +27,24 @@ export default class Membreship extends React.Component {
         />
 
         <ScrollView style={styles.body}>
-          <View style={styles.infoHotel}>
-            <Image
-              style={styles.imageTop}
-              source={require("../src/assets/tarjeta_clientes.png")}
-            />
-          </View>
           <Tabs tabBarUnderlineStyle={{ backgroundColor: Colors.red }}>
             <Tab
               heading={
                 <TabHeading style={{ backgroundColor: "white" }}>
-                  <Text style={{ color: "black" }}>Perfil</Text>
+                  <Text style={{ color: "black" }}>Disponibles</Text>
                 </TabHeading>
               }
             >
-              <Profile navigation={this.props.navigation} />
+              <CouponAvalible navigation={this.props.navigation} />
             </Tab>
             <Tab
               heading={
                 <TabHeading style={{ backgroundColor: "white" }}>
-                  <Text style={{ color: "black" }}>Beneficios</Text>
+                  <Text style={{ color: "black" }}>Usados</Text>
                 </TabHeading>
               }
             >
-              <Benefits />
-            </Tab>
-            <Tab
-              heading={
-                <TabHeading style={{ backgroundColor: "white" }}>
-                  <Text style={{ color: "black" }}>Cupones</Text>
-                </TabHeading>
-              }
-            >
-              <CouponInfo />
+              <CouponUsed />
             </Tab>
           </Tabs>
         </ScrollView>
@@ -74,8 +58,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
+    backgroundColor: "transparent",
     alignItems: "center",
-    justifyContent: "space-around"
+    justifyContent: "space-around",
+    flexDirection: "column",
+    backgroundColor: "#dcf4fb"
   },
   imageTop: {
     width: "100%"

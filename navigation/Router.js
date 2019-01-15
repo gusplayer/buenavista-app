@@ -1,17 +1,19 @@
-import React from 'react';
-import { StackNavigator } from 'react-navigation';
-import Login from '../screens/Login';
-import Terms from '../screens/Terms';
-import HotelList from '../screens/HotelList';
-import HotelDetails from '../screens/HotelDetails';
-import Profile from '../screens/Profile';
-import Filter from '../screens/Filter';
-import Benefits from '../screens/Benefits';
-import CouponUsed from '../screens/CouponUsed';
-import CouponAvalible from '../screens/CouponAvalible';
-import Booking from '../screens/Booking';
-import Notification from '../screens/Notification';
-import Membership from '../screens/Membership';
+import React from "react";
+import { StackNavigator } from "react-navigation";
+import Login from "../screens/Login";
+import Terms from "../screens/Terms";
+import HotelList from "../screens/HotelList";
+import HotelDetails from "../screens/HotelDetails";
+import Profile from "../screens/Profile";
+import Filter from "../screens/Filter";
+import Benefits from "../screens/Benefits";
+import CouponUsed from "../screens/CouponUsed";
+import CouponAvalible from "../screens/CouponAvalible";
+import Booking from "../screens/Booking";
+import Notification from "../screens/Notification";
+import Membership from "../screens/Membership";
+import CouponsView from "../screens/CouponsView";
+import ChangePassword from "../screens/ChangePassword";
 
 export const LoginNavigator = StackNavigator(
   {
@@ -23,7 +25,7 @@ export const LoginNavigator = StackNavigator(
     },
     Terms: {
       screen: Terms,
-      navigationOptions: { title: 'Terminos y condiciones' }
+      navigationOptions: { title: "Terminos y condiciones" }
     },
     HotelList: {
       screen: HotelList,
@@ -45,7 +47,7 @@ export const LoginNavigator = StackNavigator(
     },
     Filter: {
       screen: Filter,
-      navigationOptions: { title: 'Filtrar' }
+      navigationOptions: { title: "Filtrar" }
     },
     Benefits: {
       screen: Benefits,
@@ -82,10 +84,22 @@ export const LoginNavigator = StackNavigator(
       navigationOptions: {
         header: null
       }
+    },
+    CouponsView: {
+      screen: CouponsView,
+      navigationOptions: {
+        header: null
+      }
+    },
+    ChangePassword: {
+      screen: ChangePassword,
+      navigationOptions: {
+        header: null
+      }
     }
   },
   {
-    initialRouteName: 'Membership'
+    initialRouteName: "Login"
   }
 );
 // export const DashNavigator = StackNavigator(
