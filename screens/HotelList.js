@@ -24,8 +24,8 @@ export default class HotelList extends React.Component {
             "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
           ciudad: "Villavicencio",
           descuento: "10",
-          precio: "60.000",
-          precioBuenavista: "45.000"
+          precio: "120",
+          precioBuenavista: "100"
         },
         {
           nombre: "Hotel GHL",
@@ -33,8 +33,8 @@ export default class HotelList extends React.Component {
             "https://images.pexels.com/photos/6534/holiday-vacation-hotel-luxury.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
           ciudad: "Bogota",
           descuento: "10",
-          precio: "700.000",
-          precioBuenavista: "550.000"
+          precio: "95",
+          precioBuenavista: "80"
         },
         {
           nombre: "Hotel Cabañas del mar",
@@ -42,8 +42,8 @@ export default class HotelList extends React.Component {
             "https://images.pexels.com/photos/1287441/pexels-photo-1287441.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
           ciudad: "San Andres",
           descuento: "10",
-          precio: "120.000",
-          precioBuenavista: "115.000"
+          precio: "180",
+          precioBuenavista: "150"
         }
       ]
     };
@@ -76,9 +76,9 @@ export default class HotelList extends React.Component {
                 <View style={styles.priceHotel}>
                   <Text style={styles.nitePriceText}>Precio por noche</Text>
                   <View style={styles.preciosContent}>
-                    <Text style={styles.precioText}>$ {item.precio}</Text>
+                    <Text style={styles.precioText}>USD {item.precio}</Text>
                     <Text style={styles.precioBuenavista}>
-                      $ {item.precioBuenavista}
+                      USD {item.precioBuenavista}
                     </Text>
                   </View>
                 </View>

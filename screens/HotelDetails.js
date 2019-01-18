@@ -44,9 +44,9 @@ export default class HotelDetails extends React.Component {
               <Text style={styles.descriptionTitle}>Precio por noche</Text>
             </View>
             <View style={styles.priceContainerRight}>
-              <Text style={styles.precioText}>$ {item.precio}</Text>
+              <Text style={styles.precioText}>USD {item.precio}</Text>
               <Text style={styles.precioBuenavista}>
-                $ {item.precioBuenavista}
+                USD {item.precioBuenavista}
               </Text>
             </View>
           </View>
@@ -54,22 +54,22 @@ export default class HotelDetails extends React.Component {
             <Text style={styles.descriptionTitle}>Cupones</Text>
             <View style={styles.couponContainer}>
               <Image
-                source={require("../src/assets/iconoscupones/blue/MI.svg")}
+                source={require("../src/assets/iconoscupones/premium/cm.svg")}
                 style={styles.imageCoupon}
               />
               <Image
-                source={require("../src/assets/iconoscupones/blue/CM.svg")}
+                source={require("../src/assets/iconoscupones/premium/mi.svg")}
                 style={styles.imageCoupon}
               />
 
               <Image
-                source={require("../src/assets/iconoscupones/blue/2x1.svg")}
+                source={require("../src/assets/iconoscupones/premium/2x1.svg")}
                 style={styles.imageCoupon}
               />
             </View>
           </View>
           <View style={styles.webSiteLink}>
-            <Text style={styles.textLink}>Ver sitio web del hotel</Text>
+            <Text style={styles.textLink}>Ver mas información del hotel</Text>
           </View>
           <View style={styles.bookingButton}>
             <Text
