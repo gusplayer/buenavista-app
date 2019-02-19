@@ -12,11 +12,23 @@ import HeaderTab from "../src/components/header";
 import TabBar from "../src/components/tabBar";
 import { Colors } from "../utils/const";
 import { Container } from "native-base";
+import API from "../utils/api";
 
 export default class HotelList extends React.Component {
+  async componentDidMount() {
+    const hotelAPI = await API.getHotelList();
+    console.warn(hotelAPI);
+    this.setState({
+      hotelList: hotelAPI,
+      loading: false
+    });
+  }
+
   constructor() {
     super();
     this.state = {
+      hotelList: [],
+      loading: false,
       hotels: [
         {
           nombre: "Hotel del Llano",
@@ -55,8 +67,8 @@ export default class HotelList extends React.Component {
     return (
       <FlatList
         style={styles.flatList}
-        data={this.state.hotels}
-        keyExtractor={(item, _) => item.nombre}
+        data={this.state.hotelList}
+        keyExtractor={(item, _) => item.HOTEL_NOMBRE}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() =>
@@ -67,13 +79,16 @@ export default class HotelList extends React.Component {
           >
             <View style={styles.itemList}>
               <View style={styles.infoProduct}>
-                <Image style={styles.imageHotel} source={{ uri: item.foto }} />
+                <Image
+                  style={styles.imageHotel}
+                  source={{ uri: item.IMAGEN_HOTEL }}
+                />
 
                 <View style={styles.itemListText}>
-                  <Text style={styles.nameHotel}>{item.nombre}</Text>
-                  <Text style={styles.nameCity}>{item.ciudad} </Text>
+                  <Text style={styles.nameHotel}>{item.HOTEL_NOMBRE}</Text>
+                  <Text style={styles.nameCity}>{item.CIUDAD} </Text>
                 </View>
-                <View style={styles.priceHotel}>
+                {/* <View style={styles.priceHotel}>
                   <Text style={styles.nitePriceText}>Precio por noche</Text>
                   <View style={styles.preciosContent}>
                     <Text style={styles.precioText}>USD {item.precio}</Text>
@@ -81,7 +96,7 @@ export default class HotelList extends React.Component {
                       USD {item.precioBuenavista}
                     </Text>
                   </View>
-                </View>
+                </View> */}
               </View>
             </View>
           </TouchableOpacity>

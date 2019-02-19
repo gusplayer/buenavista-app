@@ -89,7 +89,7 @@ class Login extends React.Component {
             <View>
               <TextInput
                 placeholderTextColor="#59617b"
-                placeholder={"Cédula"}
+                placeholder={"Id Socio"}
                 style={styles.input}
                 underlineColorAndroid="rgba(0,0,0,0)"
                 onChangeText={email => this.setState({ email })}
