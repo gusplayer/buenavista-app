@@ -8,10 +8,23 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import { Colors, Bold } from "../utils/const";
+import API from "../utils/api";
 
 export default class Benefits extends React.Component {
   constructor() {
     super();
+    this.state = {
+      profileData: "",
+      loading: false
+    };
+  }
+
+  async componentDidMount() {
+    const profileAPI = await API.getProfile();
+    this.setState({
+      profileData: profileAPI[0],
+      loading: false
+    });
   }
 
   render() {
@@ -25,7 +38,7 @@ export default class Benefits extends React.Component {
               "http://keenthemes.com/preview/metronic/theme/assets/pages/media/profile/profile_user.jpg"
           }}
         />
-        <Text style={styles.nameUser}>Juan Camilo Guaman Chamorro</Text>
+        <Text style={styles.nameUser}>{this.state.profileData.clNombre}</Text>
         <View style={styles.itemList}>
           <View style={styles.itemInfo}>
             <Icon
@@ -35,19 +48,20 @@ export default class Benefits extends React.Component {
               style={styles.itemIcon}
             />
             <Text style={styles.itemText}>
-              <Bold>C.I / D-N.I</Bold> 40123654
+              <Bold>C.I / D-N.I</Bold> {this.state.profileData.clCedula}
             </Text>
           </View>
           <View style={styles.itemInfo}>
             <Icon name="user" size={20} color="gray" style={styles.itemIcon} />
             <Text style={styles.itemText}>
-              <Bold>Socio No. </Bold> 572312
+              <Bold>Socio No. </Bold> {this.state.profileData.faCodigo}
             </Text>
           </View>
           <View style={styles.itemInfo}>
             <Icon name="disc" size={20} color="gray" style={styles.itemIcon} />
             <Text style={styles.itemText}>
-              <Bold>Fecha Caducidad </Bold> 31/05/2019
+              <Bold>Fecha Caducidad </Bold>
+              {this.state.profileData.Column1}
             </Text>
           </View>
           <View style={styles.itemInfo}>
@@ -91,7 +105,7 @@ const styles = StyleSheet.create({
   nameUser: {
     width: 180,
     fontWeight: "600",
-    fontSize: 19,
+    fontSize: 17,
     textAlign: "center",
     color: Colors.red
   },

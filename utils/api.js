@@ -4,45 +4,15 @@ const BASE_API =
   "http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/";
 
 class Api {
-  // http://186.4.242.81/wsreservaciones
-  //http://186.4.242.81/wsreservaciones/WebServiceReservaciones.asmx/metodoLogin?dami=string&clave=string
-  // TO-DO Login user
-  postLogin(email, password) {
-    return new Promise((resolve, reject) => {
-      axios
-        .post(
-          `${BASE_API}oauth/token`,
-          {
-            grant_type: "password",
-            client_id: CLIENT_ID,
-            client_secret: CLIENT_SECRET,
-            password: password,
-            username: email
-          },
-          {
-            headers: {
-              "Content-Type": "application/json"
-            }
-          }
-        )
-        .then(response => {
-          console.warn("Datos correctos");
-
-          resolve(response);
-        })
-        .catch(error => {
-          console.warn("error en los datos");
-          reject(error);
-        });
-    });
+  async getLogin() {
+    const hotelList = await axios
+      .get(`${BASE_API}metodoHotelMembresia?dami=583120`)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return hotelList;
   }
-  // TO-DO Forget Password
-
-  // TO-DO Create Store
-
-  // TO_DO info store and user
-
-  // TO-DO product list
 
   async getHotelList() {
     const hotelList = await axios
@@ -54,15 +24,45 @@ class Api {
     return hotelList;
   }
 
-  // TO-DO Create new product
+  async getProfile() {
+    const profile = await axios
+      .get(`${BASE_API}metodoPerfilUsuario?dami=583120`)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return profile;
+  }
 
-  // TO-DO Update product
+  async getTerms() {
+    const terms = await axios
+      .get(`${BASE_API}metodoTerminosCondiciones`)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return terms;
+  }
 
-  // TO-DO Delete Product
+  async getBeneficios() {
+    const benefits = await axios
+      .get(`${BASE_API}metodoCuponesDisponibles?dami=583120`)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return benefits;
+  }
 
-  // TO-DO show all sales
-
-  //TO-DO  Update Info Store
+  async getBeneficios() {
+    const benefits = await axios
+      .get(`${BASE_API}metodoCuponesDisponibles?dami=583120`)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return benefits;
+  }
 }
 
 export default new Api();

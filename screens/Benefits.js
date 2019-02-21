@@ -2,10 +2,22 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import { Colors, Bold } from "../utils/const";
+import API from "../utils/api";
 
 export default class Benefits extends React.Component {
   constructor() {
     super();
+    this.state = {
+      benefits: []
+    };
+  }
+
+  async componentDidMount() {
+    const benefitsAPI = await API.getBeneficios();
+    this.setState({
+      benefits: benefitsAPI,
+      loading: false
+    });
   }
 
   render() {

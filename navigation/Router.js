@@ -99,7 +99,7 @@ export const LoginNavigator = StackNavigator(
     }
   },
   {
-    initialRouteName: "HotelList"
+    initialRouteName: "Login"
   }
 );
 // export const DashNavigator = StackNavigator(

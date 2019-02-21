@@ -16,14 +16,13 @@
 //   return dispatch => {};
 // };
 
-export const login = token => ({
-    type: "LOGIN",
-    payload: token
-  });
-  
-  export const logout = () => {
-    return {
-      type: "LOGOUT"
-    };
-  };
-  
+// export const login = token => ({
+//     type: "LOGIN",
+//     payload: token
+//   });
+
+//   export const logout = () => {
+//     return {
+//       type: "LOGOUT"
+//     };
+//   };

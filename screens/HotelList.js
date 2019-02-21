@@ -6,7 +6,8 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
-  Image
+  Image,
+  ActivityIndicator
 } from "react-native";
 import HeaderTab from "../src/components/header";
 import TabBar from "../src/components/tabBar";
@@ -17,7 +18,6 @@ import API from "../utils/api";
 export default class HotelList extends React.Component {
   async componentDidMount() {
     const hotelAPI = await API.getHotelList();
-    console.warn(hotelAPI);
     this.setState({
       hotelList: hotelAPI,
       loading: false
@@ -28,42 +28,19 @@ export default class HotelList extends React.Component {
     super();
     this.state = {
       hotelList: [],
-      loading: false,
-      hotels: [
-        {
-          nombre: "Hotel del Llano",
-          foto:
-            "https://images.pexels.com/photos/271624/pexels-photo-271624.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
-          ciudad: "Villavicencio",
-          descuento: "10",
-          precio: "120",
-          precioBuenavista: "100"
-        },
-        {
-          nombre: "Hotel GHL",
-          foto:
-            "https://images.pexels.com/photos/6534/holiday-vacation-hotel-luxury.jpg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-          ciudad: "Bogota",
-          descuento: "10",
-          precio: "95",
-          precioBuenavista: "80"
-        },
-        {
-          nombre: "Hotel Cabañas del mar",
-          foto:
-            "https://images.pexels.com/photos/1287441/pexels-photo-1287441.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-          ciudad: "San Andres",
-          descuento: "10",
-          precio: "180",
-          precioBuenavista: "150"
-        }
-      ]
+      loading: true
     };
   }
 
   _getHotels() {
     const { navigate } = this.props.navigation;
-
+    if (this.state.loading) {
+      return (
+        <View style={styles.container}>
+          <ActivityIndicator size="large" color="#f14b5a" />
+        </View>
+      );
+    }
     return (
       <FlatList
         style={styles.flatList}
@@ -86,17 +63,21 @@ export default class HotelList extends React.Component {
 
                 <View style={styles.itemListText}>
                   <Text style={styles.nameHotel}>{item.HOTEL_NOMBRE}</Text>
-                  <Text style={styles.nameCity}>{item.CIUDAD} </Text>
+                  <Text style={styles.nameCity}>
+                    {item.CIUDAD}, {item.PAIS}
+                  </Text>
                 </View>
-                {/* <View style={styles.priceHotel}>
+                <View style={styles.priceHotel}>
                   <Text style={styles.nitePriceText}>Precio por noche</Text>
                   <View style={styles.preciosContent}>
-                    <Text style={styles.precioText}>USD {item.precio}</Text>
+                    <Text style={styles.precioText}>
+                      USD {item.PRECIO_HOTEL}
+                    </Text>
                     <Text style={styles.precioBuenavista}>
-                      USD {item.precioBuenavista}
+                      USD {item.PRECIO_BUENVISTA}
                     </Text>
                   </View>
-                </View> */}
+                </View>
               </View>
             </View>
           </TouchableOpacity>

@@ -24,7 +24,10 @@ export default class HotelDetails extends React.Component {
 
         <ScrollView style={styles.body}>
           <View style={styles.infoHotel}>
-            <Image style={styles.imageHotel} source={{ uri: item.foto }} />
+            <Image
+              style={styles.imageHotel}
+              source={{ uri: item.IMAGEN_HOTEL }}
+            />
           </View>
           <View style={styles.redSeparator}>
             <Text style={styles.nameHotel}>{item.nombre}</Text>
@@ -44,9 +47,9 @@ export default class HotelDetails extends React.Component {
               <Text style={styles.descriptionTitle}>Precio por noche</Text>
             </View>
             <View style={styles.priceContainerRight}>
-              <Text style={styles.precioText}>USD {item.precio}</Text>
+              <Text style={styles.precioText}>USD {item.PRECIO_HOTEL}</Text>
               <Text style={styles.precioBuenavista}>
-                USD {item.precioBuenavista}
+                USD {item.PRECIO_BUENVISTA}
               </Text>
             </View>
           </View>
