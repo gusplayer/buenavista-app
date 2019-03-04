@@ -64,6 +64,26 @@ class Login extends React.Component {
       );
     }
   }
+  _getButtonForgetPass() {
+    const { navigate } = this.props.navigation;
+    if (this.state.loading) {
+      return <ActivityIndicator size="large" color="#0000ff" />;
+    } else {
+      return (
+        <TouchableOpacity
+          // onPress={this.onPressLogin}
+          onPress={() => navigate("ChangePassword")}
+          style={styles.buttonForgetPass}
+        >
+          <View style={styles.alignButton}>
+            <Text style={styles.buttonText}>
+              <Bold>RECUPERAR CONTRASEÑA</Bold>
+            </Text>
+          </View>
+        </TouchableOpacity>
+      );
+    }
+  }
   _getMessageError = () => {
     return <Text />;
   };
@@ -81,7 +101,7 @@ class Login extends React.Component {
           <View style={styles.header}>
             <Image
               source={require("../src/assets/logoBlanco.png")}
-              style={{ width: 180, height: 100 }}
+              style={{ width: 150, height: 80 }}
             />
           </View>
 
@@ -114,9 +134,19 @@ class Login extends React.Component {
             >
               No tengo cuenta <Bold>Registrarme</Bold>
             </Text>
-            <Text style={styles.link} onPress={() => navigate("ForgetPass")}>
-              ¿Olvidé contraseña?
-            </Text>
+          </View>
+
+          <View style={styles.formForgetPass}>
+            <View>
+              <TextInput
+                placeholderTextColor="#59617b"
+                placeholder={"Correo"}
+                style={styles.input}
+                underlineColorAndroid="transparent"
+                onChangeText={password => this.setState({ password })}
+              />
+            </View>
+            {this._getButtonForgetPass()}
           </View>
 
           <View style={styles.terms}>
@@ -148,7 +178,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#dcf4fb"
   },
   header: {
-    flex: 4,
+    flex: 2,
     alignContent: "center",
     alignItems: "center",
     justifyContent: "center",
@@ -163,17 +193,23 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   form: {
-    flex: 4,
+    flex: 3,
+    alignContent: "center",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  formForgetPass: {
+    flex: 2,
     alignContent: "center",
     justifyContent: "space-between",
     alignItems: "center"
   },
   footer: {
-    flex: 2,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    paddingBottom: 10,
-    marginTop: 5,
+    paddingBottom: 5,
+    marginTop: 10,
     marginBottom: 10,
     width: 300
   },
@@ -182,7 +218,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-around",
-    width: "85%"
+    width: "85%",
+    paddingTop: 20
   },
   title: {
     fontSize: 18,
@@ -251,6 +288,23 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     marginTop: 15,
     elevation: 2
+  },
+  buttonForgetPass: {
+    width: 280,
+    backgroundColor: "transparent",
+    height: 45,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 25,
+    borderLeftWidth: 1,
+    borderTopWidth: 1,
+    borderRightWidth: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: "white",
+    borderRightColor: "white",
+    borderLeftColor: "white",
+    borderTopColor: "white",
+    marginTop: 10
   },
   buttonText: {
     color: "#fff",

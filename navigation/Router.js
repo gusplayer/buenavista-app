@@ -1,6 +1,8 @@
 import React from "react";
 import { StackNavigator } from "react-navigation";
 import Login from "../screens/Login";
+import ForgetPass from "../screens/ForgetPass";
+import Register from "../screens/Register";
 import Terms from "../screens/Terms";
 import HotelList from "../screens/HotelList";
 import HotelDetails from "../screens/HotelDetails";
@@ -19,6 +21,24 @@ export const LoginNavigator = StackNavigator(
   {
     Login: {
       screen: Login,
+      navigationOptions: {
+        header: null
+      }
+    },
+    ForgetPass: {
+      screen: ForgetPass,
+      navigationOptions: {
+        header: null
+      }
+    },
+    Register: {
+      screen: Register,
+      navigationOptions: {
+        header: null
+      }
+    },
+    ChangePassword: {
+      screen: ChangePassword,
       navigationOptions: {
         header: null
       }
@@ -90,16 +110,10 @@ export const LoginNavigator = StackNavigator(
       navigationOptions: {
         header: null
       }
-    },
-    ChangePassword: {
-      screen: ChangePassword,
-      navigationOptions: {
-        header: null
-      }
     }
   },
   {
-    initialRouteName: "Login"
+    initialRouteName: "HotelList"
   }
 );
 // export const DashNavigator = StackNavigator(

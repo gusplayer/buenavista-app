@@ -58,7 +58,7 @@ class Login extends React.Component {
           style={styles.buttonLogin}
         >
           <View style={styles.alignButton}>
-            <Text style={styles.buttonText}>INGRESAR</Text>
+            <Text style={styles.buttonText}>CREAR CUENTA</Text>
           </View>
         </TouchableOpacity>
       );
@@ -104,18 +104,21 @@ class Login extends React.Component {
                 onChangeText={password => this.setState({ password })}
               />
             </View>
+            <View>
+              <TextInput
+                placeholderTextColor="#59617b"
+                placeholder={"Confirmar contraseña"}
+                style={styles.input}
+                underlineColorAndroid="transparent"
+                onChangeText={password => this.setState({ password })}
+              />
+            </View>
             {this._getButtonLogin()}
           </View>
 
           <View style={styles.footer}>
-            <Text
-              style={styles.linkForget}
-              onPress={() => navigate("Register")}
-            >
-              No tengo cuenta <Bold>Registrarme</Bold>
-            </Text>
-            <Text style={styles.link} onPress={() => navigate("ForgetPass")}>
-              ¿Olvidé contraseña?
+            <Text style={styles.link} onPress={() => navigate("Login")}>
+              Ya tengo cuenta <Bold>Iniciar sesión</Bold>
             </Text>
           </View>
 
@@ -148,7 +151,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#dcf4fb"
   },
   header: {
-    flex: 4,
+    flex: 3,
     alignContent: "center",
     alignItems: "center",
     justifyContent: "center",
@@ -163,13 +166,13 @@ const styles = StyleSheet.create({
     marginTop: 5
   },
   form: {
-    flex: 4,
+    flex: 5,
     alignContent: "center",
     justifyContent: "space-between",
     alignItems: "center"
   },
   footer: {
-    flex: 2,
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
     paddingBottom: 10,
@@ -202,17 +205,7 @@ const styles = StyleSheet.create({
     color: "#ffffff",
     alignSelf: "center",
     fontSize: 15,
-    fontWeight: "400",
-    marginBottom: 5,
-    marginTop: 9
-  },
-  linkForget: {
-    color: "#ffffff",
-    alignSelf: "center",
-    fontSize: 15,
-    fontWeight: "400",
-    marginBottom: 5,
-    paddingTop: 5
+    fontWeight: "400"
   },
   termsText: {
     color: "#ffffff",
