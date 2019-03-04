@@ -4,63 +4,128 @@ import Image from "react-native-remote-svg";
 import Icon from "react-native-vector-icons/Feather";
 import { Colors } from "../../utils/const";
 
-const TabBar = ({ navigation }) => {
+const TabBar = ({ navigation, position }) => {
   return (
     <View style={styles.tabBar}>
-      <TouchableOpacity
-        style={styles.tabItem}
-        onPress={() => navigation.navigate("HotelList")}
-      >
-        <Image
-          source={require("../assets/iconos/bar-bottom/active/domain.svg")}
-          style={styles.imageIcon}
-        />
-        <Text style={styles.tabTitleActive}> CATÁLOGO</Text>
-      </TouchableOpacity>
+      {position == 1 ? (
+        <TouchableOpacity
+          style={styles.tabItem}
+          onPress={() => navigation.navigate("HotelList")}
+        >
+          <Image
+            source={require("../assets/iconos/bar-bottom/active/domain.svg")}
+            style={styles.imageIcon}
+          />
+          <Text style={styles.tabTitleActive}> CATÁLOGO</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.tabItem}
+          onPress={() => navigation.navigate("HotelList")}
+        >
+          <Image
+            source={require("../assets/iconos/bar-bottom/gray/domain.svg")}
+            style={styles.imageIcon}
+          />
+          <Text style={styles.tabTitle}> CATÁLOGO</Text>
+        </TouchableOpacity>
+      )}
 
-      <TouchableOpacity
-        style={styles.tabItem}
-        onPress={() => navigation.navigate("Booking")}
-      >
-        <Image
-          source={require("../assets/iconos/bar-bottom/gray/search.svg")}
-          style={{ width: 25, height: 25 }}
-        />
-        <Text style={styles.tabTitle}> RESERVAR</Text>
-      </TouchableOpacity>
+      {position == 2 ? (
+        <TouchableOpacity
+          style={styles.tabItem}
+          onPress={() => navigation.navigate("Booking")}
+        >
+          <Image
+            source={require("../assets/iconos/bar-bottom/active/search.svg")}
+            style={{ width: 25, height: 25 }}
+          />
+          <Text style={styles.tabTitleActive}> RESERVAR</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.tabItem}
+          onPress={() => navigation.navigate("Booking")}
+        >
+          <Image
+            source={require("../assets/iconos/bar-bottom/gray/search.svg")}
+            style={{ width: 25, height: 25 }}
+          />
+          <Text style={styles.tabTitle}> RESERVAR</Text>
+        </TouchableOpacity>
+      )}
 
-      <TouchableOpacity
-        style={styles.tabItem}
-        onPress={() => navigation.navigate("CouponsView")}
-      >
-        <Image
-          source={require("../assets/iconos/bar-bottom/gray/cupon.svg")}
-          style={{ width: 25, height: 25 }}
-        />
-        <Text style={styles.tabTitle}> CUPONES</Text>
-      </TouchableOpacity>
+      {position == 3 ? (
+        <TouchableOpacity
+          style={styles.tabItem}
+          onPress={() => navigation.navigate("CouponsView")}
+        >
+          <Image
+            source={require("../assets/iconos/bar-bottom/active/cupon.svg")}
+            style={{ width: 25, height: 25 }}
+          />
+          <Text style={styles.tabTitleActive}> CUPONES</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.tabItem}
+          onPress={() => navigation.navigate("CouponsView")}
+        >
+          <Image
+            source={require("../assets/iconos/bar-bottom/gray/cupon.svg")}
+            style={{ width: 25, height: 25 }}
+          />
+          <Text style={styles.tabTitle}> CUPONES</Text>
+        </TouchableOpacity>
+      )}
 
-      <TouchableOpacity
-        style={styles.tabItem}
-        onPress={() => navigation.navigate("Notification")}
-      >
-        <Image
-          source={require("../assets/iconos/bar-bottom/gray/notifications.svg")}
-          style={{ width: 25, height: 25 }}
-        />
-        <Text style={styles.tabTitle}> NOTIFICACIÓN</Text>
-      </TouchableOpacity>
+      {position == 4 ? (
+        <TouchableOpacity
+          style={styles.tabItem}
+          onPress={() => navigation.navigate("Notification")}
+        >
+          <Image
+            source={require("../assets/iconos/bar-bottom/active/notifications.svg")}
+            style={{ width: 25, height: 25 }}
+          />
+          <Text style={styles.tabTitleActive}> NOTIFICACIÓN</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.tabItem}
+          onPress={() => navigation.navigate("Notification")}
+        >
+          <Image
+            source={require("../assets/iconos/bar-bottom/gray/notifications.svg")}
+            style={{ width: 25, height: 25 }}
+          />
+          <Text style={styles.tabTitle}> NOTIFICACIÓN</Text>
+        </TouchableOpacity>
+      )}
 
-      <TouchableOpacity
-        style={styles.tabItem}
-        onPress={() => navigation.navigate("Membership")}
-      >
-        <Image
-          source={require("../assets/iconos/bar-bottom/gray/circle.svg")}
-          style={{ width: 25, height: 25 }}
-        />
-        <Text style={styles.tabTitle}> MEMEBRESIA</Text>
-      </TouchableOpacity>
+      {position == 5 ? (
+        <TouchableOpacity
+          style={styles.tabItem}
+          onPress={() => navigation.navigate("Membership")}
+        >
+          <Image
+            source={require("../assets/iconos/bar-bottom/active/circle.svg")}
+            style={{ width: 25, height: 25 }}
+          />
+          <Text style={styles.tabTitleActive}> MEMEBRESIA</Text>
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity
+          style={styles.tabItem}
+          onPress={() => navigation.navigate("Membership")}
+        >
+          <Image
+            source={require("../assets/iconos/bar-bottom/gray/circle.svg")}
+            style={{ width: 25, height: 25 }}
+          />
+          <Text style={styles.tabTitle}> MEMEBRESIA</Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };

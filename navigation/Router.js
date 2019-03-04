@@ -42,7 +42,14 @@ export const LoginNavigator = StackNavigator(
       navigationOptions: {
         header: null
       }
-    },
+    }
+  },
+  {
+    initialRouteName: "Login"
+  }
+);
+export const DashNavigator = StackNavigator(
+  {
     Terms: {
       screen: Terms,
       navigationOptions: { title: "Terminos y condiciones" }

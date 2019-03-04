@@ -8,26 +8,24 @@ export default class Benefits extends React.Component {
   constructor() {
     super();
     this.state = {
-      benefits: []
+      benefits: " "
     };
   }
 
   async componentDidMount() {
-    const benefitsAPI = await API.getBeneficios();
+    const benefitsAPI = await API.getBenefits();
+
     this.setState({
-      benefits: benefitsAPI,
+      benefits: benefitsAPI[0],
       loading: false
     });
+    console.warn(this.state.benefits);
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>
-          Diseñada para dar la mayor cobertura de beneficios a nuestros
-          distinguidos miembros, ampliando tu abanico de opciones a destinos,
-          ademas de nuestro servicio All Inclusive.
-        </Text>
+        <Text>{this.state.benefits}</Text>
         <View style={styles.itemList}>
           <View style={styles.itemInfo}>
             <Icon

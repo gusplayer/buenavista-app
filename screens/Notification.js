@@ -1,9 +1,9 @@
-import React from 'react';
-import { StyleSheet, Text, View, ScrollView, WebView } from 'react-native';
-import HeaderTab from '../src/components/header';
-import Image from 'react-native-remote-svg';
-import { Container } from 'native-base';
-import TabBar from '../src/components/tabBar';
+import React from "react";
+import { StyleSheet, Text, View, ScrollView, WebView } from "react-native";
+import HeaderTab from "../src/components/header";
+import Image from "react-native-remote-svg";
+import { Container } from "native-base";
+import TabBar from "../src/components/tabBar";
 
 export default class Notification extends React.Component {
   constructor() {
@@ -22,7 +22,7 @@ export default class Notification extends React.Component {
         />
         <View style={styles.body}>
           <Image
-            source={require('../src/assets/iconos/login/mail-24px.svg')}
+            source={require("../src/assets/iconos/login/mail-24px.svg")}
             style={styles.imageIcon}
           />
 
@@ -31,7 +31,7 @@ export default class Notification extends React.Component {
             mucho más.
           </Text>
         </View>
-        <TabBar navigation={this.props.navigation} />
+        <TabBar navigation={this.props.navigation} position={4} />
       </Container>
     );
   }
@@ -40,15 +40,15 @@ export default class Notification extends React.Component {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    backgroundColor: 'white',
-    alignItems: 'center',
-    justifyContent: 'center'
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "center"
   },
   text: {
     fontSize: 18,
     width: 300,
-    textAlign: 'center',
-    color: 'black',
+    textAlign: "center",
+    color: "black",
     marginTop: 20
   },
   imageIcon: {

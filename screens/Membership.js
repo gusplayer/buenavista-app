@@ -64,7 +64,7 @@ export default class Membreship extends React.Component {
             </Tab>
           </Tabs>
         </ScrollView>
-        <TabBar navigation={this.props.navigation} />
+        <TabBar navigation={this.props.navigation} position={5} />
       </Container>
     );
   }

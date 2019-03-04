@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -6,12 +6,12 @@ import {
   ScrollView,
   WebView,
   TouchableOpacity
-} from 'react-native';
-import HeaderTab from '../src/components/header';
-import Image from 'react-native-remote-svg';
-import TabBar from '../src/components/tabBar';
-import { Colors } from '../utils/const';
-import { Item, Input, Label, Form, Container } from 'native-base';
+} from "react-native";
+import HeaderTab from "../src/components/header";
+import Image from "react-native-remote-svg";
+import TabBar from "../src/components/tabBar";
+import { Colors } from "../utils/const";
+import { Item, Input, Label, Form, Container } from "native-base";
 
 export default class Booking extends React.Component {
   constructor() {
@@ -35,7 +35,7 @@ export default class Booking extends React.Component {
         </View>
 
         <ScrollView style={styles.body}>
-          <View style={{ alignItems: 'center' }}>
+          <View style={{ alignItems: "center" }}>
             <View style={styles.form}>
               <Item inlineLabel>
                 <Label>Selecciona el país</Label>
@@ -57,22 +57,22 @@ export default class Booking extends React.Component {
               </Item>
 
               <View style={styles.dates}>
-                <Item inlineLabel style={{ width: '45%' }}>
+                <Item inlineLabel style={{ width: "45%" }}>
                   <Label>Fecha inicio</Label>
                   <Input />
                 </Item>
-                <Item inlineLabel style={{ width: '45%' }}>
+                <Item inlineLabel style={{ width: "45%" }}>
                   <Label>Fecha fin</Label>
                   <Input />
                 </Item>
               </View>
 
               <View style={styles.dates}>
-                <Item inlineLabel style={{ width: '45%' }}>
+                <Item inlineLabel style={{ width: "45%" }}>
                   <Label>Adultos</Label>
                   <Input />
                 </Item>
-                <Item inlineLabel style={{ width: '45%' }}>
+                <Item inlineLabel style={{ width: "45%" }}>
                   <Label>Niños</Label>
                   <Input />
                 </Item>
@@ -86,14 +86,14 @@ export default class Booking extends React.Component {
           </View>
 
           <TouchableOpacity
-            onPress={() => navigate('HotelList')}
+            onPress={() => navigate("HotelList")}
             style={styles.buttonLogin}
           >
             <Text style={styles.buttonText}>ENVIAR SOLICITUD</Text>
           </TouchableOpacity>
         </ScrollView>
 
-        <TabBar navigation={this.props.navigation} />
+        <TabBar navigation={this.props.navigation} position={2} />
       </Container>
     );
   }
@@ -102,47 +102,47 @@ export default class Booking extends React.Component {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    backgroundColor: 'white'
+    backgroundColor: "white"
   },
   form: {
     padding: 20,
-    alignItems: 'center',
-    width: '100%'
+    alignItems: "center",
+    width: "100%"
   },
   dates: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between"
   },
   redSeparator: {
-    width: '100%',
+    width: "100%",
     height: 35,
     backgroundColor: Colors.red,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center"
   },
   nameHotel: {
-    color: 'white',
+    color: "white",
     fontSize: 12,
-    fontWeight: '400'
+    fontWeight: "400"
   },
   buttonLogin: {
     width: 280,
     backgroundColor: Colors.gold,
     height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 25,
     marginTop: 10,
     marginBottom: 15,
-    alignSelf: 'center'
+    alignSelf: "center"
   },
   buttonText: {
-    color: '#fff',
-    textAlign: 'center',
+    color: "#fff",
+    textAlign: "center",
     paddingLeft: 10,
     paddingRight: 10,
     fontSize: 16,
-    fontWeight: '300'
+    fontWeight: "300"
   }
 });

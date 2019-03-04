@@ -9,13 +9,15 @@ import {
 import Icon from "react-native-vector-icons/Feather";
 import { Colors, Bold } from "../utils/const";
 import API from "../utils/api";
+import ImagePicker from "react-native-image-picker";
 
 export default class Benefits extends React.Component {
   constructor() {
     super();
     this.state = {
       profileData: "",
-      loading: false
+      loading: false,
+      imageSource: ""
     };
   }
 
@@ -24,6 +26,31 @@ export default class Benefits extends React.Component {
     this.setState({
       profileData: profileAPI[0],
       loading: false
+    });
+  }
+
+  _galery() {
+    ImagePicker.launchImageLibrary(options, response => {
+      if (response.didCancel) {
+        console.warn("User cancelled image picker");
+      } else if (response.error) {
+        console.warn("ImagePicker Error: ", response.error);
+      } else if (response.customButton) {
+        console.warn("User tapped custom button: ", response.customButton);
+      } else {
+        let base64img = "data:image/jpeg;base64," + response.data;
+        this.setState({
+          imageSource: base64img
+        });
+      }
+    });
+  }
+  _camera() {
+    ImagePicker.launchCamera(options, response => {
+      let base64img = "data:image/jpeg;base64," + response.data;
+      this.setState({
+        imageSource: base64img
+      });
     });
   }
 

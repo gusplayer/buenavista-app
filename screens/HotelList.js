@@ -100,7 +100,7 @@ export default class HotelList extends React.Component {
         />
 
         <ScrollView style={styles.body}>{this._getHotels()}</ScrollView>
-        <TabBar navigation={this.props.navigation} />
+        <TabBar navigation={this.props.navigation} position={1} />
       </Container>
     );
   }

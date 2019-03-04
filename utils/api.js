@@ -12,24 +12,22 @@ class Api {
   };
 
   _retrieveData = async () => {
-    // let token = "";
-    // try {
-    //   token = await AsyncStorage.getItem("userToken");
-    //   if (token !== null) {
-    //     ACCESS_TOKEN = token;
-    //   }
-    // } catch (error) {
-    //   console.warn("Async de token dañado");
-    //   // Error retrieving data
-    // }
-    ACCESS_TOKEN = "";
+    let token = "";
+    try {
+      token = await AsyncStorage.getItem("userToken");
+      if (token !== null) {
+        ACCESS_TOKEN = token;
+      }
+    } catch (error) {
+      console.warn("Async de token dañado");
+    }
   };
   async getLogin() {
     const hotelList = await axios
-      // http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/metodoLogin?dami=583120&clave=112233
-      .get(`${BASE_API}metodoHotelMembresia?dami=583120`)
+      .get(`${BASE_API}metodoLogin?dami=583120&clave=112233`)
       .then(response => {
         return response.data;
+        this._storeData(response.data.access_token);
       })
       .catch(error => error);
     return hotelList;
@@ -37,7 +35,6 @@ class Api {
 
   async getForgetPass() {
     const hotelList = await axios
-      // http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/metodoLogin?dami=583120&clave=112233
       .get(`${BASE_API}metodoHotelMembresia?dami=583120`)
       .then(response => {
         return response.data;
@@ -48,7 +45,6 @@ class Api {
 
   async getChangePass() {
     const hotelList = await axios
-      // http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/metodoLogin?dami=583120&clave=112233
       .get(`${BASE_API}metodoHotelMembresia?dami=583120`)
       .then(response => {
         return response.data;
@@ -59,7 +55,6 @@ class Api {
 
   async getRegister() {
     const hotelList = await axios
-      // http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/metodoLogin?dami=583120&clave=112233
       .get(`${BASE_API}metodoHotelMembresia?dami=583120`)
       .then(response => {
         return response.data;
@@ -68,7 +63,10 @@ class Api {
     return hotelList;
   }
 
+  //////////////////////// With Auth /////////////////////
+
   async getHotelList() {
+    await this._retrieveData();
     const hotelList = await axios
       .get(`${BASE_API}metodoHotelesMembresia?dami=583120`)
       .then(response => {
@@ -98,19 +96,9 @@ class Api {
     return terms;
   }
 
-  async getBeneficios() {
+  async getBenefits() {
     const benefits = await axios
-      .get(`${BASE_API}metodoCuponesDisponibles?dami=583120`)
-      .then(response => {
-        return response.data;
-      })
-      .catch(error => error);
-    return benefits;
-  }
-
-  async getBeneficios() {
-    const benefits = await axios
-      .get(`${BASE_API}metodoCuponesDisponibles?dami=583120`)
+      .get(`${BASE_API}metodoBeneficiosMembresia?dami=583120`)
       .then(response => {
         return response.data;
       })
