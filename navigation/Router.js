@@ -42,6 +42,10 @@ export const LoginNavigator = StackNavigator(
       navigationOptions: {
         header: null
       }
+    },
+    Terms: {
+      screen: Terms,
+      navigationOptions: { title: "Terminos y condiciones" }
     }
   },
   {

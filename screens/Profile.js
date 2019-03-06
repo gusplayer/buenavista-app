@@ -11,13 +11,23 @@ import { Colors, Bold } from "../utils/const";
 import API from "../utils/api";
 import ImagePicker from "react-native-image-picker";
 
+const options = {
+  title: "Select Avatar",
+  customButtons: [{ name: "fb", title: "Choose Photo from Facebook" }],
+  storageOptions: {
+    skipBackup: false,
+    path: "images"
+  }
+};
+
 export default class Benefits extends React.Component {
   constructor() {
     super();
     this.state = {
       profileData: "",
       loading: false,
-      imageSource: ""
+      imageSource:
+        "http://www.classicindiascale.com/wp-content/uploads/2018/06/header-profile-default.png"
     };
   }
 
@@ -58,13 +68,14 @@ export default class Benefits extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
-        <Image
-          style={styles.photoUser}
-          source={{
-            uri:
-              "http://keenthemes.com/preview/metronic/theme/assets/pages/media/profile/profile_user.jpg"
-          }}
-        />
+        <TouchableHighlight onPress={() => this._galery()}>
+          <Image
+            style={styles.photoUser}
+            source={{
+              uri: this.state.imageSource
+            }}
+          />
+        </TouchableHighlight>
         <Text style={styles.nameUser}>{this.state.profileData.clNombre}</Text>
         <View style={styles.itemList}>
           <View style={styles.itemInfo}>
