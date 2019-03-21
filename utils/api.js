@@ -68,7 +68,7 @@ class Api {
   async getHotelList() {
     await this._retrieveData();
     const hotelList = await axios
-      .get(`${BASE_API}metodoHotelesMembresia?dami=583120`)
+      .get(`${BASE_API}metodoHotelMembresiaCupon?dami=583120`)
       .then(response => {
         return response.data;
       })

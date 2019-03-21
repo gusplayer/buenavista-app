@@ -99,7 +99,7 @@ export default class Benefits extends React.Component {
             <Icon name="disc" size={20} color="gray" style={styles.itemIcon} />
             <Text style={styles.itemText}>
               <Bold>Fecha Caducidad </Bold>
-              {this.state.profileData.Column1}
+              {this.state.profileData.faFechaCaducidad}
             </Text>
           </View>
           <View style={styles.itemInfo}>

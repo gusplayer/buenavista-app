@@ -78,7 +78,6 @@ class Login extends React.Component {
             }}
           />
         </View>
-
         <View style={styles.textWelcome}>
           <Image
             source={require("../src/assets/iconoApp/iconsCupones.png")}

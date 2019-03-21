@@ -44,8 +44,8 @@ export default class HotelList extends React.Component {
     return (
       <FlatList
         style={styles.flatList}
-        data={this.state.hotelList}
-        keyExtractor={(item, _) => item.HOTEL_NOMBRE}
+        data={this.state.hotelList.slice(0, 5)}
+        keyExtractor={(item, _) => item.imagen1}
         renderItem={({ item }) => (
           <TouchableOpacity
             onPress={() =>
@@ -58,23 +58,23 @@ export default class HotelList extends React.Component {
               <View style={styles.infoProduct}>
                 <Image
                   style={styles.imageHotel}
-                  source={{ uri: item.IMAGEN_HOTEL }}
+                  source={{ uri: item.imagen1 }}
                 />
 
                 <View style={styles.itemListText}>
-                  <Text style={styles.nameHotel}>{item.HOTEL_NOMBRE}</Text>
+                  <Text style={styles.nameHotel}>{item.Hotel}</Text>
                   <Text style={styles.nameCity}>
-                    {item.CIUDAD}, {item.PAIS}
+                    {item.Ciudad}, {item.Pais}
                   </Text>
                 </View>
                 <View style={styles.priceHotel}>
                   <Text style={styles.nitePriceText}>Precio por noche</Text>
                   <View style={styles.preciosContent}>
                     <Text style={styles.precioText}>
-                      USD {item.PRECIO_HOTEL}
+                      USD {item.Precio_Hotel}
                     </Text>
                     <Text style={styles.precioBuenavista}>
-                      USD {item.PRECIO_BUENVISTA}
+                      USD {item.Precio_Buenavista}
                     </Text>
                   </View>
                 </View>

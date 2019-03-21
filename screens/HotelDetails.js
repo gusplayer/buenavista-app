@@ -24,10 +24,7 @@ export default class HotelDetails extends React.Component {
 
         <ScrollView style={styles.body}>
           <View style={styles.infoHotel}>
-            <Image
-              style={styles.imageHotel}
-              source={{ uri: item.IMAGEN_HOTEL }}
-            />
+            <Image style={styles.imageHotel} source={{ uri: item.imagen1 }} />
           </View>
           <View style={styles.redSeparator}>
             <Text style={styles.nameHotel}>{item.nombre}</Text>
