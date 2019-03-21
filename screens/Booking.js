@@ -11,11 +11,24 @@ import HeaderTab from "../src/components/header";
 import Image from "react-native-remote-svg";
 import TabBar from "../src/components/tabBar";
 import { Colors } from "../utils/const";
-import { Item, Input, Label, Form, Container } from "native-base";
+import {
+  Item,
+  Input,
+  Label,
+  Form,
+  Container,
+  DatePicker,
+  Content
+} from "native-base";
 
 export default class Booking extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = { chosenDate: new Date() };
+    this.setDate = this.setDate.bind(this);
+  }
+  setDate(newDate) {
+    this.setState({ chosenDate: newDate });
   }
 
   render() {
@@ -37,14 +50,14 @@ export default class Booking extends React.Component {
         <ScrollView style={styles.body}>
           <View style={{ alignItems: "center" }}>
             <View style={styles.form}>
-              <Item inlineLabel>
+              {/* <Item inlineLabel>
                 <Label>Selecciona el país</Label>
                 <Input />
               </Item>
               <Item inlineLabel>
                 <Label>Selecciona la ciudad o provincia</Label>
                 <Input />
-              </Item>
+              </Item> */}
 
               <Item inlineLabel>
                 <Label>Hotel a reservar</Label>
@@ -58,11 +71,55 @@ export default class Booking extends React.Component {
 
               <View style={styles.dates}>
                 <Item inlineLabel style={{ width: "45%" }}>
-                  <Label>Fecha inicio</Label>
+                  <DatePicker
+                    defaultDate={new Date(2018, 4, 4)}
+                    minimumDate={new Date(2018, 1, 1)}
+                    maximumDate={new Date(2018, 12, 31)}
+                    locale={"en"}
+                    timeZoneOffsetInMinutes={undefined}
+                    modalTransparent={false}
+                    animationType={"fade"}
+                    androidMode={"default"}
+                    placeHolderText="Fecha Inicio"
+                    textStyle={{ color: "green" }}
+                    placeHolderTextStyle={{
+                      color: "#4c4c4c",
+                      marginLeft: -10,
+                      paddingLeft: 0
+                    }}
+                    onDateChange={this.setDate}
+                    disabled={false}
+                  />
+                  {/* <Text>
+                    Date: {this.state.chosenDate.toString().substr(4, 12)}
+                  </Text> */}
+
                   <Input />
                 </Item>
                 <Item inlineLabel style={{ width: "45%" }}>
-                  <Label>Fecha fin</Label>
+                  <DatePicker
+                    defaultDate={new Date(2018, 4, 4)}
+                    minimumDate={new Date(2018, 1, 1)}
+                    maximumDate={new Date(2018, 12, 31)}
+                    locale={"en"}
+                    timeZoneOffsetInMinutes={undefined}
+                    modalTransparent={false}
+                    animationType={"fade"}
+                    androidMode={"default"}
+                    placeHolderText="Fecha Fin"
+                    textStyle={{ color: "green" }}
+                    placeHolderTextStyle={{
+                      color: "#4c4c4c",
+                      marginLeft: -10,
+                      paddingLeft: 0
+                    }}
+                    onDateChange={this.setDate}
+                    disabled={false}
+                  />
+                  {/* <Text>
+                    Date: {this.state.chosenDate.toString().substr(4, 12)}
+                  </Text> */}
+
                   <Input />
                 </Item>
               </View>

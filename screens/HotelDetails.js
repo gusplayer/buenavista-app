@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, ScrollView } from "react-native";
 import HeaderTab from "../src/components/header";
 import { Colors } from "../utils/const";
 import Image from "react-native-remote-svg";
+import Swiper from "react-native-web-swiper";
 
 export default class HotelDetails extends React.Component {
   constructor() {
@@ -24,29 +25,45 @@ export default class HotelDetails extends React.Component {
 
         <ScrollView style={styles.body}>
           <View style={styles.infoHotel}>
-            <Image style={styles.imageHotel} source={{ uri: item.imagen1 }} />
+            {/* <Image style={styles.imageHotel} source={{ uri: item.imagen1 }} /> */}
+            <View style={styles.imageHotel}>
+              <Swiper>
+                <View style={styles.slideContainer}>
+                  <Image
+                    style={styles.imageHotel}
+                    source={{ uri: item.imagen1 }}
+                  />
+                </View>
+                <View style={styles.slideContainer}>
+                  <Image
+                    style={styles.imageHotel}
+                    source={{ uri: item.imagen2 }}
+                  />
+                </View>
+                <View style={styles.slideContainer}>
+                  <Image
+                    style={styles.imageHotel}
+                    source={{ uri: item.imagen3 }}
+                  />
+                </View>
+              </Swiper>
+            </View>
           </View>
           <View style={styles.redSeparator}>
             <Text style={styles.nameHotel}>{item.nombre}</Text>
           </View>
           <View style={styles.descriptionContainer}>
             <Text style={styles.descriptionTitle}>Descripción</Text>
-            <Text style={styles.descriptionText}>
-              Lograr satisfacción total de nuestro cliente brindando en su
-              estadia el placer de disfrutar la comodidad, calidez y diversión
-              que nuestro hotel ofrece, con los mas altos estandares de calidad
-              internacional y manteniendo el equilibrio responsable entre la
-              sociedad y el medio ambiente.
-            </Text>
+            <Text style={styles.descriptionText}>{item.Descripcion}</Text>
           </View>
           <View style={styles.priceContainer}>
             <View style={styles.priceContainerLeft}>
               <Text style={styles.descriptionTitle}>Precio por noche</Text>
             </View>
             <View style={styles.priceContainerRight}>
-              <Text style={styles.precioText}>USD {item.PRECIO_HOTEL}</Text>
+              <Text style={styles.precioText}>USD {item.Precio_Hotel}</Text>
               <Text style={styles.precioBuenavista}>
-                USD {item.PRECIO_BUENVISTA}
+                USD {item.Precio_Buenavista}
               </Text>
             </View>
           </View>
@@ -200,5 +217,19 @@ const styles = StyleSheet.create({
     marginRight: 10,
     width: 55,
     height: 55
+  },
+  slideContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  slide1: {
+    backgroundColor: "rgba(20,20,200,0.3)"
+  },
+  slide2: {
+    backgroundColor: "rgba(20,200,20,0.3)"
+  },
+  slide3: {
+    backgroundColor: "rgba(200,20,20,0.3)"
   }
 });

@@ -44,7 +44,7 @@ export default class HotelList extends React.Component {
     return (
       <FlatList
         style={styles.flatList}
-        data={this.state.hotelList.slice(0, 5)}
+        data={this.state.hotelList}
         keyExtractor={(item, _) => item.imagen1}
         renderItem={({ item }) => (
           <TouchableOpacity

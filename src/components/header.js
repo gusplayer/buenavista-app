@@ -9,7 +9,7 @@ const HeaderTab = ({ navigation, left, right }) => {
     <Header style={styles.header}>
       <Left>
         {left.data ? (
-          <TouchableOpacity onPress={() => navigation.navigate(left.path)}>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
             <Icon name={left.icon} size={23} color="gray" />
           </TouchableOpacity>
         ) : (
