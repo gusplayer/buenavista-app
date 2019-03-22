@@ -71,16 +71,16 @@ export default class HotelDetails extends React.Component {
             <Text style={styles.descriptionTitle}>Cupones</Text>
             <View style={styles.couponContainer}>
               <Image
-                source={require("../src/assets/iconoscupones/premium/cm.svg")}
+                source={require("../src/assets/iconoscupones/premium/cm.png")}
                 style={styles.imageCoupon}
               />
               <Image
-                source={require("../src/assets/iconoscupones/premium/mi.svg")}
+                source={require("../src/assets/iconoscupones/premium/mi.png")}
                 style={styles.imageCoupon}
               />
 
               <Image
-                source={require("../src/assets/iconoscupones/premium/2x1.svg")}
+                source={require("../src/assets/iconoscupones/premium/2x1.png")}
                 style={styles.imageCoupon}
               />
             </View>

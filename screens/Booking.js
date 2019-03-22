@@ -20,9 +20,17 @@ export default class Booking extends React.Component {
       selectedKids: 0,
       selectedAdults: 1,
       chosenDate: new Date(),
-      loaderBoton: false
+      loaderBoton: false,
+      hotelList: []
     };
     this.setDate = this.setDate.bind(this);
+  }
+  async componentDidMount() {
+    const hotelAPI = await API.getHotelList();
+    this.setState({
+      hotelList: hotelAPI,
+      loading: false
+    });
   }
   onValueChangeKids(value) {
     this.setState({
