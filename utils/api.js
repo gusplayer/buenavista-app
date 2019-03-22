@@ -76,6 +76,17 @@ class Api {
     return hotelList;
   }
 
+  async getHabitaciones() {
+    await this._retrieveData();
+    const hotelRoom = await axios
+      .get(`${BASE_API}metodoHabitacionesCupones?dami=583120&hotel=158&tipo=1`)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return hotelRoom;
+  }
+
   async getProfile() {
     const profile = await axios
       .get(`${BASE_API}metodoPerfilUsuario?dami=583120`)

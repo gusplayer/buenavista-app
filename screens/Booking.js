@@ -11,23 +11,34 @@ import HeaderTab from "../src/components/header";
 import Image from "react-native-remote-svg";
 import TabBar from "../src/components/tabBar";
 import { Colors } from "../utils/const";
-import {
-  Item,
-  Input,
-  Label,
-  Form,
-  Container,
-  DatePicker,
-  Content
-} from "native-base";
+import { Item, Input, Label, Container, DatePicker, Picker } from "native-base";
 
 export default class Booking extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { chosenDate: new Date() };
+    this.state = {
+      selectedKids: 0,
+      selectedAdults: 1,
+      chosenDate: new Date(),
+      loaderBoton: false
+    };
     this.setDate = this.setDate.bind(this);
   }
+  onValueChangeKids(value) {
+    this.setState({
+      selectedKids: value
+    });
+  }
+  onValueChangeAdults(value) {
+    this.setState({
+      selectedAdults: value
+    });
+  }
   setDate(newDate) {
+    this.setState({ chosenDate: newDate });
+  }
+
+  onClickSendBooking() {
     this.setState({ chosenDate: newDate });
   }
 
@@ -124,14 +135,54 @@ export default class Booking extends React.Component {
                 </Item>
               </View>
 
-              <View style={styles.dates}>
-                <Item inlineLabel style={{ width: "45%" }}>
+              <View picker inlineLabel style={styles.dates}>
+                <Item inlineLabel style={{ width: "48%" }}>
                   <Label>Adultos</Label>
-                  <Input />
+                  <Picker
+                    mode="dropdown"
+                    style={{ width: undefined }}
+                    placeholder="Adultos"
+                    placeholderStyle={{ color: "#bfc6ea" }}
+                    placeholderIconColor="#007aff"
+                    selectedValue={this.state.selectedAdults}
+                    onValueChange={this.onValueChangeAdults.bind(this)}
+                  >
+                    <Picker.Item label="1" value="1" />
+                    <Picker.Item label="2" value="2" />
+                    <Picker.Item label="3" value="3" />
+                    <Picker.Item label="4" value="4" />
+                    <Picker.Item label="5" value="5" />
+                    <Picker.Item label="6" value="6" />
+                    <Picker.Item label="7" value="7" />
+                    <Picker.Item label="8" value="8" />
+                    <Picker.Item label="9" value="9" />
+                    <Picker.Item label="10" value="10" />
+                  </Picker>
                 </Item>
-                <Item inlineLabel style={{ width: "45%" }}>
+
+                <Item picker inlineLabel style={{ width: "45%" }}>
                   <Label>Niños</Label>
-                  <Input />
+                  <Picker
+                    mode="dropdown"
+                    style={{ width: undefined }}
+                    placeholder="Niños"
+                    placeholderStyle={{ color: "#bfc6ea" }}
+                    placeholderIconColor="#007aff"
+                    selectedValue={this.state.selectedKids}
+                    onValueChange={this.onValueChangeKids.bind(this)}
+                  >
+                    <Picker.Item label="0" value="0" />
+                    <Picker.Item label="1" value="1" />
+                    <Picker.Item label="2" value="2" />
+                    <Picker.Item label="3" value="3" />
+                    <Picker.Item label="4" value="4" />
+                    <Picker.Item label="5" value="5" />
+                    <Picker.Item label="6" value="6" />
+                    <Picker.Item label="7" value="7" />
+                    <Picker.Item label="8" value="8" />
+                    <Picker.Item label="9" value="9" />
+                    <Picker.Item label="10" value="10" />
+                  </Picker>
                 </Item>
               </View>
 
