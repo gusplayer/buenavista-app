@@ -12,6 +12,7 @@ import Image from "react-native-remote-svg";
 import TabBar from "../src/components/tabBar";
 import { Colors } from "../utils/const";
 import { Item, Input, Label, Container, DatePicker, Picker } from "native-base";
+import API from "../utils/api";
 
 export default class Booking extends React.Component {
   constructor(props) {
@@ -32,6 +33,12 @@ export default class Booking extends React.Component {
       loading: false
     });
   }
+  countryList = () => {
+    return this.hotelList.map(x => {
+      // return <Picker.Item label={x.Hotel} key={} value={x} />;
+      return <Picker.Item label="9" value="9" />;
+    });
+  };
   onValueChangeKids(value) {
     this.setState({
       selectedKids: value
@@ -79,13 +86,35 @@ export default class Booking extends React.Component {
               </Item> */}
 
               <Item inlineLabel>
-                <Label>Hotel a reservar</Label>
-                <Input />
+                <Label style={{ width: "55%" }}>Hotel a reservar</Label>
+                <Picker
+                  mode="dropdown"
+                  style={{ width: undefined }}
+                  placeholder="Adultos"
+                  placeholderStyle={{ color: "#bfc6ea" }}
+                  placeholderIconColor="#007aff"
+                  selectedValue={this.state.selectedAdults}
+                  onValueChange={this.onValueChangeAdults.bind(this)}
+                >
+                  {this.state.hotelList.map(v => {
+                    return <Picker.Item label={v.Hotel} value={v.id_Hotel} />;
+                  })}
+                </Picker>
               </Item>
 
               <Item inlineLabel>
-                <Label>Tipo de habitación</Label>
-                <Input />
+                <Label style={{ width: "55%" }}>Tipo de habitación</Label>
+                <Picker
+                  mode="dropdown"
+                  style={{ width: undefined }}
+                  placeholder="Adultos"
+                  placeholderStyle={{ color: "#bfc6ea" }}
+                  placeholderIconColor="#007aff"
+                  selectedValue={this.state.selectedAdults}
+                  onValueChange={this.onValueChangeAdults.bind(this)}
+                >
+                  <Picker.Item label="1" value="1" />
+                </Picker>
               </Item>
 
               <View style={styles.dates}>
@@ -195,8 +224,28 @@ export default class Booking extends React.Component {
               </View>
 
               <Item inlineLabel>
-                <Label>Aplicar cupón</Label>
-                <Input />
+                <Label style={{ width: "50%" }}>Aplicar cupón</Label>
+                <Picker
+                  mode="dropdown"
+                  style={{ width: undefined }}
+                  placeholder="Niños"
+                  placeholderStyle={{ color: "#bfc6ea" }}
+                  placeholderIconColor="#007aff"
+                  selectedValue={this.state.selectedKids}
+                  onValueChange={this.onValueChangeKids.bind(this)}
+                >
+                  <Picker.Item label="0" value="0" />
+                  <Picker.Item label="1" value="1" />
+                  <Picker.Item label="2" value="2" />
+                  <Picker.Item label="3" value="3" />
+                  <Picker.Item label="4" value="4" />
+                  <Picker.Item label="5" value="5" />
+                  <Picker.Item label="6" value="6" />
+                  <Picker.Item label="7" value="7" />
+                  <Picker.Item label="8" value="8" />
+                  <Picker.Item label="9" value="9" />
+                  <Picker.Item label="10" value="10" />
+                </Picker>
               </Item>
             </View>
           </View>

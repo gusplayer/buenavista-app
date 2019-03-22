@@ -124,7 +124,7 @@ export const DashNavigator = StackNavigator(
     }
   },
   {
-    initialRouteName: "HotelList"
+    initialRouteName: "Booking"
   }
 );
 // export const DashNavigator = StackNavigator(
