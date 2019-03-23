@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #504e2d;
+        stroke: #3d3b24;
+        stroke-miterlimit: 10;
+        stroke-width: 5px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-size: 80px;
+        font-family: Roboto-Medium, Roboto;
+        font-weight: 500;
+      }
+    </style>
+  </defs>
+  <g id="Capa_18" transform="translate(440)">
+    <g id="XMLID_1356_">
+      <circle id="XMLID_1358_" class="cls-1" cx="97.5" cy="97.5" r="97.5" transform="translate(-437.5 2.5)"/>
+      <text id="CM" class="cls-2" transform="translate(-401.133 123.379)"><tspan x="0" y="0">CM</tspan></text>
+    </g>
+  </g>
+</svg>

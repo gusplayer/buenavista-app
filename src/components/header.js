@@ -1,6 +1,5 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import Image from "react-native-remote-svg";
+import { StyleSheet, TouchableOpacity, Image } from "react-native";
 import { Header, Left, Body, Right, View } from "native-base";
 import Icon from "react-native-vector-icons/Feather";
 
@@ -18,8 +17,8 @@ const HeaderTab = ({ navigation, left, right }) => {
       </Left>
       <Body>
         <Image
-          source={require("../assets/Logo.svg")}
-          style={{ width: 200, height: 70 }}
+          source={require("../assets/Logo.png")}
+          style={{ width: 200, height: 30 }}
         />
       </Body>
       <Right>

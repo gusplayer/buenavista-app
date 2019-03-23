@@ -22,7 +22,7 @@ export default class Notification extends React.Component {
         />
         <View style={styles.body}>
           <Image
-            source={require("../src/assets/iconos/login/mail-24px.svg")}
+            source={require("../src/assets/iconos/login/mail.png")}
             style={styles.imageIcon}
           />
 

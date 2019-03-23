@@ -1,6 +1,5 @@
 import * as React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import Image from "react-native-remote-svg";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import { Colors } from "../../utils/const";
 
@@ -13,7 +12,7 @@ const TabBar = ({ navigation, position }) => {
           onPress={() => navigation.navigate("HotelList")}
         >
           <Image
-            source={require("../assets/iconos/bar-bottom/active/domain.svg")}
+            source={require("../assets/iconos/bar-bottom/active/domain.png")}
             style={styles.imageIcon}
           />
           <Text style={styles.tabTitleActive}> CATÁLOGO</Text>
@@ -24,7 +23,7 @@ const TabBar = ({ navigation, position }) => {
           onPress={() => navigation.navigate("HotelList")}
         >
           <Image
-            source={require("../assets/iconos/bar-bottom/gray/domain.svg")}
+            source={require("../assets/iconos/bar-bottom/gray/domain.png")}
             style={styles.imageIcon}
           />
           <Text style={styles.tabTitle}> CATÁLOGO</Text>
@@ -37,7 +36,7 @@ const TabBar = ({ navigation, position }) => {
           onPress={() => navigation.navigate("Booking")}
         >
           <Image
-            source={require("../assets/iconos/bar-bottom/active/search.svg")}
+            source={require("../assets/iconos/bar-bottom/active/search.png")}
             style={{ width: 25, height: 25 }}
           />
           <Text style={styles.tabTitleActive}> RESERVAR</Text>
@@ -48,7 +47,7 @@ const TabBar = ({ navigation, position }) => {
           onPress={() => navigation.navigate("Booking")}
         >
           <Image
-            source={require("../assets/iconos/bar-bottom/gray/search.svg")}
+            source={require("../assets/iconos/bar-bottom/gray/search.png")}
             style={{ width: 25, height: 25 }}
           />
           <Text style={styles.tabTitle}> RESERVAR</Text>
@@ -61,7 +60,7 @@ const TabBar = ({ navigation, position }) => {
           onPress={() => navigation.navigate("CouponsView")}
         >
           <Image
-            source={require("../assets/iconos/bar-bottom/active/cupon.svg")}
+            source={require("../assets/iconos/bar-bottom/active/cupon.png")}
             style={{ width: 25, height: 25 }}
           />
           <Text style={styles.tabTitleActive}> CUPONES</Text>
@@ -72,7 +71,7 @@ const TabBar = ({ navigation, position }) => {
           onPress={() => navigation.navigate("CouponsView")}
         >
           <Image
-            source={require("../assets/iconos/bar-bottom/gray/cupon.svg")}
+            source={require("../assets/iconos/bar-bottom/gray/cupon.png")}
             style={{ width: 25, height: 25 }}
           />
           <Text style={styles.tabTitle}> CUPONES</Text>
@@ -85,7 +84,7 @@ const TabBar = ({ navigation, position }) => {
           onPress={() => navigation.navigate("Notification")}
         >
           <Image
-            source={require("../assets/iconos/bar-bottom/active/notifications.svg")}
+            source={require("../assets/iconos/bar-bottom/active/notifications.png")}
             style={{ width: 25, height: 25 }}
           />
           <Text style={styles.tabTitleActive}> NOTIFICACIÓN</Text>
@@ -96,7 +95,7 @@ const TabBar = ({ navigation, position }) => {
           onPress={() => navigation.navigate("Notification")}
         >
           <Image
-            source={require("../assets/iconos/bar-bottom/gray/notifications.svg")}
+            source={require("../assets/iconos/bar-bottom/gray/notifications.png")}
             style={{ width: 25, height: 25 }}
           />
           <Text style={styles.tabTitle}> NOTIFICACIÓN</Text>
@@ -109,7 +108,7 @@ const TabBar = ({ navigation, position }) => {
           onPress={() => navigation.navigate("Membership")}
         >
           <Image
-            source={require("../assets/iconos/bar-bottom/active/circle.svg")}
+            source={require("../assets/iconos/bar-bottom/active/circle.png")}
             style={{ width: 25, height: 25 }}
           />
           <Text style={styles.tabTitleActive}> MEMEBRESIA</Text>
@@ -120,7 +119,7 @@ const TabBar = ({ navigation, position }) => {
           onPress={() => navigation.navigate("Membership")}
         >
           <Image
-            source={require("../assets/iconos/bar-bottom/gray/circle.svg")}
+            source={require("../assets/iconos/bar-bottom/gray/circle.png")}
             style={{ width: 25, height: 25 }}
           />
           <Text style={styles.tabTitle}> MEMEBRESIA</Text>

@@ -6,6 +6,7 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
+  TouchableHighlight,
   Image,
   ActivityIndicator
 } from "react-native";
@@ -47,7 +48,7 @@ export default class HotelList extends React.Component {
         data={this.state.hotelList}
         keyExtractor={(item, _) => item.imagen1}
         renderItem={({ item }) => (
-          <TouchableOpacity
+          <TouchableHighlight
             onPress={() =>
               navigate("HotelDetails", {
                 hotel: item
@@ -80,7 +81,7 @@ export default class HotelList extends React.Component {
                 </View>
               </View>
             </View>
-          </TouchableOpacity>
+          </TouchableHighlight>
         )}
       />
     );

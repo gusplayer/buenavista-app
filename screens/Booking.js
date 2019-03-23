@@ -4,11 +4,9 @@ import {
   Text,
   View,
   ScrollView,
-  WebView,
   TouchableOpacity
 } from "react-native";
 import HeaderTab from "../src/components/header";
-import Image from "react-native-remote-svg";
 import TabBar from "../src/components/tabBar";
 import { Colors } from "../utils/const";
 import { Item, Input, Label, Container, DatePicker, Picker } from "native-base";
@@ -22,14 +20,18 @@ export default class Booking extends React.Component {
       selectedAdults: 1,
       chosenDate: new Date(),
       loaderBoton: false,
-      hotelList: []
+      hotelList: [],
+      hotelRoomsList: [],
+      hotelSelected: []
     };
     this.setDate = this.setDate.bind(this);
   }
   async componentDidMount() {
     const hotelAPI = await API.getHotelList();
+    const hotelRoomsAPI = await API.getHabitaciones();
     this.setState({
       hotelList: hotelAPI,
+      hotelRoomsList: hotelRoomsAPI,
       loading: false
     });
   }
@@ -39,6 +41,11 @@ export default class Booking extends React.Component {
       return <Picker.Item label="9" value="9" />;
     });
   };
+  onValueChangeHotel(value) {
+    this.setState({
+      hotelSelected: value
+    });
+  }
   onValueChangeKids(value) {
     this.setState({
       selectedKids: value
@@ -93,11 +100,11 @@ export default class Booking extends React.Component {
                   placeholder="Adultos"
                   placeholderStyle={{ color: "#bfc6ea" }}
                   placeholderIconColor="#007aff"
-                  selectedValue={this.state.selectedAdults}
+                  selectedValue={this.state.hotelSelect}
                   onValueChange={this.onValueChangeAdults.bind(this)}
                 >
                   {this.state.hotelList.map(v => {
-                    return <Picker.Item label={v.Hotel} value={v.id_Hotel} />;
+                    return <Picker.Item label={v.Hotel} value={v} />;
                   })}
                 </Picker>
               </Item>
@@ -113,7 +120,11 @@ export default class Booking extends React.Component {
                   selectedValue={this.state.selectedAdults}
                   onValueChange={this.onValueChangeAdults.bind(this)}
                 >
-                  <Picker.Item label="1" value="1" />
+                  {this.state.hotelRoomsList.map(v => {
+                    return (
+                      <Picker.Item label={v.thNombre} value={v.haCodigo} />
+                    );
+                  })}
                 </Picker>
               </Item>
 
@@ -223,30 +234,85 @@ export default class Booking extends React.Component {
                 </Item>
               </View>
 
-              <Item inlineLabel>
-                <Label style={{ width: "50%" }}>Aplicar cupón</Label>
-                <Picker
-                  mode="dropdown"
-                  style={{ width: undefined }}
-                  placeholder="Niños"
-                  placeholderStyle={{ color: "#bfc6ea" }}
-                  placeholderIconColor="#007aff"
-                  selectedValue={this.state.selectedKids}
-                  onValueChange={this.onValueChangeKids.bind(this)}
-                >
-                  <Picker.Item label="0" value="0" />
-                  <Picker.Item label="1" value="1" />
-                  <Picker.Item label="2" value="2" />
-                  <Picker.Item label="3" value="3" />
-                  <Picker.Item label="4" value="4" />
-                  <Picker.Item label="5" value="5" />
-                  <Picker.Item label="6" value="6" />
-                  <Picker.Item label="7" value="7" />
-                  <Picker.Item label="8" value="8" />
-                  <Picker.Item label="9" value="9" />
-                  <Picker.Item label="10" value="10" />
-                </Picker>
-              </Item>
+              <View picker inlineLabel style={styles.kidsTextContainer}>
+                <Text style={styles.kidsText}>
+                  ¿Qué edades tienen los niños?
+                </Text>
+              </View>
+
+              <View picker inlineLabel style={styles.dates}>
+                <Item inlineLabel style={{ width: "48%" }}>
+                  <Label>Niño 1</Label>
+                  <Picker
+                    mode="dropdown"
+                    style={{ width: undefined }}
+                    placeholder="Adultos"
+                    placeholderStyle={{ color: "#bfc6ea" }}
+                    placeholderIconColor="#007aff"
+                    selectedValue={this.state.selectedAdults}
+                    onValueChange={this.onValueChangeAdults.bind(this)}
+                  >
+                    <Picker.Item label="0" value="0" />
+                    <Picker.Item label="1" value="1" />
+                    <Picker.Item label="2" value="2" />
+                    <Picker.Item label="3" value="3" />
+                    <Picker.Item label="4" value="4" />
+                    <Picker.Item label="5" value="5" />
+                    <Picker.Item label="6" value="6" />
+                    <Picker.Item label="7" value="7" />
+                    <Picker.Item label="8" value="8" />
+                    <Picker.Item label="9" value="9" />
+                    <Picker.Item label="10" value="10" />
+                  </Picker>
+                </Item>
+
+                <Item picker inlineLabel style={{ width: "45%" }}>
+                  <Label>Niño 2</Label>
+                  <Picker
+                    mode="dropdown"
+                    style={{ width: undefined }}
+                    placeholder="Niños"
+                    placeholderStyle={{ color: "#bfc6ea" }}
+                    placeholderIconColor="#007aff"
+                    selectedValue={this.state.selectedKids}
+                    onValueChange={this.onValueChangeKids.bind(this)}
+                  >
+                    <Picker.Item label="0" value="0" />
+                    <Picker.Item label="1" value="1" />
+                    <Picker.Item label="2" value="2" />
+                    <Picker.Item label="3" value="3" />
+                    <Picker.Item label="4" value="4" />
+                    <Picker.Item label="5" value="5" />
+                    <Picker.Item label="6" value="6" />
+                    <Picker.Item label="7" value="7" />
+                    <Picker.Item label="8" value="8" />
+                    <Picker.Item label="9" value="9" />
+                    <Picker.Item label="10" value="10" />
+                  </Picker>
+                </Item>
+              </View>
+
+              <View picker inlineLabel style={styles.dates}>
+                <Item inlineLabel style={{ width: "100%" }}>
+                  <Label style={{ width: "50%" }}>Aplicar cupón</Label>
+                  <Picker
+                    mode="dropdown"
+                    style={{ width: undefined }}
+                    placeholder="Niños"
+                    placeholderStyle={{ color: "#bfc6ea" }}
+                    placeholderIconColor="#007aff"
+                    selectedValue={this.state.selectedKids}
+                    onValueChange={this.onValueChangeKids.bind(this)}
+                  >
+                    {/* {this.state.hotelSelected.id_cupon1 != "" && (
+                    <Picker.Item
+                      label={this.state.hotelSelected.cupon1}
+                      value={this.state.hotelSelected.id_cupon1}
+                    />
+                  )} */}
+                  </Picker>
+                </Item>
+              </View>
             </View>
           </View>
 
@@ -278,6 +344,17 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     justifyContent: "space-between"
+  },
+  kidsTextContainer: {
+    width: "100%",
+    paddingVertical: 15,
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  kidsText: {
+    fontSize: 16,
+    color: "black",
+    fontWeight: "500"
   },
   redSeparator: {
     width: "100%",

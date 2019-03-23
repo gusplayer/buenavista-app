@@ -17,7 +17,7 @@ export default class CouponUsed extends React.Component {
           <View style={styles.containImage}>
             <Image
               style={styles.imageCupon}
-              source={require("../src/assets/cupones/cuponesN/premium/cupon1.png")}
+              source={require("../src/assets/cupones/cupones/cuponesN/premium/2x1.png")}
             />
           </View>
           <Text style={styles.textCupon}>
@@ -33,7 +33,7 @@ export default class CouponUsed extends React.Component {
           <View style={styles.containImage}>
             <Image
               style={styles.imageCupon}
-              source={require("../src/assets/cupones/cuponesN/premium/cupon2.png")}
+              source={require("../src/assets/cupones/cupones/cuponesN/premium/cm.png")}
             />
           </View>
           <Text style={styles.textCupon}>

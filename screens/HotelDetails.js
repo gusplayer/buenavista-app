@@ -50,7 +50,7 @@ export default class HotelDetails extends React.Component {
             </View>
           </View>
           <View style={styles.redSeparator}>
-            <Text style={styles.nameHotel}>{item.nombre}</Text>
+            <Text style={styles.nameHotel}>{item.Hotel}</Text>
           </View>
           <View style={styles.descriptionContainer}>
             <Text style={styles.descriptionTitle}>Descripción</Text>

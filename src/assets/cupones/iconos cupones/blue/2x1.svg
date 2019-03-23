@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #2c407f;
+        stroke: #21325b;
+        stroke-miterlimit: 10;
+        stroke-width: 5px;
+      }
+
+      .cls-2 {
+        fill: #fff;
+        font-size: 80px;
+        font-family: Roboto-Medium, Roboto;
+        font-weight: 500;
+      }
+    </style>
+  </defs>
+  <g id="Capa_1" transform="translate(880 695)">
+    <g id="XMLID_623_">
+      <circle id="XMLID_2_" class="cls-1" cx="97.5" cy="97.5" r="97.5" transform="translate(-877.5 -692.5)"/>
+      <text id="_2x1" data-name="2x1" class="cls-2" transform="translate(-845.586 -571.621)"><tspan x="0" y="0">2x1</tspan></text>
+    </g>
+  </g>
+</svg>

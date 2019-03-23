@@ -1,7 +1,6 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
 import { Colors } from "../utils/const";
-import Image from "react-native-remote-svg";
 import { Container, Tab, Tabs, TabHeading } from "native-base";
 import TabBar from "../src/components/tabBar";
 import HeaderTab from "../src/components/header";
