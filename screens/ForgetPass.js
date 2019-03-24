@@ -14,56 +14,52 @@ import { connect } from 'react-redux';
 import { CheckBox } from 'native-base';
 import { Bold, Colors } from '../utils/const';
 import Image from 'react-native-remote-svg';
+import Modal from 'react-native-modal';
 
-class Login extends React.Component {
+export default class ForgetPass extends React.Component {
   constructor() {
     super();
     this.state = {
       email: ' ',
       password: ' ',
       loading: false,
-      messageError: ''
+      messageError: '',
+      isModalVisible: false
     };
   }
-  onPressLogin = () => {
-    this.setState({ loading: true });
-    API.postLogin(this.state.email, this.state.password)
-      .then(response => {
-        console.warn('hasta aqui vamos bien');
-        let token = response.data.access_token;
-        this.props.dispatch({
-          type: 'LOGIN',
-          payload: {
-            token
-          }
-        });
-      })
-      .catch(() => {
-        console.warn('Los datos no coinciden');
-        this.setState({
-          loading: false,
-          messageError: 'Los datos no coindien por favor intenta de nuevo'
-        });
-      });
-  };
-  _getButtonLogin() {
+  modal() {
     const { navigate } = this.props.navigation;
-    if (this.state.loading) {
-      return <ActivityIndicator size="large" color="#0000ff" />;
-    } else {
-      return (
-        <TouchableOpacity
-          // onPress={this.onPressLogin}
-          onPress={() => navigate('ChangePassword')}
-          style={styles.buttonLogin}
+    return (
+      <View style={styles.modalContent}>
+        <View
+          style={{
+            padding: 28,
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center'
+          }}
         >
-          <View style={styles.alignButton}>
-            <Text style={styles.buttonText}>INGRESAR</Text>
-          </View>
-        </TouchableOpacity>
-      );
-    }
+          <Text style={{ textAlign: 'center', fontSize: 16, marginBottom: 15 }}>
+            Una nueva contraseña ha sido enviada a tu correo electronico.
+          </Text>
+          <Text
+            style={styles.linkForgetModal}
+            onPress={() => {
+              this.setState({ isModalVisible: false });
+              navigate('Login');
+            }}
+          >
+            <Bold>Volver al Inicio</Bold>
+          </Text>
+        </View>
+      </View>
+    );
   }
+  onPressButton = () => {
+    this.setState({ isModalVisible: true });
+    // this.setState({ loading: true });
+  };
+
   _getButtonForgetPass() {
     const { navigate } = this.props.navigation;
     if (this.state.loading) {
@@ -72,7 +68,7 @@ class Login extends React.Component {
       return (
         <TouchableOpacity
           // onPress={this.onPressLogin}
-          onPress={() => navigate('ChangePassword')}
+          onPress={this.onPressButton}
           style={styles.buttonForgetPass}
         >
           <View style={styles.alignButton}>
@@ -84,9 +80,7 @@ class Login extends React.Component {
       );
     }
   }
-  _getMessageError = () => {
-    return <Text />;
-  };
+
   render() {
     const { navigate } = this.props.navigation;
     return (
@@ -94,57 +88,49 @@ class Login extends React.Component {
         source={require('../src/assets/fondo.jpg')}
         style={styles.container}
       >
-        <KeyboardAvoidingView
-          resetScrollToCoords={{ x: 0, y: 0 }}
-          scrollEnabled={false}
-        >
-          <View style={styles.header}>
-            <Image
-              source={require('../src/assets/logoBlanco.png')}
-              style={{ width: 150, height: 80 }}
+        <View style={styles.header}>
+          <Image
+            source={require('../src/assets/logoBlanco.png')}
+            style={{ width: 160, height: 93 }}
+          />
+        </View>
+
+        <View style={styles.formForgetPass}>
+          <View>
+            <TextInput
+              keyboardType="numeric"
+              placeholderTextColor="#59617b"
+              placeholder={'Id Socio'}
+              style={styles.input}
+              underlineColorAndroid="transparent"
+              onChangeText={password => this.setState({ password })}
             />
           </View>
 
-          <View style={styles.formForgetPass}>
-            <View>
-              <TextInput
-                keyboardType="numeric"
-                placeholderTextColor="#59617b"
-                placeholder={'Id Socio'}
-                style={styles.input}
-                underlineColorAndroid="transparent"
-                onChangeText={password => this.setState({ password })}
-              />
-            </View>
-            {this._getButtonForgetPass()}
-          </View>
+          {this._getButtonForgetPass()}
+        </View>
 
-          <View style={styles.footer}>
-            <Text style={styles.linkForget} onPress={() => navigate('Login')}>
-              Volver al <Bold>Inicio de sesión</Bold>
-            </Text>
-            <Text style={styles.link} onPress={() => navigate('ForgetPass')}>
-              ¿Olvidé contraseña?
-            </Text>
-          </View>
+        <View style={styles.footer}>
+          <Text style={styles.linkForget} onPress={() => navigate('Login')}>
+            Volver al <Bold>Inicio de sesión</Bold>
+          </Text>
+          <Text style={styles.link} onPress={() => navigate('ForgetPass')}>
+            ¿Olvidé contraseña?
+          </Text>
+        </View>
 
-          <View style={styles.terms}>
-            <CheckBox checked={true} color="#c3b381" />
-            <Text style={styles.termsText} onPress={() => navigate('Terms')}>
-              Al ingresar aceptarás los <Bold>términos y condiciones</Bold>
-            </Text>
-          </View>
-        </KeyboardAvoidingView>
+        <View style={styles.terms}>
+          <CheckBox checked={true} color="#c3b381" />
+          <Text style={styles.termsText} onPress={() => navigate('Terms')}>
+            Al ingresar aceptarás los <Bold>términos y condiciones</Bold>
+          </Text>
+        </View>
+
+        <Modal isVisible={this.state.isModalVisible}>{this.modal()}</Modal>
       </ImageBackground>
     );
   }
 }
-
-const mapStateToProps = state => {
-  return { auth: state };
-};
-
-export default connect(mapStateToProps)(Login);
 
 const styles = StyleSheet.create({
   container: {
@@ -230,6 +216,14 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     paddingTop: 5
   },
+  linkForgetModal: {
+    color: 'blue',
+    alignSelf: 'center',
+    fontSize: 15,
+    fontWeight: '400',
+    marginBottom: 5,
+    paddingTop: 5
+  },
   termsText: {
     color: '#ffffff',
     alignSelf: 'center',
@@ -290,7 +284,21 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingLeft: 10,
     paddingRight: 10,
-    fontSize: 16,
-    fontWeight: '300'
+    fontSize: 15,
+    fontWeight: '200'
+  },
+  modalContent: {
+    flexDirection: 'column',
+    backgroundColor: 'white',
+    borderRadius: 8,
+    height: 190,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  modalIcon: {
+    color: 'gray',
+    fontSize: 35,
+    marginBottom: 10,
+    marginTop: 10
   }
 });
