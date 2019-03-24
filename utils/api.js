@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { AsyncStorage } from 'react-native';
 
-const USER_TOKEN = '';
+let USER_TOKEN = null;
 const BASE_API =
   'http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/';
 
@@ -13,14 +13,11 @@ class Api {
   };
 
   _retrieveData = async () => {
-    let token = '';
     try {
-      token = await AsyncStorage.getItem('userToken');
-      if (token !== null) {
-        USER_TOKEN = token;
-      }
+      let token = await AsyncStorage.getItem('userToken');
+      USER_TOKEN = token;
     } catch (error) {
-      console.warn('Async de token dañado');
+      console.warn(error);
     }
   };
   async getLogin(userID, password) {
@@ -86,7 +83,9 @@ class Api {
   async getHabitaciones() {
     await this._retrieveData();
     const hotelRoom = await axios
-      .get(`${BASE_API}metodoHabitacionesCupones?dami=583120&hotel=158&tipo=1`)
+      .get(
+        `${BASE_API}metodoHabitacionesCupones?dami=${USER_TOKEN}&hotel=158&tipo=1`
+      )
       .then(response => {
         return response.data;
       })
@@ -95,8 +94,9 @@ class Api {
   }
 
   async getProfile() {
+    await this._retrieveData();
     const profile = await axios
-      .get(`${BASE_API}metodoPerfilUsuario?dami=583120`)
+      .get(`${BASE_API}metodoPerfilUsuario?dami=${USER_TOKEN}`)
       .then(response => {
         return response.data;
       })
@@ -105,6 +105,7 @@ class Api {
   }
 
   async getTerms() {
+    await this._retrieveData();
     const terms = await axios
       .get(`${BASE_API}metodoTerminosCondiciones`)
       .then(response => {
@@ -115,8 +116,9 @@ class Api {
   }
 
   async getBenefits() {
+    await this._retrieveData();
     const benefits = await axios
-      .get(`${BASE_API}metodoBeneficiosMembresia?dami=583120`)
+      .get(`${BASE_API}metodoBeneficiosMembresia?dami=${USER_TOKEN}`)
       .then(response => {
         return response.data;
       })
