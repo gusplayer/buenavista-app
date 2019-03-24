@@ -1,36 +1,43 @@
-import axios from "axios";
-import { AsyncStorage } from "react-native";
+import axios from 'axios';
+import { AsyncStorage } from 'react-native';
 
+const USER_TOKEN = '';
 const BASE_API =
-  "http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/";
+  'http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/';
 
 class Api {
   _storeData = async token => {
     try {
-      await AsyncStorage.setItem("userToken", token);
+      await AsyncStorage.setItem('userToken', token);
     } catch (error) {}
   };
 
   _retrieveData = async () => {
-    let token = "";
+    let token = '';
     try {
-      token = await AsyncStorage.getItem("userToken");
+      token = await AsyncStorage.getItem('userToken');
       if (token !== null) {
-        ACCESS_TOKEN = token;
+        USER_TOKEN = token;
       }
     } catch (error) {
-      console.warn("Async de token dañado");
+      console.warn('Async de token dañado');
     }
   };
-  async getLogin() {
-    const hotelList = await axios
-      .get(`${BASE_API}metodoLogin?dami=583120&clave=112233`)
+  async getLogin(userID, password) {
+    const loginAPI = await axios
+      .get(`${BASE_API}metodoLogin?dami=${userID}&clave=${password}`)
       .then(response => {
-        return response.data;
-        this._storeData(response.data.access_token);
-      })
-      .catch(error => error);
-    return hotelList;
+        this._storeData(userID);
+        let Auth = false;
+        if (response.data[0].codError == '200') {
+          let Auth = true;
+          return Auth;
+        } else {
+          let Auth = false;
+          return Auth;
+        }
+      });
+    return loginAPI;
   }
 
   async getForgetPass() {
@@ -68,7 +75,7 @@ class Api {
   async getHotelList() {
     await this._retrieveData();
     const hotelList = await axios
-      .get(`${BASE_API}metodoHotelMembresiaCupon?dami=583120`)
+      .get(`${BASE_API}metodoHotelMembresiaCupon?dami=${USER_TOKEN}`)
       .then(response => {
         return response.data;
       })
