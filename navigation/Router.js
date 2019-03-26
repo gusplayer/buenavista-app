@@ -16,6 +16,7 @@ import Notification from '../screens/Notification';
 import Membership from '../screens/Membership';
 import CouponsView from '../screens/CouponsView';
 import ChangePassword from '../screens/ChangePassword';
+import Logout from '../screens/Logout';
 
 export const LoginNavigator = StackNavigator(
   {
@@ -43,7 +44,7 @@ export const LoginNavigator = StackNavigator(
     }
   },
   {
-    initialRouteName: 'Register'
+    initialRouteName: 'Login'
   }
 );
 export const DashNavigator = StackNavigator(
@@ -118,6 +119,12 @@ export const DashNavigator = StackNavigator(
     },
     CouponsView: {
       screen: CouponsView,
+      navigationOptions: {
+        header: null
+      }
+    },
+    Logout: {
+      screen: Logout,
       navigationOptions: {
         header: null
       }
