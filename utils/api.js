@@ -47,24 +47,38 @@ class Api {
     return hotelList;
   }
 
-  async getChangePass() {
-    const hotelList = await axios
-      .get(`${BASE_API}metodoHotelMembresia?dami=583120`)
+  async getChangePass(dami, clave) {
+    const changePass = await axios
+      .get(`${BASE_API}metodoCambioClave?dami=${dami}&clave${clave}`)
       .then(response => {
-        return response.data;
+        this._storeData(userID);
+        let Auth = false;
+        if (response.data[0].codError == '200') {
+          let Auth = true;
+          return Auth;
+        } else {
+          let Auth = false;
+          return Auth;
+        }
       })
       .catch(error => error);
-    return hotelList;
+    return changePass;
   }
 
-  async getRegister() {
-    const hotelList = await axios
-      .get(`${BASE_API}metodoHotelMembresia?dami=583120`)
+  async getRegister(dami) {
+    const registroAPI = await axios
+      .get(`${BASE_API}metodoRegistrate?dami=${dami}`)
       .then(response => {
-        return response.data;
-      })
-      .catch(error => error);
-    return hotelList;
+        let Auth = false;
+        if (response.data[0].codError == '200') {
+          let Auth = true;
+          return Auth;
+        } else {
+          let Auth = false;
+          return Auth;
+        }
+      });
+    return registroAPI;
   }
 
   //////////////////////// With Auth /////////////////////

@@ -43,7 +43,7 @@ export const LoginNavigator = StackNavigator(
     }
   },
   {
-    initialRouteName: 'Login'
+    initialRouteName: 'Register'
   }
 );
 export const DashNavigator = StackNavigator(
