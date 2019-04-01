@@ -1,14 +1,14 @@
-import axios from 'axios';
-import { AsyncStorage } from 'react-native';
+import axios from "axios";
+import { AsyncStorage } from "react-native";
 
 let USER_TOKEN = null;
 const BASE_API =
-  'http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/';
+  "http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/";
 
 class Api {
   _storeData = async token => {
     try {
-      await AsyncStorage.setItem('userToken', token);
+      await AsyncStorage.setItem("userToken", token);
     } catch (error) {}
   };
 
@@ -27,7 +27,7 @@ class Api {
       .then(response => {
         this._storeData(userID);
         let Auth = false;
-        if (response.data[0].codError == '200') {
+        if (response.data[0].codError == "200") {
           let Auth = true;
           return Auth;
         } else {
@@ -54,7 +54,7 @@ class Api {
       .then(response => {
         this._storeData(userID);
         let Auth = false;
-        if (response.data[0].codError == '200') {
+        if (response.data[0].codError == "200") {
           let Auth = true;
           return Auth;
         } else {
@@ -71,7 +71,7 @@ class Api {
       .get(`${BASE_API}metodoRegistrate?dami=${dami}`)
       .then(response => {
         let Auth = false;
-        if (response.data[0].codError == '200') {
+        if (response.data[0].codError == "200") {
           let Auth = true;
           return Auth;
         } else {
@@ -106,6 +106,19 @@ class Api {
       })
       .catch(error => error);
     return hotelRoom;
+  }
+
+  async getCuponesHotel() {
+    await this._retrieveData();
+    const hotelCupones = await axios
+      .get(
+        `${BASE_API}metodoHabitacionesCupones?dami=${USER_TOKEN}&hotel=158&tipo=2`
+      )
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return hotelCupones;
   }
 
   async getProfile() {
