@@ -1,6 +1,6 @@
-import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
-import { Colors } from "../utils/const";
+import React from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import { Colors } from '../utils/const';
 
 export default class CouponUsed extends React.Component {
   constructor() {
@@ -17,7 +17,7 @@ export default class CouponUsed extends React.Component {
           <View style={styles.containImage}>
             <Image
               style={styles.imageCupon}
-              source={require("../src/assets/cupones/cupones/cuponesN/premium/2x1.png")}
+              source={require('../src/assets/cupones/cupones/1.png')}
             />
           </View>
           <Text style={styles.textCupon}>
@@ -33,7 +33,7 @@ export default class CouponUsed extends React.Component {
           <View style={styles.containImage}>
             <Image
               style={styles.imageCupon}
-              source={require("../src/assets/cupones/cupones/cuponesN/premium/cm.png")}
+              source={require('../src/assets/cupones/cupones/1.png')}
             />
           </View>
           <Text style={styles.textCupon}>
@@ -50,36 +50,36 @@ export default class CouponUsed extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
-    alignItems: "center"
+    width: '100%',
+    alignItems: 'center'
   },
   bookingButton: {
-    width: "100%",
+    width: '100%',
     height: 35,
     backgroundColor: Colors.green,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   bookingText: {
-    color: "white",
-    fontWeight: "300",
+    color: 'white',
+    fontWeight: '300',
     fontSize: 14
   },
 
   itemList: {
-    width: "80%"
+    width: '80%'
   },
   containImage: {
     height: 180
   },
   textCupon: {
-    color: "black",
+    color: 'black',
     marginBottom: 20
   },
   imageCupon: {
     flex: 1,
-    width: "100%",
-    height: "100%",
-    resizeMode: "contain"
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain'
   }
 });

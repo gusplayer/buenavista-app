@@ -13,12 +13,13 @@ class Api {
   };
 
   _retrieveData = async () => {
-    try {
-      let token = await AsyncStorage.getItem('userToken');
-      USER_TOKEN = token;
-    } catch (error) {
-      console.warn(error);
-    }
+    // try {
+    //   let token = await AsyncStorage.getItem('userToken');
+    //   USER_TOKEN = token;
+    // } catch (error) {
+    //   console.warn(error);
+    // }
+    USER_TOKEN = 583120;
   };
   async getLogin(userID, password) {
     const loginAPI = await axios
@@ -138,6 +139,36 @@ class Api {
       })
       .catch(error => error);
     return benefits;
+  }
+  async getCuponAvalible() {
+    await this._retrieveData();
+    const cupons = await axios
+      .get(`${BASE_API}metodoCuponesDisponibles?dami=${USER_TOKEN}`)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return cupons;
+  }
+  async getCuponUsed() {
+    await this._retrieveData();
+    const cupons = await axios
+      .get(`${BASE_API}metodoCuponesUtilizados?dami=${USER_TOKEN}`)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return cupons;
+  }
+  async getCuponMembership() {
+    await this._retrieveData();
+    const cupons = await axios
+      .get(`${BASE_API}metodoCuponesMembresia?dami=${USER_TOKEN}`)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return cupons;
   }
 }
 

@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 
 class Auth extends React.Component {
   render() {
-    if (this.props.auth.auth == true) {
-      return <DashNavigator />;
-    } else {
-      return <LoginNavigator />;
-    }
+    //if (this.props.auth.auth == true) {
+    return <DashNavigator />;
+    // } else {
+    //   return <LoginNavigator />;
+    // }
   }
 }
 

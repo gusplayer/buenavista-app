@@ -1,11 +1,31 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Colors, Bold } from '../utils/const';
-import { Item, Input, Label, Form } from 'native-base';
+import { Item, Input, Label, Form, Picker } from 'native-base';
+import API from '../utils/api';
 
 export default class Filter extends React.Component {
   constructor() {
     super();
+    this.state = {
+      countryList: [
+        {
+          id: 1,
+          name: 'Colombia'
+        },
+        {
+          id: 2,
+          name: 'Ecuador'
+        }
+      ],
+      selectedCountry: []
+    };
+  }
+
+  onValueChangeCountry(value) {
+    this.setState({
+      selectedCountry: value
+    });
   }
 
   render() {
@@ -17,9 +37,24 @@ export default class Filter extends React.Component {
           <Text style={styles.textBold}>Filtrar por:</Text>
           <View style={styles.form}>
             <Item inlineLabel>
-              <Label>Selecciona el país</Label>
-              <Input />
+              <Label style={{ width: '50%' }}>Selecciona país</Label>
+              <Picker
+                mode="dropdown"
+                style={{ width: '50%' }}
+                placeholder="Adultos"
+                placeholderStyle={{ color: '#bfc6ea' }}
+                placeholderIconColor="#007aff"
+                selectedValue={this.state.selectedCountry}
+                onValueChange={this.onValueChangeCountry.bind(this)}
+              >
+                {this.state.countryList.map(v => {
+                  return (
+                    <Picker.Item key={v.id} label={v.name} value={v.name} />
+                  );
+                })}
+              </Picker>
             </Item>
+
             <Item inlineLabel>
               <Label>Selecciona la ciudad o provincia</Label>
               <Input />

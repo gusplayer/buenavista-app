@@ -1,14 +1,14 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import Icon from "react-native-vector-icons/Feather";
-import { Colors, Bold } from "../utils/const";
-import API from "../utils/api";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
+import { Colors, Bold } from '../utils/const';
+import API from '../utils/api';
 
 export default class Benefits extends React.Component {
   constructor() {
     super();
     this.state = {
-      benefits: " "
+      benefits: ' '
     };
   }
 
@@ -25,7 +25,7 @@ export default class Benefits extends React.Component {
       <View style={styles.container}>
         <Text>{this.state.benefits.Description}</Text>
         <View style={styles.itemList}>
-          {this.state.benefits.Beneficio1 != "" && (
+          {this.state.benefits.Beneficio1 != '' && (
             <View style={styles.itemInfo}>
               <Icon
                 name="plus-circle"
@@ -38,7 +38,7 @@ export default class Benefits extends React.Component {
               </Text>
             </View>
           )}
-          {this.state.benefits.Beneficio2 != "" && (
+          {this.state.benefits.Beneficio2 != '' && (
             <View style={styles.itemInfo}>
               <Icon
                 name="plus-circle"
@@ -51,7 +51,7 @@ export default class Benefits extends React.Component {
               </Text>
             </View>
           )}
-          {this.state.benefits.Beneficio3 != "" && (
+          {this.state.benefits.Beneficio3 != '' && (
             <View style={styles.itemInfo}>
               <Icon
                 name="plus-circle"
@@ -64,7 +64,7 @@ export default class Benefits extends React.Component {
               </Text>
             </View>
           )}
-          {this.state.benefits.Beneficio4 != "" && (
+          {this.state.benefits.Beneficio4 != '' && (
             <View style={styles.itemInfo}>
               <Icon
                 name="plus-circle"
@@ -77,7 +77,7 @@ export default class Benefits extends React.Component {
               </Text>
             </View>
           )}
-          {this.state.benefits.Beneficio5 != "" && (
+          {this.state.benefits.Beneficio5 != '' && (
             <View style={styles.itemInfo}>
               <Icon
                 name="plus-circle"
@@ -90,7 +90,7 @@ export default class Benefits extends React.Component {
               </Text>
             </View>
           )}
-          {this.state.benefits.Beneficio6 != "" && (
+          {this.state.benefits.Beneficio6 != '' && (
             <View style={styles.itemInfo}>
               <Icon
                 name="plus-circle"
@@ -103,7 +103,7 @@ export default class Benefits extends React.Component {
               </Text>
             </View>
           )}
-          {this.state.benefits.Beneficio7 != "" && (
+          {this.state.benefits.Beneficio7 != '' && (
             <View style={styles.itemInfo}>
               <Icon
                 name="plus-circle"
@@ -116,7 +116,7 @@ export default class Benefits extends React.Component {
               </Text>
             </View>
           )}
-          {this.state.benefits.Beneficio8 != "" && (
+          {this.state.benefits.Beneficio8 != '' && (
             <View style={styles.itemInfo}>
               <Icon
                 name="plus-circle"
@@ -129,7 +129,7 @@ export default class Benefits extends React.Component {
               </Text>
             </View>
           )}
-          {this.state.benefits.Beneficio9 != "" && (
+          {this.state.benefits.Beneficio9 != '' && (
             <View style={styles.itemInfo}>
               <Icon
                 name="plus-circle"
@@ -142,7 +142,7 @@ export default class Benefits extends React.Component {
               </Text>
             </View>
           )}
-          {this.state.benefits.Beneficio0 != "" && (
+          {this.state.benefits.Beneficio0 != '' && (
             <View style={styles.itemInfo}>
               <Icon
                 name="plus-circle"
@@ -182,17 +182,17 @@ export default class Benefits extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
+    width: '100%',
     padding: 20
   },
   itemList: {
     marginVertical: 20,
-    width: "90%",
-    alignItems: "flex-start",
-    justifyContent: "center"
+    width: '90%',
+    alignItems: 'flex-start',
+    justifyContent: 'center'
   },
   itemInfo: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginBottom: 9
   },
   itemIcon: {
@@ -200,6 +200,6 @@ const styles = StyleSheet.create({
     marginLeft: 10
   },
   itemText: {
-    color: "black"
+    color: 'black'
   }
 });

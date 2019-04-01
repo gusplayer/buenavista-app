@@ -131,7 +131,7 @@ export const DashNavigator = StackNavigator(
     }
   },
   {
-    initialRouteName: 'HotelList'
+    initialRouteName: 'Filter'
   }
 );
 // export const DashNavigator = StackNavigator(
