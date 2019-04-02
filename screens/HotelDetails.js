@@ -85,9 +85,9 @@ export default class HotelDetails extends React.Component {
               />
             </View>
           </View>
-          <View style={styles.webSiteLink}>
+          {/* <View style={styles.webSiteLink}>
             <Text style={styles.textLink}>Ver mas información del hotel</Text>
-          </View>
+          </View> */}
           <View style={styles.bookingButton}>
             <Text
               onPress={() => navigate("Booking")}

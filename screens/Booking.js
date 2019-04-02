@@ -28,18 +28,18 @@ export default class Booking extends React.Component {
       hotelRoomsList: [],
       hotelCuponesList: [],
       hotelSelected: [],
-      loading: true
+      loading: true,
+      enabledRoom: false,
+      enabledCupon: false
     };
     this.setDate = this.setDate.bind(this);
   }
   async componentDidMount() {
     const hotelAPI = await API.getHotelList();
-    const hotelRoomsAPI = await API.getHabitaciones();
-    const hotelCuponesAPI = await API.getCuponesHotel();
+
     this.setState({
       hotelList: hotelAPI,
-      hotelRoomsList: hotelRoomsAPI,
-      hotelCuponesList: hotelCuponesAPI,
+
       loading: false
     });
   }
@@ -49,11 +49,20 @@ export default class Booking extends React.Component {
       return <Picker.Item label="9" value="9" />;
     });
   };
-  onValueChangeHotel(value) {
+
+  async onValueChangeHotel(value) {
+    this.setState({ enabledRoom: false, enabledCupon: false });
+    const hotelRoomsAPI = await API.getHabitaciones();
+    const hotelCuponesAPI = await API.getCuponesHotel();
     this.setState({
-      hotelSelected: value
+      hotelSelected: value,
+      hotelRoomsList: hotelRoomsAPI,
+      hotelCuponesList: hotelCuponesAPI,
+      enabledRoom: true,
+      enabledCupon: true
     });
   }
+
   onValueChangeKids(value) {
     this.setState({
       selectedKids: value
@@ -62,6 +71,12 @@ export default class Booking extends React.Component {
   onValueChangeAdults(value) {
     this.setState({
       selectedAdults: value
+    });
+  }
+
+  onValueChangeCupon(value) {
+    this.setState({
+      selectedKids: value
     });
   }
   setDate(newDate) {
@@ -151,7 +166,7 @@ export default class Booking extends React.Component {
                   placeholderStyle={{ color: "#bfc6ea" }}
                   placeholderIconColor="#007aff"
                   selectedValue={this.state.hotelSelect}
-                  onValueChange={this.onValueChangeAdults.bind(this)}
+                  onValueChange={this.onValueChangeHotel.bind(this)}
                 >
                   {this.state.hotelList.map(v => {
                     return <Picker.Item label={v.Hotel} value={v} />;
@@ -163,7 +178,7 @@ export default class Booking extends React.Component {
                 <Label style={{ width: "53%" }}>Tipo de habitación</Label>
                 <Picker
                   mode="dropdown"
-                  enabled={false}
+                  enabled={this.state.enabledRoom}
                   style={{ width: undefined }}
                   placeholder="Adultos"
                   placeholderStyle={{ color: "#bfc6ea" }}
@@ -301,13 +316,13 @@ export default class Booking extends React.Component {
                   <Label style={{ width: "52%" }}>Aplicar cupón</Label>
                   <Picker
                     mode="dropdown"
-                    enabled={false}
+                    enabled={this.state.enabledCupon}
                     style={{ width: undefined }}
                     placeholder="Niños"
                     placeholderStyle={{ color: "#bfc6ea" }}
                     placeholderIconColor="#007aff"
-                    selectedValue={this.state.selectedKids}
-                    onValueChange={this.onValueChangeKids.bind(this)}
+                    selectedValue={this.state.selectedCupon}
+                    onValueChange={this.onValueChangeCupon.bind(this)}
                   >
                     {this.state.hotelCuponesList.map(v => {
                       return <Picker.Item label={v.Cupon} value={v.Cupon} />;

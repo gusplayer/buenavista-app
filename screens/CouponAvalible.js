@@ -1,7 +1,7 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import { Colors } from '../utils/const';
-import API from '../utils/api';
+import React from "react";
+import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import { Colors } from "../utils/const";
+import API from "../utils/api";
 
 export default class CouponAvalible extends React.Component {
   constructor() {
@@ -23,23 +23,25 @@ export default class CouponAvalible extends React.Component {
 
   listComponents() {
     return this.state.cuponList.map(x => {
+      let imagen = x.id_Cupon;
       return (
         <View style={styles.container}>
           <View style={styles.bookingButton}>
             <Text style={styles.bookingText}>{x.Cupon}</Text>
           </View>
           <View style={styles.itemList}>
-            <View style={styles.containImage}>
+            {/* <View style={styles.containImage}>
               <Image
                 style={styles.imageCupon}
-                source={require('../src/assets/cupones/cupones/1.png')}
+                source={require(`../src/assets/cupones/cupones/${imagen}.png`)}
               />
-            </View>
-            <Text style={styles.textCupon}>
+            </View> */}
+            {/* <Text style={styles.textCupon}>
               Valido por una noche totalmente gratis para dos personas en
               habitación doble a elegir entre varios hoteles y hosterías
               nacionales.
-            </Text>
+            </Text> */}
+            <Text style={styles.textCupon}>Disponibles: {x.Disponibles}</Text>
           </View>
         </View>
       );
@@ -54,36 +56,36 @@ export default class CouponAvalible extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    alignItems: 'center'
+    width: "100%",
+    alignItems: "center"
   },
   bookingButton: {
-    width: '100%',
+    width: "100%",
     height: 35,
     backgroundColor: Colors.green,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center"
   },
   bookingText: {
-    color: 'white',
-    fontWeight: '300',
+    color: "white",
+    fontWeight: "300",
     fontSize: 14
   },
-
   itemList: {
-    width: '80%'
+    width: "80%"
   },
   containImage: {
     height: 180
   },
   textCupon: {
-    color: 'black',
-    marginBottom: 20
+    color: "black",
+    marginBottom: 20,
+    textAlign: "center"
   },
   imageCupon: {
     flex: 1,
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain'
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain"
   }
 });

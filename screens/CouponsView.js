@@ -5,7 +5,7 @@ import Image from "react-native-remote-svg";
 import { Container, Tab, Tabs, TabHeading } from "native-base";
 import TabBar from "../src/components/tabBar";
 import HeaderTab from "../src/components/header";
-import CouponAvalible from "./CouponInfo";
+import CouponAvalible from "./CouponAvalible";
 import CouponUsed from "./CouponUsed";
 
 export default class Membreship extends React.Component {
