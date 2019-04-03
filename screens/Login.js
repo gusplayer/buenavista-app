@@ -11,7 +11,7 @@ import {
   ImageBackground
 } from "react-native";
 import { connect } from "react-redux";
-import { CheckBox } from "native-base";
+import { CheckBox, Container } from "native-base";
 import { Bold, Colors } from "../utils/const";
 import Image from "react-native-remote-svg";
 
@@ -73,10 +73,7 @@ class Login extends React.Component {
         source={require("../src/assets/fondo.jpg")}
         style={styles.container}
       >
-        <KeyboardAvoidingView
-          resetScrollToCoords={{ x: 0, y: 0 }}
-          scrollEnabled={false}
-        >
+        <Container style={{ backgroundColor: "transparent" }}>
           <View style={styles.header}>
             <Image
               source={require("../src/assets/logoBlanco.png")}
@@ -133,7 +130,7 @@ class Login extends React.Component {
               Al ingresar aceptarás los <Bold>términos y condiciones</Bold>
             </Text>
           </View>
-        </KeyboardAvoidingView>
+        </Container>
       </ImageBackground>
     );
   }

@@ -23,19 +23,19 @@ export default class CouponAvalible extends React.Component {
 
   listComponents() {
     return this.state.cuponList.map(x => {
-      let imagen = x.id_Cupon;
+      imagen = x.id_Cupon;
       return (
         <View style={styles.container}>
           <View style={styles.bookingButton}>
             <Text style={styles.bookingText}>{x.Cupon}</Text>
           </View>
           <View style={styles.itemList}>
-            {/* <View style={styles.containImage}>
-              <Image
+            <View style={styles.containImage}>
+              {/* <Image
                 style={styles.imageCupon}
                 source={require(`../src/assets/cupones/cupones/${imagen}.png`)}
-              />
-            </View> */}
+              /> */}
+            </View>
             {/* <Text style={styles.textCupon}>
               Valido por una noche totalmente gratis para dos personas en
               habitación doble a elegir entre varios hoteles y hosterías

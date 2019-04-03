@@ -183,6 +183,16 @@ class Api {
       .catch(error => error);
     return cupons;
   }
+  async getImageProfile() {
+    await this._retrieveData();
+    const image = await axios
+      .get(`${BASE_API}metodoMostrarImagen?dami=${USER_TOKEN}`)
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return image;
+  }
 }
 
 export default new Api();

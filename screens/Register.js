@@ -1,5 +1,5 @@
-import React from 'react';
-import API from '../utils/api';
+import React from "react";
+import API from "../utils/api";
 import {
   StyleSheet,
   Text,
@@ -9,22 +9,23 @@ import {
   KeyboardAvoidingView,
   ActivityIndicator,
   ImageBackground
-} from 'react-native';
-import { connect } from 'react-redux';
-import { CheckBox } from 'native-base';
-import { Bold, Colors } from '../utils/const';
-import Image from 'react-native-remote-svg';
+} from "react-native";
+import { connect } from "react-redux";
+import { CheckBox } from "native-base";
+import { Bold, Colors } from "../utils/const";
+import Image from "react-native-remote-svg";
 
 class Register extends React.Component {
   constructor() {
     super();
     this.state = {
-      email: ' ',
-      password: ' ',
-      passwordRepeat: ' ',
+      email: " ",
+      password: " ",
+      passwordRepeat: " ",
       loading: false,
       messageError: false,
-      showPasswordInput: false
+      showPasswordInput: false,
+      messageErrorPassword: false
     };
   }
   onPressLogin = async () => {
@@ -61,22 +62,28 @@ class Register extends React.Component {
     }
   }
   onPressRegister = async () => {
-    const { navigate } = this.props.navigation;
-    this.setState({ loading: true });
-    let changePass = await API.getRegister(
-      this.state.email,
-      this.state.password
-    );
-    this.setState({ loading: false });
-    if (changePass == true) {
-      this.props.dispatch({
-        type: 'LOGIN',
-        payload: {
-          changePass
-        }
-      });
+    if (this.state.password === this.state.passwordRepeat) {
+      const { navigate } = this.props.navigation;
+
+      this.setState({ loading: true, messageErrorPassword: false });
+      let changePass = await API.getRegister(
+        this.state.email,
+        this.state.password
+      );
+      this.setState({ loading: false });
+      if (changePass == true) {
+        this.props.dispatch({
+          type: "LOGIN",
+          payload: {
+            changePass
+          }
+        });
+      }
+    } else {
+      this.setState({ messageErrorPassword: true });
     }
   };
+
   _getButtonRegister() {
     const { navigate } = this.props.navigation;
     if (this.state.loading) {
@@ -101,7 +108,7 @@ class Register extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <ImageBackground
-        source={require('../src/assets/fondo.jpg')}
+        source={require("../src/assets/fondo.jpg")}
         style={styles.container}
       >
         <KeyboardAvoidingView
@@ -110,7 +117,7 @@ class Register extends React.Component {
         >
           <View style={styles.header}>
             <Image
-              source={require('../src/assets/logoBlanco.png')}
+              source={require("../src/assets/logoBlanco.png")}
               style={{ width: 160, height: 93 }}
             />
           </View>
@@ -123,11 +130,18 @@ class Register extends React.Component {
                 </Text>
               </View>
             )}
+            {this.state.messageErrorPassword == true && (
+              <View style={styles.errorLogin}>
+                <Text style={styles.textError}>
+                  Las contraseñas deben ser iguales.
+                </Text>
+              </View>
+            )}
             <View>
               <TextInput
                 keyboardType="numeric"
                 placeholderTextColor="#59617b"
-                placeholder={'Id Socio'}
+                placeholder={"Id Socio"}
                 style={styles.input}
                 underlineColorAndroid="rgba(0,0,0,0)"
                 onChangeText={email => this.setState({ email })}
@@ -136,8 +150,9 @@ class Register extends React.Component {
             {this.state.showPasswordInput == true && (
               <View>
                 <TextInput
+                  secureTextEntry={true}
                   placeholderTextColor="#59617b"
-                  placeholder={'Contraseña'}
+                  placeholder={"Contraseña"}
                   style={styles.input}
                   underlineColorAndroid="transparent"
                   onChangeText={password => this.setState({ password })}
@@ -147,11 +162,14 @@ class Register extends React.Component {
             {this.state.showPasswordInput == true && (
               <View>
                 <TextInput
+                  secureTextEntry={true}
                   placeholderTextColor="#59617b"
-                  placeholder={'Confirmar contraseña'}
+                  placeholder={"Repetir contraseña"}
                   style={styles.input}
                   underlineColorAndroid="transparent"
-                  onChangeText={password => this.setState({ password })}
+                  onChangeText={passwordRepeat =>
+                    this.setState({ passwordRepeat })
+                  }
                 />
               </View>
             )}
@@ -161,14 +179,14 @@ class Register extends React.Component {
           </View>
 
           <View style={styles.footer}>
-            <Text style={styles.link} onPress={() => navigate('Login')}>
+            <Text style={styles.link} onPress={() => navigate("Login")}>
               Ya tengo cuenta <Bold>Iniciar sesión</Bold>
             </Text>
           </View>
 
           <View style={styles.terms}>
             <CheckBox checked={true} color="#c3b381" />
-            <Text style={styles.termsText} onPress={() => navigate('Terms')}>
+            <Text style={styles.termsText} onPress={() => navigate("Terms")}>
               Al ingresar aceptarás los <Bold>términos y condiciones</Bold>
             </Text>
           </View>
@@ -187,38 +205,38 @@ export default connect(mapStateToProps)(Register);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    flexDirection: 'column',
-    backgroundColor: '#dcf4fb'
+    width: "100%",
+    backgroundColor: "transparent",
+    alignItems: "center",
+    justifyContent: "space-around",
+    flexDirection: "column",
+    backgroundColor: "#dcf4fb"
   },
   header: {
     flex: 3,
-    alignContent: 'center',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
     paddingTop: 20,
-    flexDirection: 'column'
+    flexDirection: "column"
   },
   textWelcome: {
     flex: 1,
-    width: '100%',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: "100%",
+    alignItems: "center",
+    justifyContent: "center",
     marginTop: 5
   },
   form: {
     flex: 4,
-    alignContent: 'center',
-    justifyContent: 'center',
-    alignItems: 'center'
+    alignContent: "center",
+    justifyContent: "center",
+    alignItems: "center"
   },
   footer: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     paddingBottom: 10,
     marginTop: 5,
     marginBottom: 10,
@@ -226,90 +244,90 @@ const styles = StyleSheet.create({
   },
   terms: {
     flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-around',
-    width: '85%'
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-around",
+    width: "85%"
   },
   title: {
     fontSize: 18,
-    fontWeight: '700',
-    textAlign: 'center',
+    fontWeight: "700",
+    textAlign: "center",
     marginBottom: 5,
-    color: '#59617b'
+    color: "#59617b"
   },
   subtitle: {
     fontSize: 15,
-    fontWeight: '500',
-    textAlign: 'center',
+    fontWeight: "500",
+    textAlign: "center",
     marginBottom: 10,
-    color: '#59617b'
+    color: "#59617b"
   },
   link: {
-    color: '#ffffff',
-    alignSelf: 'center',
+    color: "#ffffff",
+    alignSelf: "center",
     fontSize: 15,
-    fontWeight: '400'
+    fontWeight: "400"
   },
   termsText: {
-    color: '#ffffff',
-    alignSelf: 'center',
+    color: "#ffffff",
+    alignSelf: "center",
     fontSize: 12,
-    fontWeight: '400',
+    fontWeight: "400",
     marginLeft: 5
   },
   input: {
-    backgroundColor: '#ffffff',
+    backgroundColor: "#ffffff",
     height: 50,
     width: 300,
     paddingLeft: 45,
     borderRadius: 5,
-    color: '#59617b',
-    fontWeight: '300',
+    color: "#59617b",
+    fontWeight: "300",
     marginBottom: 10,
     shadowOpacity: 0.3,
     shadowRadius: 3,
-    shadowColor: '#59617b',
+    shadowColor: "#59617b",
     shadowOffset: { width: 0, height: 2 }
   },
   textFooter: {
-    textAlign: 'center'
+    textAlign: "center"
   },
   alignButton: {
-    flexDirection: 'row',
-    alignItems: 'center'
+    flexDirection: "row",
+    alignItems: "center"
   },
   buttonLogin: {
     width: 280,
     backgroundColor: Colors.gold,
     height: 45,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 25,
     marginTop: 5,
     elevation: 2
   },
   buttonText: {
-    color: '#fff',
-    textAlign: 'center',
+    color: "#fff",
+    textAlign: "center",
     paddingLeft: 10,
     paddingRight: 10,
     fontSize: 16,
-    fontWeight: '300'
+    fontWeight: "300"
   },
   errorLogin: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     marginBottom: 10,
     width: 300,
     height: 40,
     borderRadius: 5,
-    fontWeight: '500',
-    justifyContent: 'center',
-    alignItems: 'center'
+    fontWeight: "500",
+    justifyContent: "center",
+    alignItems: "center"
   },
   textError: {
-    color: '#B1180F',
+    color: "#B1180F",
     fontSize: 14,
-    fontWeight: '500'
+    fontWeight: "500"
   }
 });

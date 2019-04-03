@@ -5,13 +5,15 @@ import {
   View,
   ScrollView,
   TouchableOpacity,
-  ActivityIndicator
+  ActivityIndicator,
+  Image
 } from "react-native";
 import HeaderTab from "../src/components/header";
 import TabBar from "../src/components/tabBar";
-import { Colors } from "../utils/const";
+import { Colors, Bold } from "../utils/const";
 import { Item, Input, Label, Container, DatePicker, Picker } from "native-base";
 import API from "../utils/api";
+import Modal from "react-native-modal";
 
 export default class Booking extends React.Component {
   constructor(props) {
@@ -35,7 +37,8 @@ export default class Booking extends React.Component {
       enabledCupon: false,
       disabledFechaFin: true,
       messageError: false,
-      loadingHeader: false
+      loadingHeader: false,
+      isModalVisible: false
     };
     this.setDateInicio = this.setDateInicio.bind(this);
     this.setDateFin = this.setDateFin.bind(this);
@@ -48,6 +51,46 @@ export default class Booking extends React.Component {
       loading: false,
       loadingHeader: false
     });
+  }
+
+  modal() {
+    const { navigate } = this.props.navigation;
+    return (
+      <View style={styles.modalContent}>
+        <View
+          style={{
+            padding: 28,
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center"
+          }}
+        >
+          <Image
+            source={require("../src/assets/Logo.png")}
+            style={{ width: 150, height: 20, marginLeft: -15 }}
+          />
+          <Text
+            style={{
+              textAlign: "center",
+              fontSize: 16,
+              marginBottom: 15,
+              marginTop: 20
+            }}
+          >
+            Los datos registrados en la reserva han sido enviados correctamente.
+          </Text>
+          <Text
+            style={styles.linkForgetModal}
+            onPress={() => {
+              this.setState({ isModalVisible: false });
+              navigate("HotelList");
+            }}
+          >
+            <Bold>Continuar</Bold>
+          </Text>
+        </View>
+      </View>
+    );
   }
 
   countryList = () => {
@@ -71,7 +114,8 @@ export default class Booking extends React.Component {
       hotelCuponesList: hotelCuponesAPI,
       enabledRoom: true,
       enabledCupon: true,
-      loadingHeader: false
+      loadingHeader: false,
+      messageError: false
     });
   }
 
@@ -100,9 +144,13 @@ export default class Booking extends React.Component {
     this.setState({ chosenDateFin: newDate });
   }
 
-  onClickSendBooking() {
-    this.setState({ chosenDate: newDate });
-  }
+  onClickSendBooking = () => {
+    if (this.state.enabledCupon == false) {
+      this.setState({ messageError: true });
+    } else {
+      this.setState({ isModalVisible: true });
+    }
+  };
 
   render() {
     let myloop = [];
@@ -371,7 +419,7 @@ export default class Booking extends React.Component {
           )}
 
           <TouchableOpacity
-            onPress={() => navigate("HotelList")}
+            onPress={() => this.onClickSendBooking()}
             style={styles.buttonLogin}
           >
             <Text style={styles.buttonText}>ENVIAR SOLICITUD</Text>
@@ -379,6 +427,7 @@ export default class Booking extends React.Component {
         </ScrollView>
 
         <TabBar navigation={this.props.navigation} position={2} />
+        <Modal isVisible={this.state.isModalVisible}>{this.modal()}</Modal>
       </Container>
     );
   }
@@ -464,5 +513,19 @@ const styles = StyleSheet.create({
     color: "#B1180F",
     fontSize: 14,
     fontWeight: "500"
+  },
+  modalContent: {
+    flexDirection: "column",
+    backgroundColor: "white",
+    borderRadius: 8,
+    height: 190,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  modalIcon: {
+    color: "gray",
+    fontSize: 35,
+    marginBottom: 10,
+    marginTop: 10
   }
 });
