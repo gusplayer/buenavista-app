@@ -22,27 +22,34 @@ export default class Booking extends React.Component {
       selectedHotel: 0,
       selectedCupon: 0,
       selectedRoom: 0,
-      chosenDate: new Date(),
+      chosenDateInicio: new Date(),
+      chosenDateFin: new Date(),
       loaderBoton: false,
       hotelList: [],
       hotelRoomsList: [],
       hotelCuponesList: [],
-      hotelSelected: [],
+      hotelSelected: "",
+      roomSelected: "",
       loading: true,
       enabledRoom: false,
-      enabledCupon: false
+      enabledCupon: false,
+      disabledFechaFin: true,
+      messageError: false,
+      loadingHeader: false
     };
-    this.setDate = this.setDate.bind(this);
+    this.setDateInicio = this.setDateInicio.bind(this);
+    this.setDateFin = this.setDateFin.bind(this);
   }
   async componentDidMount() {
     const hotelAPI = await API.getHotelList();
 
     this.setState({
       hotelList: hotelAPI,
-
-      loading: false
+      loading: false,
+      loadingHeader: false
     });
   }
+
   countryList = () => {
     return this.hotelList.map(x => {
       // return <Picker.Item label={x.Hotel} key={} value={x} />;
@@ -51,7 +58,11 @@ export default class Booking extends React.Component {
   };
 
   async onValueChangeHotel(value) {
-    this.setState({ enabledRoom: false, enabledCupon: false });
+    this.setState({
+      enabledRoom: false,
+      enabledCupon: false,
+      loadingHeader: true
+    });
     const hotelRoomsAPI = await API.getHabitaciones();
     const hotelCuponesAPI = await API.getCuponesHotel();
     this.setState({
@@ -59,7 +70,8 @@ export default class Booking extends React.Component {
       hotelRoomsList: hotelRoomsAPI,
       hotelCuponesList: hotelCuponesAPI,
       enabledRoom: true,
-      enabledCupon: true
+      enabledCupon: true,
+      loadingHeader: false
     });
   }
 
@@ -76,11 +88,16 @@ export default class Booking extends React.Component {
 
   onValueChangeCupon(value) {
     this.setState({
-      selectedKids: value
+      selectedCupon: value
     });
   }
-  setDate(newDate) {
-    this.setState({ chosenDate: newDate });
+
+  setDateInicio(newDate) {
+    this.setState({ chosenDateInicio: newDate });
+  }
+
+  setDateFin(newDate) {
+    this.setState({ chosenDateFin: newDate });
   }
 
   onClickSendBooking() {
@@ -140,9 +157,20 @@ export default class Booking extends React.Component {
           right={rigthHeader}
         />
         <View style={styles.redSeparator}>
-          <Text style={styles.nameHotel}>
-            TE AYUDAMOS A ENCONTRAR TU ALOJAMIENTO IDEAL
-          </Text>
+          {this.state.loadingHeader ? (
+            <View style={{ flexDirection: "row" }}>
+              <ActivityIndicator
+                size="small"
+                color="#fff"
+                style={{ marginRight: 10 }}
+              />
+              <Text style={styles.nameHotel}>ACTUALIZANDO INFORMACIÓN</Text>
+            </View>
+          ) : (
+            <Text style={styles.nameHotel}>
+              TE AYUDAMOS A ENCONTRAR TU ALOJAMIENTO IDEAL
+            </Text>
+          )}
         </View>
 
         <ScrollView style={styles.body}>
@@ -162,12 +190,13 @@ export default class Booking extends React.Component {
                 <Picker
                   mode="dropdown"
                   style={{ width: undefined }}
-                  placeholder="Adultos"
+                  placeholder="Hotel"
                   placeholderStyle={{ color: "#bfc6ea" }}
                   placeholderIconColor="#007aff"
-                  selectedValue={this.state.hotelSelect}
+                  selectedValue={this.state.hotelSelected}
                   onValueChange={this.onValueChangeHotel.bind(this)}
                 >
+                  <Picker.Item label="Seleccionar Hotel" value=" " />
                   {this.state.hotelList.map(v => {
                     return <Picker.Item label={v.Hotel} value={v} />;
                   })}
@@ -180,10 +209,10 @@ export default class Booking extends React.Component {
                   mode="dropdown"
                   enabled={this.state.enabledRoom}
                   style={{ width: undefined }}
-                  placeholder="Adultos"
+                  placeholder="Habitación"
                   placeholderStyle={{ color: "#bfc6ea" }}
                   placeholderIconColor="#007aff"
-                  selectedValue={this.state.selectedAdults}
+                  selectedValue={this.state.roomSelected}
                   onValueChange={this.onValueChangeAdults.bind(this)}
                 >
                   {this.state.hotelRoomsList.map(v => {
@@ -200,7 +229,7 @@ export default class Booking extends React.Component {
                     defaultDate={new Date(2018, 4, 4)}
                     minimumDate={new Date(2018, 1, 1)}
                     maximumDate={new Date(2018, 12, 31)}
-                    locale={"en"}
+                    locale={"es"}
                     timeZoneOffsetInMinutes={undefined}
                     modalTransparent={false}
                     animationType={"fade"}
@@ -212,7 +241,7 @@ export default class Booking extends React.Component {
                       marginLeft: -10,
                       paddingLeft: 0
                     }}
-                    onDateChange={this.setDate}
+                    onDateChange={this.setDateInicio}
                     disabled={false}
                   />
                   {/* <Text>
@@ -226,7 +255,7 @@ export default class Booking extends React.Component {
                     defaultDate={new Date(2018, 4, 4)}
                     minimumDate={new Date(2018, 1, 1)}
                     maximumDate={new Date(2018, 12, 31)}
-                    locale={"en"}
+                    locale={"es"}
                     timeZoneOffsetInMinutes={undefined}
                     modalTransparent={false}
                     animationType={"fade"}
@@ -238,7 +267,7 @@ export default class Booking extends React.Component {
                       marginLeft: -10,
                       paddingLeft: 0
                     }}
-                    onDateChange={this.setDate}
+                    onDateChange={this.setDateFin}
                     disabled={false}
                   />
                   {/* <Text>
@@ -333,6 +362,14 @@ export default class Booking extends React.Component {
             </View>
           </View>
 
+          {this.state.messageError == true && (
+            <View style={styles.errorLogin}>
+              <Text style={styles.textError}>
+                Faltan datos por ingresar en tu reserva.
+              </Text>
+            </View>
+          )}
+
           <TouchableOpacity
             onPress={() => navigate("HotelList")}
             style={styles.buttonLogin}
@@ -412,5 +449,20 @@ const styles = StyleSheet.create({
   ageKids: {
     width: "100%",
     flexWrap: "wrap"
+  },
+  errorLogin: {
+    backgroundColor: "white",
+    marginBottom: 10,
+    width: "100%",
+    height: 20,
+    borderRadius: 5,
+    fontWeight: "500",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  textError: {
+    color: "#B1180F",
+    fontSize: 14,
+    fontWeight: "500"
   }
 });
