@@ -193,6 +193,18 @@ class Api {
       .catch(error => error);
     return image;
   }
+  async updateImageProfile(newImage) {
+    await this._retrieveData();
+    const image = await axios
+      .get(
+        `${BASE_API}metodoCambiarImagen?dami=${USER_TOKEN}&imagen=${newImage}`
+      )
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return image;
+  }
 }
 
 export default new Api();

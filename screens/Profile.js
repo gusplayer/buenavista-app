@@ -4,7 +4,8 @@ import {
   Text,
   View,
   Image,
-  TouchableHighlight
+  TouchableHighlight,
+  ActivityIndicator
 } from "react-native";
 import Icon from "react-native-vector-icons/Feather";
 import { Colors, Bold } from "../utils/const";
@@ -26,7 +27,7 @@ class Profile extends React.Component {
     super();
     this.state = {
       profileData: "",
-      loading: false,
+      loading: true,
       imageSource:
         "http://www.classicindiascale.com/wp-content/uploads/2018/06/header-profile-default.png"
     };
@@ -37,11 +38,9 @@ class Profile extends React.Component {
     const imageProfileAPI = await API.getImageProfile();
     this.setState({
       profileData: profileAPI[0],
+      imageSource: imageProfileAPI[0].detInfo,
       loading: false
     });
-    console.warn(JSON.parse(imageProfileAPI + "}"));
-    console.warn(typeof imageProfileAPI);
-    console.warn(imageProfileAPI);
   }
 
   _galery() {
@@ -60,6 +59,7 @@ class Profile extends React.Component {
       }
     });
   }
+  changeImage = newImage => {};
   _camera() {
     ImagePicker.launchCamera(options, response => {
       let base64img = "data:image/jpeg;base64," + response.data;
@@ -81,6 +81,14 @@ class Profile extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
+    if (this.state.loading) {
+      return (
+        <View style={styles.container}>
+          <ActivityIndicator size="large" color="#f14b5a" />
+          <Text>Cargando usuario</Text>
+        </View>
+      );
+    }
     return (
       <View style={styles.container}>
         <TouchableHighlight onPress={() => this._galery()}>
