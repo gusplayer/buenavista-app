@@ -11,6 +11,11 @@ class Api {
       await AsyncStorage.setItem("userToken", token);
     } catch (error) {}
   };
+  _storeDataMembership = async membership => {
+    try {
+      await AsyncStorage.setItem("userMembership", membership);
+    } catch (error) {}
+  };
 
   _retrieveData = async () => {
     // try {
@@ -26,7 +31,6 @@ class Api {
       .get(`${BASE_API}metodoLogin?dami=${userID}&clave=${password}`)
       .then(response => {
         this._storeData(userID);
-        let Auth = false;
         if (response.data[0].codError == "200") {
           let Auth = true;
           return Auth;
@@ -35,6 +39,14 @@ class Api {
           return Auth;
         }
       });
+    const Membership = await axios
+      .get(`${BASE_API}metodoPerfilUsuario?dami=${userID}`)
+      .then(response => {
+        this._storeDataMembership(response.data[0].TipoProducto);
+        return true;
+      })
+      .catch(error => error);
+
     return loginAPI;
   }
 
@@ -194,6 +206,8 @@ class Api {
     return image;
   }
   async updateImageProfile(newImage) {
+    console.warn("entro al API");
+
     await this._retrieveData();
     const image = await axios
       .get(
@@ -203,6 +217,7 @@ class Api {
         return response.data;
       })
       .catch(error => error);
+    console.warn(image);
     return image;
   }
 }

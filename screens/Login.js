@@ -6,7 +6,6 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  KeyboardAvoidingView,
   ActivityIndicator,
   ImageBackground
 } from "react-native";

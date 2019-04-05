@@ -7,16 +7,33 @@ import HeaderTab from "../src/components/header";
 import Profile from "./Profile";
 import Benefits from "./Benefits";
 import CouponInfo from "./CouponInfo";
+import { AsyncStorage } from "react-native";
 
 export default class Membreship extends React.Component {
   constructor() {
     super();
+    this.state = {
+      membership: ""
+    };
+  }
+
+  async componentDidMount() {
+    try {
+      //let membership = await AsyncStorage.getItem("userMembership");
+      // this.state.membership = membership;
+      this.state.membership = "OPERA";
+    } catch (error) {
+      console.warn(error);
+    }
   }
 
   render() {
     const { navigate } = this.props.navigation;
     const leftHeader = { data: false };
     const rigthHeader = { data: false };
+    const imageMembership = `../src/assets/membresias/${
+      this.state.membership
+    }.png`;
 
     return (
       <Container>
@@ -27,11 +44,8 @@ export default class Membreship extends React.Component {
         />
 
         <ScrollView style={styles.body}>
-          <View style={styles.infoHotel}>
-            <Image
-              style={styles.imageTop}
-              source={require("../src/assets/tarjeta_clientes.png")}
-            />
+          <View style={styles.contentImage}>
+            <Image style={styles.imageTop} source={{ uri: imageMembership }} />
           </View>
           <Tabs tabBarUnderlineStyle={{ backgroundColor: Colors.red }}>
             <Tab
@@ -77,6 +91,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-around"
   },
   imageTop: {
-    width: "100%"
+    flex: 1,
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover"
+  },
+  contentImage: {
+    height: 160
   }
 });

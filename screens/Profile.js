@@ -28,8 +28,8 @@ class Profile extends React.Component {
     this.state = {
       profileData: "",
       loading: true,
-      imageSource:
-        "http://www.classicindiascale.com/wp-content/uploads/2018/06/header-profile-default.png"
+      loadingPhoto: true,
+      imageSource: " "
     };
   }
 
@@ -39,11 +39,14 @@ class Profile extends React.Component {
     this.setState({
       profileData: profileAPI[0],
       imageSource: imageProfileAPI[0].detInfo,
-      loading: false
+      loadingPhoto: false
     });
   }
 
   _galery() {
+    this.setState({
+      loadingPhoto: true
+    });
     ImagePicker.launchImageLibrary(options, response => {
       if (response.didCancel) {
         console.warn("User cancelled image picker");
@@ -56,16 +59,15 @@ class Profile extends React.Component {
         this.setState({
           imageSource: base64img
         });
+        this.changeImage(base64img);
       }
     });
   }
-  changeImage = newImage => {};
-  _camera() {
-    ImagePicker.launchCamera(options, response => {
-      let base64img = "data:image/jpeg;base64," + response.data;
-      this.setState({
-        imageSource: base64img
-      });
+
+  async changeImage(image) {
+    await API.updateImageProfile(image);
+    this.setState({
+      loadingPhoto: false
     });
   }
 
@@ -81,24 +83,34 @@ class Profile extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    if (this.state.loading) {
-      return (
-        <View style={styles.container}>
-          <ActivityIndicator size="large" color="#f14b5a" />
-          <Text>Cargando usuario</Text>
-        </View>
-      );
-    }
+
     return (
       <View style={styles.container}>
-        <TouchableHighlight onPress={() => this._galery()}>
-          <Image
-            style={styles.photoUser}
-            source={{
-              uri: this.state.imageSource
-            }}
-          />
-        </TouchableHighlight>
+        {this.state.loadingPhoto == true ? (
+          <TouchableHighlight style={styles.contentPhoto}>
+            <ActivityIndicator
+              size="large"
+              color="#f14b5a"
+              style={{
+                backgroundColor: "white",
+                width: "100%",
+                height: "100%"
+              }}
+            />
+          </TouchableHighlight>
+        ) : (
+          <TouchableHighlight
+            style={styles.contentPhoto}
+            onPress={() => this._galery()}
+          >
+            <Image
+              style={styles.photoUser}
+              source={{
+                uri: this.state.imageSource
+              }}
+            />
+          </TouchableHighlight>
+        )}
         <Text style={styles.nameUser}>{this.state.profileData.clNombre}</Text>
         <View style={styles.itemList}>
           <View style={styles.itemInfo}>
@@ -168,13 +180,23 @@ const styles = StyleSheet.create({
     flex: 1,
     width: "100%",
     alignItems: "center",
-    padding: 25
+    alignContent: "center",
+    padding: 20
+  },
+  contentPhoto: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    marginBottom: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "white",
+    elevation: 1
   },
   photoUser: {
     width: 100,
     height: 100,
-    borderRadius: 50,
-    marginBottom: 10
+    borderRadius: 50
   },
   nameUser: {
     width: 180,
