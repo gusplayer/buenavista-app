@@ -1,14 +1,16 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
-import { Colors } from "../utils/const";
+import { Colors, CuponesOpera } from "../utils/const";
 import API from "../utils/api";
+import { AsyncStorage } from "react-native";
 
 export default class CouponAvalible extends React.Component {
   constructor() {
     super();
     this.state = {
       cuponList: [],
-      loading: true
+      loading: true,
+      membership: require("../src/assets/membresias/PREMIUM.png")
     };
   }
 
@@ -18,12 +20,15 @@ export default class CouponAvalible extends React.Component {
       cuponList: cuponAPI,
       loading: false
     });
-    console.warn(this.state.cuponList);
+    // let membership = await AsyncStorage.getItem("userMembership");
+    let membershipStorage = "0PERA";
+    this.setState({
+      membership: "OPERA"
+    });
   }
 
   listComponents() {
     return this.state.cuponList.map(x => {
-      imagen = x.id_Cupon;
       return (
         <View style={styles.container}>
           <View style={styles.bookingButton}>
@@ -31,10 +36,12 @@ export default class CouponAvalible extends React.Component {
           </View>
           <View style={styles.itemList}>
             <View style={styles.containImage}>
-              {/* <Image
-                style={styles.imageCupon}
-                source={require(`../src/assets/cupones/cupones/${imagen}.png`)}
-              /> */}
+              {this.state.membership === "OPERA" && (
+                <Image
+                  style={styles.imageCupon}
+                  source={CuponesOpera[x.id_Cupon]}
+                />
+              )}
             </View>
             {/* <Text style={styles.textCupon}>
               Valido por una noche totalmente gratis para dos personas en

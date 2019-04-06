@@ -1,6 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
-import { Colors } from "../utils/const";
+import { Colors, Membresias } from "../utils/const";
 import { Container, Tab, Tabs, TabHeading } from "native-base";
 import TabBar from "../src/components/tabBar";
 import HeaderTab from "../src/components/header";
@@ -13,27 +13,24 @@ export default class Membreship extends React.Component {
   constructor() {
     super();
     this.state = {
-      membership: ""
+      membership: require("../src/assets/membresias/PREMIUM.png")
     };
   }
 
   async componentDidMount() {
-    try {
-      //let membership = await AsyncStorage.getItem("userMembership");
-      // this.state.membership = membership;
-      this.state.membership = "OPERA";
-    } catch (error) {
-      console.warn(error);
-    }
+    // let membership = await AsyncStorage.getItem("userMembership");
+    let membershipStorage = "0PERA";
+    this.setState({
+      membership: require(`../src/assets/membresias/BLUE.png`)
+    });
   }
+
+  imageChange = () => {};
 
   render() {
     const { navigate } = this.props.navigation;
     const leftHeader = { data: false };
     const rigthHeader = { data: false };
-    const imageMembership = `../src/assets/membresias/${
-      this.state.membership
-    }.png`;
 
     return (
       <Container>
@@ -42,10 +39,9 @@ export default class Membreship extends React.Component {
           left={leftHeader}
           right={rigthHeader}
         />
-
         <ScrollView style={styles.body}>
           <View style={styles.contentImage}>
-            <Image style={styles.imageTop} source={{ uri: imageMembership }} />
+            <Image style={styles.imageTop} source={this.state.membership} />
           </View>
           <Tabs tabBarUnderlineStyle={{ backgroundColor: Colors.red }}>
             <Tab
@@ -84,19 +80,13 @@ export default class Membreship extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "space-around"
-  },
   imageTop: {
     flex: 1,
     width: "100%",
-    height: "100%",
-    resizeMode: "cover"
+    height: "100%"
   },
   contentImage: {
-    height: 160
+    height: 160,
+    width: "100%"
   }
 });
