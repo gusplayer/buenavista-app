@@ -1,22 +1,22 @@
-import React from "react";
-import { StackNavigator } from "react-navigation";
-import Login from "../screens/Login";
-import ForgetPass from "../screens/ForgetPass";
-import Register from "../screens/Register";
-import Terms from "../screens/Terms";
-import HotelList from "../screens/HotelList";
-import HotelDetails from "../screens/HotelDetails";
-import Profile from "../screens/Profile";
-import Filter from "../screens/Filter";
-import Benefits from "../screens/Benefits";
-import CouponUsed from "../screens/CouponUsed";
-import CouponAvalible from "../screens/CouponAvalible";
-import Booking from "../screens/Booking";
-import Notification from "../screens/Notification";
-import Membership from "../screens/Membership";
-import CouponsView from "../screens/CouponsView";
-import ChangePassword from "../screens/ChangePassword";
-import Logout from "../screens/Logout";
+import React from 'react';
+import { StackNavigator } from 'react-navigation';
+import Login from '../screens/Login';
+import ForgetPass from '../screens/ForgetPass';
+import Register from '../screens/Register';
+import Terms from '../screens/Terms';
+import HotelList from '../screens/HotelList';
+import HotelDetails from '../screens/HotelDetails';
+import Profile from '../screens/Profile';
+import Filter from '../screens/Filter';
+import Benefits from '../screens/Benefits';
+import CouponUsed from '../screens/CouponUsed';
+import CouponAvalible from '../screens/CouponAvalible';
+import Booking from '../screens/Booking';
+import Notification from '../screens/Notification';
+import Membership from '../screens/Membership';
+import CouponsView from '../screens/CouponsView';
+import ChangePassword from '../screens/ChangePassword';
+import Logout from '../screens/Logout';
 
 export const LoginNavigator = StackNavigator(
   {
@@ -40,11 +40,11 @@ export const LoginNavigator = StackNavigator(
     },
     Terms: {
       screen: Terms,
-      navigationOptions: { title: "Terminos y condiciones" }
+      navigationOptions: { title: 'Terminos y condiciones' }
     }
   },
   {
-    initialRouteName: "Login"
+    initialRouteName: 'Login'
   }
 );
 export const DashNavigator = StackNavigator(
@@ -57,7 +57,7 @@ export const DashNavigator = StackNavigator(
     },
     Terms: {
       screen: Terms,
-      navigationOptions: { title: "Terminos y condiciones" }
+      navigationOptions: { title: 'Terminos y condiciones' }
     },
     HotelList: {
       screen: HotelList,
@@ -79,7 +79,7 @@ export const DashNavigator = StackNavigator(
     },
     Filter: {
       screen: Filter,
-      navigationOptions: { title: "Filtrar" }
+      navigationOptions: { title: 'Filtrar' }
     },
     Benefits: {
       screen: Benefits,
@@ -131,7 +131,7 @@ export const DashNavigator = StackNavigator(
     }
   },
   {
-    initialRouteName: "HotelList"
+    initialRouteName: 'HotelList'
   }
 );
 // export const DashNavigator = StackNavigator(

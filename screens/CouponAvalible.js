@@ -1,8 +1,20 @@
-import React from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
-import { Colors, CuponesOpera } from "../utils/const";
-import API from "../utils/api";
-import { AsyncStorage } from "react-native";
+import React from 'react';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  AsyncStorage
+} from 'react-native';
+import {
+  Colors,
+  CuponesBlue,
+  CuponesGold,
+  CuponesOpera,
+  CuponesPremium
+} from '../utils/const';
+import API from '../utils/api';
 
 export default class CouponAvalible extends React.Component {
   constructor() {
@@ -10,7 +22,7 @@ export default class CouponAvalible extends React.Component {
     this.state = {
       cuponList: [],
       loading: true,
-      membership: require("../src/assets/membresias/PREMIUM.png")
+      membership: require('../src/assets/cupones/cupones/BLUE/83270.png')
     };
   }
 
@@ -20,10 +32,10 @@ export default class CouponAvalible extends React.Component {
       cuponList: cuponAPI,
       loading: false
     });
-    // let membership = await AsyncStorage.getItem("userMembership");
-    let membershipStorage = "0PERA";
+    // let membershipStorage = await AsyncStorage.getItem("userMembership");
+    let membershipStorage = 'OPERA';
     this.setState({
-      membership: "OPERA"
+      membership: membershipStorage
     });
   }
 
@@ -36,10 +48,28 @@ export default class CouponAvalible extends React.Component {
           </View>
           <View style={styles.itemList}>
             <View style={styles.containImage}>
-              {this.state.membership === "OPERA" && (
+              {this.state.membership == 'BLUE' && (
+                <Image
+                  style={styles.imageCupon}
+                  source={CuponesBlue[x.id_Cupon]}
+                />
+              )}
+              {this.state.membership == 'GOLD' && (
+                <Image
+                  style={styles.imageCupon}
+                  source={CuponesGold[x.id_Cupon]}
+                />
+              )}
+              {this.state.membership == 'OPERA' && (
                 <Image
                   style={styles.imageCupon}
                   source={CuponesOpera[x.id_Cupon]}
+                />
+              )}
+              {this.state.membership == 'PREMIUM' && (
+                <Image
+                  style={styles.imageCupon}
+                  source={CuponesPremium[x.id_Cupon]}
                 />
               )}
             </View>
@@ -63,36 +93,36 @@ export default class CouponAvalible extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
-    alignItems: "center"
+    width: '100%',
+    alignItems: 'center'
   },
   bookingButton: {
-    width: "100%",
+    width: '100%',
     height: 35,
     backgroundColor: Colors.green,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   bookingText: {
-    color: "white",
-    fontWeight: "300",
+    color: 'white',
+    fontWeight: '300',
     fontSize: 14
   },
   itemList: {
-    width: "80%"
+    width: '80%'
   },
   containImage: {
     height: 180
   },
   textCupon: {
-    color: "black",
+    color: 'black',
     marginBottom: 20,
-    textAlign: "center"
+    textAlign: 'center'
   },
   imageCupon: {
     flex: 1,
-    width: "100%",
-    height: "100%",
-    resizeMode: "contain"
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain'
   }
 });
