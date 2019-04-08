@@ -10,7 +10,7 @@ import {
   ImageBackground
 } from "react-native";
 import { connect } from "react-redux";
-import { CheckBox, Container } from "native-base";
+import { CheckBox, Container, Content, Form, Item } from "native-base";
 import { Bold, Colors } from "../utils/const";
 import Image from "react-native-remote-svg";
 
@@ -68,11 +68,11 @@ class Login extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <ImageBackground
-        source={require("../src/assets/fondo.jpg")}
-        style={styles.container}
-      >
-        <Container style={{ backgroundColor: "transparent" }}>
+      <Container style={{ backgroundColor: "transparent" }}>
+        <ImageBackground
+          source={require("../src/assets/fondo.jpg")}
+          style={styles.container}
+        >
           <View style={styles.header}>
             <Image
               source={require("../src/assets/logoBlanco.png")}
@@ -80,7 +80,7 @@ class Login extends React.Component {
             />
           </View>
 
-          <View style={styles.form}>
+          <Form style={styles.form}>
             {this.state.messageError == true && (
               <View style={styles.errorLogin}>
                 <Text style={styles.textError}>
@@ -109,7 +109,7 @@ class Login extends React.Component {
               />
             </View>
             {this._getButtonLogin()}
-          </View>
+          </Form>
 
           <View style={styles.footer}>
             <Text
@@ -129,8 +129,8 @@ class Login extends React.Component {
               Al ingresar aceptarás los <Bold>términos y condiciones</Bold>
             </Text>
           </View>
-        </Container>
-      </ImageBackground>
+        </ImageBackground>
+      </Container>
     );
   }
 }
