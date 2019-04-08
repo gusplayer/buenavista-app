@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   Image
 } from 'react-native';
+import { Container, Header, Content, Form, Item, Input } from 'native-base';
 import Modal from 'react-native-modal';
 import { Colors, Bold } from '../utils/const';
 import API from '../utils/api';
@@ -105,67 +106,73 @@ export default class ChangePassword extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Image
-            source={require('../src/assets/fondo.jpg')}
-            style={{
-              height: 250,
-              width: '100%'
-            }}
-          />
-        </View>
-        <View style={styles.textWelcome}>
-          <Image
-            source={require('../src/assets/iconoApp/iconsCupones.png')}
-            style={{ width: 61, height: 61 }}
-          />
-          <Text style={styles.textInfo}>
-            Gracias por ingresar a nuestra app. {'\n'}Te invitamos a cambiar tu
-            {'\n'}
-            contraseña por la que mas te guste
-          </Text>
-        </View>
-
-        <View style={styles.form}>
-          {this.state.messageErrorEmpty == true && (
-            <View style={styles.errorLogin}>
-              <Text style={styles.textError}>
-                Los campos no pueden ser vacios.
-              </Text>
-            </View>
-          )}
-          {this.state.messageErrorPassword == true && (
-            <View style={styles.errorLogin}>
-              <Text style={styles.textError}>
-                Las contraseñas deben ser iguales.
-              </Text>
-            </View>
-          )}
-          <View>
-            <TextInput
-              secureTextEntry={true}
-              placeholderTextColor="#59617b"
-              placeholder={'Nueva contraseña'}
-              style={styles.input}
-              underlineColorAndroid="rgba(0,0,0,0)"
-              onChangeText={password => this.setState({ password })}
+      <Container style={styles.container}>
+        <Content style={{ flex: 1 }}>
+          <View style={styles.header}>
+            <Image
+              source={require('../src/assets/fondo.jpg')}
+              style={{
+                height: 250,
+                width: '100%'
+              }}
             />
           </View>
-          <View>
-            <TextInput
-              secureTextEntry={true}
-              placeholderTextColor="#59617b"
-              placeholder={'Confirmar contraseña'}
-              style={styles.input}
-              underlineColorAndroid="transparent"
-              onChangeText={passwordRepeat => this.setState({ passwordRepeat })}
+          <View style={styles.textWelcome}>
+            <Image
+              source={require('../src/assets/iconoApp/iconsCupones.png')}
+              style={{ width: 61, height: 61 }}
             />
+            <Text style={styles.textInfo}>
+              Gracias por ingresar a nuestra app. {'\n'}Te invitamos a cambiar
+              tu
+              {'\n'}
+              contraseña por la que mas te guste
+            </Text>
           </View>
-          {this._getButtonChangePass()}
-        </View>
-        <Modal isVisible={this.state.isModalVisible}>{this.modal()}</Modal>
-      </View>
+          <Form style={styles.form}>
+            {this.state.messageErrorEmpty == true && (
+              <View style={styles.errorLogin}>
+                <Text style={styles.textError}>
+                  Los campos no pueden ser vacios.
+                </Text>
+              </View>
+            )}
+            {this.state.messageErrorPassword == true && (
+              <View style={styles.errorLogin}>
+                <Text style={styles.textError}>
+                  Las contraseñas deben ser iguales.
+                </Text>
+              </View>
+            )}
+            <Item>
+              <TextInput
+                secureTextEntry={true}
+                placeholderTextColor="#59617b"
+                placeholder={'Nueva contraseña'}
+                style={styles.input}
+                underlineColorAndroid="rgba(0,0,0,0)"
+                onChangeText={password => this.setState({ password })}
+              />
+            </Item>
+            <Item>
+              <View>
+                <TextInput
+                  secureTextEntry={true}
+                  placeholderTextColor="#59617b"
+                  placeholder={'Confirmar contraseña'}
+                  style={styles.input}
+                  underlineColorAndroid="transparent"
+                  onChangeText={passwordRepeat =>
+                    this.setState({ passwordRepeat })
+                  }
+                />
+              </View>
+            </Item>
+            {this._getButtonChangePass()}
+          </Form>
+          <Modal isVisible={this.state.isModalVisible}>{this.modal()}</Modal>
+        </Content>
+      </Container>
     );
   }
 }
@@ -173,7 +180,8 @@ export default class ChangePassword extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%'
+    width: '100%',
+    backgroundColor: '#F5F5F5'
   },
   header: {
     height: 250,
@@ -199,7 +207,8 @@ const styles = StyleSheet.create({
     flex: 3,
     alignContent: 'center',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 15
   },
   linkForget: {
     color: '#ffffff',

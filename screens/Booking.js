@@ -45,7 +45,6 @@ export default class Booking extends React.Component {
   }
   async componentDidMount() {
     const hotelAPI = await API.getHotelList();
-
     this.setState({
       hotelList: hotelAPI,
       loading: false,
@@ -168,7 +167,7 @@ export default class Booking extends React.Component {
               selectedValue={this.state.selectedAdults}
               onValueChange={this.onValueChangeAdults.bind(this)}
             >
-              <Picker.Item label="0" value="0" />
+              <Picker.Item label="0 años" value="0" />
               <Picker.Item label="1 año" value="1" />
               <Picker.Item label="2 años" value="2" />
               <Picker.Item label="3 años" value="3" />

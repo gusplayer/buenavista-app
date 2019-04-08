@@ -131,6 +131,6 @@ export const DashNavigator = StackNavigator(
     }
   },
   {
-    initialRouteName: 'ChangePassword'
+    initialRouteName: 'HotelList'
   }
 );
