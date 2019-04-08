@@ -25,7 +25,7 @@ export default class Booking extends React.Component {
       selectedCupon: 0,
       selectedRoom: 0,
       chosenDateInicio: new Date(),
-      chosenDateFin: new Date(),
+      chosenDateFin: "",
       loaderBoton: false,
       hotelList: [],
       hotelRoomsList: [],
@@ -37,6 +37,7 @@ export default class Booking extends React.Component {
       enabledCupon: false,
       disabledFechaFin: true,
       messageError: false,
+      messageMissingDates: false,
       loadingHeader: false,
       isModalVisible: false
     };
@@ -94,7 +95,7 @@ export default class Booking extends React.Component {
 
   // countryList = () => {
   //   return this.hotelList.map(x => {
-  // return <Picker.Item label={x.Hotel} key={} value={x} />;
+  //     // return <Picker.Item label={x.Hotel} key={} value={x} />;
   //     return <Picker.Item label="9" value="9" />;
   //   });
   // };
@@ -105,9 +106,8 @@ export default class Booking extends React.Component {
       enabledCupon: false,
       loadingHeader: true
     });
-    let idTest = 4;
-    const hotelRoomsAPI = await API.getHabitaciones();
-    const hotelCuponesAPI = await API.getCuponesHotel(idTest);
+    const hotelRoomsAPI = await API.getHabitaciones(value.id_Hotel);
+    const hotelCuponesAPI = await API.getCuponesHotel(value.id_Hotel);
     this.setState({
       hotelSelected: value,
       hotelRoomsList: hotelRoomsAPI,
@@ -117,7 +117,6 @@ export default class Booking extends React.Component {
       loadingHeader: false,
       messageError: false
     });
-    console.warn(this.state.hotelSelected);
   }
 
   onValueChangeKids(value) {
@@ -413,8 +412,14 @@ export default class Booking extends React.Component {
 
           {this.state.messageError == true && (
             <View style={styles.errorLogin}>
+              <Text style={styles.textError}>Debes seleccionar un hotel.</Text>
+            </View>
+          )}
+
+          {this.state.messageMissingDates == true && (
+            <View style={styles.errorLogin}>
               <Text style={styles.textError}>
-                Faltan datos por ingresar en tu reserva.
+                Debes elegir fechas de reservación.
               </Text>
             </View>
           )}

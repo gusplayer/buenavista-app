@@ -144,11 +144,11 @@ class Api {
     return hotelList;
   }
 
-  async getHabitaciones() {
+  async getHabitaciones(hotel) {
     await this._retrieveData();
     const hotelRoom = await axios
       .get(
-        `${BASE_API}metodoHabitacionesCupones?dami=${USER_TOKEN}&hotel=3&tipo=1`
+        `${BASE_API}metodoHabitacionesCupones?dami=${USER_TOKEN}&hotel=${hotel}&tipo=1`
       )
       .then(response => {
         return response.data;
