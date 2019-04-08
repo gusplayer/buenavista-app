@@ -24,7 +24,8 @@ export default class Booking extends React.Component {
       selectedHotel: 0,
       selectedCupon: 0,
       selectedRoom: 0,
-      chosenDateInicio: new Date(),
+      //chosenDateInicio: new Date(),
+      chosenDateInicio: "",
       chosenDateFin: "",
       loaderBoton: false,
       hotelList: [],
@@ -146,9 +147,16 @@ export default class Booking extends React.Component {
 
   onClickSendBooking = () => {
     if (this.state.enabledCupon == false) {
+      //falta seleccionar el hotel
       this.setState({ messageError: true });
     } else {
-      this.setState({ isModalVisible: true });
+      if (this.state.chosenDateInicio == "" || this.state.chosenDateFin == "") {
+        //Faltan las fechas
+        this.setState({ messageMissingDates: true });
+      } else {
+        //Todos los datos estan bien
+        this.setState({ isModalVisible: true });
+      }
     }
   };
 
@@ -274,9 +282,7 @@ export default class Booking extends React.Component {
               <View style={styles.dates}>
                 <Item inlineLabel style={{ width: "45%" }}>
                   <DatePicker
-                    defaultDate={new Date(2018, 4, 4)}
-                    minimumDate={new Date(2018, 1, 1)}
-                    maximumDate={new Date(2018, 12, 31)}
+                    defaultDate={new Date()}
                     locale={"es"}
                     timeZoneOffsetInMinutes={undefined}
                     modalTransparent={false}
@@ -300,9 +306,7 @@ export default class Booking extends React.Component {
                 </Item>
                 <Item inlineLabel style={{ width: "45%" }}>
                   <DatePicker
-                    defaultDate={new Date(2018, 4, 4)}
-                    minimumDate={new Date(2018, 1, 1)}
-                    maximumDate={new Date(2018, 12, 31)}
+                    defaultDate={new Date()}
                     locale={"es"}
                     timeZoneOffsetInMinutes={undefined}
                     modalTransparent={false}
