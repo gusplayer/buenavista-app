@@ -131,35 +131,6 @@ export const DashNavigator = StackNavigator(
     }
   },
   {
-    initialRouteName: 'HotelList'
+    initialRouteName: 'ChangePassword'
   }
 );
-// export const DashNavigator = StackNavigator(
-//   {
-//     Dash: {
-//       screen: Dashboard,
-//       navigationOptions: {
-//         header: null
-//       }
-//     },
-//     ListProductSales: {
-//       screen: ListProductSales,
-//       navigationOptions: { title: "Detalles de la venta", header: null }
-//     },
-//     Helpdesk: {
-//       screen: Helpdesk,
-//       navigationOptions: { title: "Ayuda" }
-//     },
-//     Settings: {
-//       screen: Settings,
-//       navigationOptions: { title: "Ajustes de la cuenta" }
-//     },
-//     Soon: {
-//       screen: Soon,
-//       navigationOptions: { title: "Volver al menú" }
-//     }
-//   },
-//   {
-//     initialRouteName: "Dash"
-//   }
-// );

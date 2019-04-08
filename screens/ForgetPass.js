@@ -39,6 +39,10 @@ export default class ForgetPass extends React.Component {
             textAlign: 'center'
           }}
         >
+          <Image
+            source={require('../src/assets/Logo.png')}
+            style={{ width: 150, height: 20, marginLeft: -15 }}
+          />
           <Text style={{ textAlign: 'center', fontSize: 16, marginBottom: 15 }}>
             Una nueva contraseña ha sido enviada a tu correo electronico.
           </Text>

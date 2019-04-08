@@ -1,19 +1,19 @@
-import axios from "axios";
-import { AsyncStorage } from "react-native";
+import axios from 'axios';
+import { AsyncStorage } from 'react-native';
 
 let USER_TOKEN = null;
 const BASE_API =
-  "http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/";
+  'http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/';
 
 class Api {
   _storeData = async token => {
     try {
-      await AsyncStorage.setItem("userToken", token);
+      await AsyncStorage.setItem('userToken', token);
     } catch (error) {}
   };
   _storeDataMembership = async membership => {
     try {
-      await AsyncStorage.setItem("userMembership", membership);
+      await AsyncStorage.setItem('userMembership', membership);
     } catch (error) {}
   };
 
@@ -31,7 +31,7 @@ class Api {
       .get(`${BASE_API}metodoLogin?dami=${userID}&clave=${password}`)
       .then(response => {
         this._storeData(userID);
-        if (response.data[0].codError == "200") {
+        if (response.data[0].codError == '200') {
           let Auth = true;
           return Auth;
         } else {
@@ -62,11 +62,12 @@ class Api {
 
   async getChangePass(dami, clave) {
     const changePass = await axios
-      .get(`${BASE_API}metodoCambioClave?dami=${dami}&clave${clave}`)
+      .get(`${BASE_API}metodoCambioClave?dami=${dami}&clave=${clave}`)
       .then(response => {
-        this._storeData(userID);
+        this._storeData(dami);
+
         let Auth = false;
-        if (response.data[0].codError == "200") {
+        if (response.data[0].codError == '200') {
           let Auth = true;
           return Auth;
         } else {
@@ -83,7 +84,7 @@ class Api {
       .get(`${BASE_API}metodoRegistrate?dami=${dami}`)
       .then(response => {
         let Auth = false;
-        if (response.data[0].codError == "200") {
+        if (response.data[0].codError == '200') {
           let Auth = true;
           return Auth;
         } else {
@@ -95,6 +96,25 @@ class Api {
   }
 
   //////////////////////// With Auth /////////////////////
+
+  //Cambio de clave cuando esta Auth
+  async getChangePassAuth(clave) {
+    await this._retrieveData();
+    const changePass = await axios
+      .get(`${BASE_API}metodoCambioClave?dami=${USER_TOKEN}&clave=${clave}`)
+      .then(response => {
+        let Auth = false;
+        if (response.data[0].codError == '200') {
+          let Auth = true;
+          return Auth;
+        } else {
+          let Auth = false;
+          return Auth;
+        }
+      })
+      .catch(error => console.warn(error));
+    return changePass;
+  }
 
   async getHotelList() {
     await this._retrieveData();
@@ -206,7 +226,7 @@ class Api {
     return image;
   }
   async updateImageProfile(newImage) {
-    console.warn("entro al API");
+    console.warn('entro al API');
 
     await this._retrieveData();
     const image = await axios
