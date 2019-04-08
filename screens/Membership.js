@@ -7,7 +7,7 @@ import HeaderTab from "../src/components/header";
 import Profile from "./Profile";
 import Benefits from "./Benefits";
 import CouponInfo from "./CouponInfo";
-import { AsyncStorage } from "react-native";
+import API from "../utils/api";
 
 export default class Membreship extends React.Component {
   constructor() {
@@ -18,8 +18,7 @@ export default class Membreship extends React.Component {
   }
 
   async componentDidMount() {
-    // let membershipStorage = await AsyncStorage.getItem("userMembership");
-    let membershipStorage = "OPERA";
+    let membershipStorage = await API._retrieveDataMembership();
     this.setState({
       membership: membershipStorage
     });

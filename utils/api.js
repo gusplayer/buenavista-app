@@ -26,6 +26,17 @@ class Api {
     // }
     USER_TOKEN = 583120;
   };
+
+  _retrieveDataMembership = async () => {
+    // try {
+    //   let membershipStorage = await AsyncStorage.getItem("userMembership");
+    //   return membershipStorage;
+    // } catch (error) {
+    //   console.warn(error);
+    // }
+    return "GOLD";
+  };
+
   async getLogin(userID, password) {
     const loginAPI = await axios
       .get(`${BASE_API}metodoLogin?dami=${userID}&clave=${password}`)

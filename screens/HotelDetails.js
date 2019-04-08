@@ -1,7 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView } from "react-native";
 import HeaderTab from "../src/components/header";
-import { Colors } from "../utils/const";
+import {
+  Colors,
+  IconosCuponesBlue,
+  IconosCuponesGold,
+  IconosCuponesOpera,
+  IconosCuponesPremium
+} from "../utils/const";
 import Image from "react-native-remote-svg";
 import Swiper from "react-native-web-swiper";
 import API from "../utils/api";
@@ -10,7 +16,8 @@ export default class HotelDetails extends React.Component {
   constructor() {
     super();
     this.state = {
-      hotelCuponesList: []
+      hotelCuponesList: [],
+      membership: require("../src/assets/cupones/cupones/BLUE/83270.png")
     };
   }
 
@@ -21,8 +28,10 @@ export default class HotelDetails extends React.Component {
     this.setState({
       hotelCuponesList: hotelCuponesAPI
     });
-    // console.warn(this.props.navigation.state.params.hotel.id_Hotel);
-    console.warn(hotelCuponesAPI);
+    let membershipStorage = await API._retrieveDataMembership();
+    this.setState({
+      membership: membershipStorage
+    });
   }
 
   render() {
@@ -40,7 +49,6 @@ export default class HotelDetails extends React.Component {
 
         <ScrollView style={styles.body}>
           <View style={styles.infoHotel}>
-            {/* <Image style={styles.imageHotel} source={{ uri: item.imagen1 }} /> */}
             <View style={styles.imageHotel}>
               <Swiper
                 autoplayTimeout={1}
@@ -89,16 +97,35 @@ export default class HotelDetails extends React.Component {
           <View style={styles.descriptionContainer}>
             <Text style={styles.descriptionTitle}>Cupones</Text>
 
-            {/* return <Picker.Item label={v.Cupon} value={v.Cupon} />; */}
-
             <View style={styles.couponContainer}>
               {this.state.hotelCuponesList.map(v => {
                 return (
-                  // <Image
-                  //   source={require("../src/assets/cupones/iconoscupones/opera/1.png")}
-                  //   style={styles.imageCoupon}
-                  // />
-                  <Text>Imagen cupon</Text>
+                  <View style={styles.imageCupon}>
+                    {this.state.membership == "BLUE" && (
+                      <Image
+                        style={{ width: 55, height: 55, marginRight: 5 }}
+                        source={IconosCuponesBlue[v.id_Cupon]}
+                      />
+                    )}
+                    {this.state.membership == "GOLD" && (
+                      <Image
+                        style={{ width: 55, height: 55, marginRight: 5 }}
+                        source={IconosCuponesGold[v.id_Cupon]}
+                      />
+                    )}
+                    {this.state.membership == "OPERA" && (
+                      <Image
+                        style={{ width: 55, height: 55, marginRight: 5 }}
+                        source={IconosCuponesOpera[v.id_Cupon]}
+                      />
+                    )}
+                    {this.state.membership == "PREMIUM" && (
+                      <Image
+                        style={{ width: 55, height: 55, marginRight: 5 }}
+                        source={IconosCuponesPremium[v.id_Cupon]}
+                      />
+                    )}
+                  </View>
                 );
               })}
             </View>
@@ -233,6 +260,10 @@ const styles = StyleSheet.create({
     marginTop: 2,
     marginLeft: 0,
     marginRight: 10,
+    width: 55,
+    height: 55
+  },
+  contentIconos: {
     width: 55,
     height: 55
   },

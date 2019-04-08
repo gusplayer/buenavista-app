@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -6,15 +6,15 @@ import {
   Image,
   ScrollView,
   AsyncStorage
-} from 'react-native';
+} from "react-native";
 import {
   Colors,
   CuponesBlue,
   CuponesGold,
   CuponesOpera,
   CuponesPremium
-} from '../utils/const';
-import API from '../utils/api';
+} from "../utils/const";
+import API from "../utils/api";
 
 export default class CouponUsed extends React.Component {
   constructor() {
@@ -22,7 +22,7 @@ export default class CouponUsed extends React.Component {
     this.state = {
       cuponList: [],
       loading: true,
-      membership: require('../src/assets/cupones/cupones/BLUE/83270.png')
+      membership: require("../src/assets/cupones/cupones/BLUE/83270.png")
     };
   }
 
@@ -32,8 +32,7 @@ export default class CouponUsed extends React.Component {
       cuponList: cuponAPI,
       loading: false
     });
-    // let membershipStorage = await AsyncStorage.getItem("userMembership");
-    let membershipStorage = 'OPERA';
+    let membershipStorage = await API._retrieveDataMembership();
     this.setState({
       membership: membershipStorage
     });
@@ -48,25 +47,25 @@ export default class CouponUsed extends React.Component {
           </View>
           <View style={styles.itemList}>
             <View style={styles.containImage}>
-              {this.state.membership == 'BLUE' && (
+              {this.state.membership == "BLUE" && (
                 <Image
                   style={styles.imageCupon}
                   source={CuponesBlue[x.id_Cupon]}
                 />
               )}
-              {this.state.membership == 'GOLD' && (
+              {this.state.membership == "GOLD" && (
                 <Image
                   style={styles.imageCupon}
                   source={CuponesGold[x.id_Cupon]}
                 />
               )}
-              {this.state.membership == 'OPERA' && (
+              {this.state.membership == "OPERA" && (
                 <Image
                   style={styles.imageCupon}
                   source={CuponesOpera[x.id_Cupon]}
                 />
               )}
-              {this.state.membership == 'PREMIUM' && (
+              {this.state.membership == "PREMIUM" && (
                 <Image
                   style={styles.imageCupon}
                   source={CuponesPremium[x.id_Cupon]}
@@ -93,36 +92,36 @@ export default class CouponUsed extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    alignItems: 'center'
+    width: "100%",
+    alignItems: "center"
   },
   bookingButton: {
-    width: '100%',
+    width: "100%",
     height: 35,
     backgroundColor: Colors.green,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center"
   },
   bookingText: {
-    color: 'white',
-    fontWeight: '300',
+    color: "white",
+    fontWeight: "300",
     fontSize: 14
   },
   itemList: {
-    width: '80%'
+    width: "80%"
   },
   containImage: {
     height: 180
   },
   textCupon: {
-    color: 'black',
+    color: "black",
     marginBottom: 20,
-    textAlign: 'center'
+    textAlign: "center"
   },
   imageCupon: {
     flex: 1,
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain'
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain"
   }
 });
