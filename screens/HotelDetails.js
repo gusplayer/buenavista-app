@@ -135,7 +135,11 @@ export default class HotelDetails extends React.Component {
           </View> */}
           <View style={styles.bookingButton}>
             <Text
-              onPress={() => navigate("Booking")}
+              onPress={() =>
+                navigate("Booking", {
+                  hotel: item
+                })
+              }
               style={styles.bookingText}
             >
               RESERVAR

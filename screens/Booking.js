@@ -40,12 +40,23 @@ export default class Booking extends React.Component {
       messageError: false,
       messageMissingDates: false,
       loadingHeader: false,
-      isModalVisible: false
+      isModalVisible: false,
+      idHotelParams: ""
     };
     this.setDateInicio = this.setDateInicio.bind(this);
     this.setDateFin = this.setDateFin.bind(this);
   }
   async componentDidMount() {
+    // if (this.props.navigation.state.params) {
+    //   let idHotel = this.props.navigation.state.params.hotel;
+    //   this.setState({
+    //     idHotelParams: idHotel
+    //   });
+    //   console.warn(idHotelParams.id_Hotel);
+    // this.onValueChangeHotel(
+    //   this.props.navigation.state.params.hotel.id_Hotel
+    // );
+    // }
     const hotelAPI = await API.getHotelList();
     this.setState({
       hotelList: hotelAPI,
@@ -101,7 +112,7 @@ export default class Booking extends React.Component {
   //   });
   // };
 
-  async onValueChangeHotel(value) {
+  onValueChangeHotel = async value => {
     this.setState({
       enabledRoom: false,
       enabledCupon: false,
@@ -118,7 +129,7 @@ export default class Booking extends React.Component {
       loadingHeader: false,
       messageError: false
     });
-  }
+  };
 
   onValueChangeKids(value) {
     this.setState({
@@ -130,13 +141,11 @@ export default class Booking extends React.Component {
       selectedAdults: value
     });
   }
-
   onValueChangeCupon(value) {
     this.setState({
       selectedCupon: value
     });
   }
-
   setDateInicio(newDate) {
     this.setState({ chosenDateInicio: newDate });
   }
@@ -241,23 +250,31 @@ export default class Booking extends React.Component {
                 <Input />
               </Item> */}
 
-              <Item inlineLabel>
-                <Label style={{ width: "53%" }}>Hotel a reservar</Label>
-                <Picker
-                  mode="dropdown"
-                  style={{ width: undefined }}
-                  placeholder="Hotel"
-                  placeholderStyle={{ color: "#bfc6ea" }}
-                  placeholderIconColor="#007aff"
-                  selectedValue={this.state.hotelSelected}
-                  onValueChange={this.onValueChangeHotel.bind(this)}
-                >
-                  <Picker.Item label="Seleccionar Hotel" value=" " />
-                  {this.state.hotelList.map(v => {
-                    return <Picker.Item label={v.Hotel} value={v} />;
-                  })}
-                </Picker>
-              </Item>
+              {this.state.idHotelParams == "" ? (
+                <Item inlineLabel>
+                  <Label style={{ width: "53%" }}>Hotel a reservar</Label>
+                  <Picker
+                    mode="dropdown"
+                    style={{ width: undefined }}
+                    placeholder="Hotel"
+                    placeholderStyle={{ color: "#bfc6ea" }}
+                    placeholderIconColor="#007aff"
+                    selectedValue={this.state.hotelSelected}
+                    onValueChange={this.onValueChangeHotel.bind(this)}
+                  >
+                    <Picker.Item label="Seleccionar Hotel" value=" " />
+                    {this.state.hotelList.map(v => {
+                      return <Picker.Item label={v.Hotel} value={v} />;
+                    })}
+                  </Picker>
+                </Item>
+              ) : (
+                <Item inlineLabel>
+                  <Label style={{ width: "100%" }}>
+                    {this.state.idHotelParams.Hotel}
+                  </Label>
+                </Item>
+              )}
 
               <Item inlineLabel>
                 <Label style={{ width: "53%" }}>Tipo de habitación</Label>
