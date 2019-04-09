@@ -18,23 +18,23 @@ class Api {
   };
 
   _retrieveData = async () => {
-    // try {
-    //   let token = await AsyncStorage.getItem('userToken');
-    //   USER_TOKEN = token;
-    // } catch (error) {
-    //   console.warn(error);
-    // }
-    USER_TOKEN = 583120;
+    try {
+      let token = await AsyncStorage.getItem("userToken");
+      USER_TOKEN = token;
+    } catch (error) {
+      console.warn(error);
+    }
+    //USER_TOKEN = 583120;
   };
 
   _retrieveDataMembership = async () => {
-    // try {
-    //   let membershipStorage = await AsyncStorage.getItem("userMembership");
-    //   return membershipStorage;
-    // } catch (error) {
-    //   console.warn(error);
-    // }
-    return "GOLD";
+    try {
+      let membershipStorage = await AsyncStorage.getItem("userMembership");
+      return membershipStorage;
+    } catch (error) {
+      console.warn(error);
+    }
+    //return "GOLD";
   };
 
   async getLogin(userID, password) {
