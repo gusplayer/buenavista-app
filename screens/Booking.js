@@ -20,6 +20,13 @@ export default class Booking extends React.Component {
     super(props);
     this.state = {
       selectedKids: 0,
+      selectedKidAge1: 0,
+      selectedKidAge2: 0,
+      selectedKidAge3: 0,
+      selectedKidAge4: 0,
+      selectedKidAge5: 0,
+      edades: [2, 4, 12],
+      selectExample: 5,
       selectedAdults: 1,
       selectedHotel: 0,
       selectedCupon: 0,
@@ -133,6 +140,39 @@ export default class Booking extends React.Component {
       selectedKids: value
     });
   }
+  onValueChangeKidAge(value, position) {
+    if (value == 0) {
+      this.setState({
+        selectedKidAge1: position
+      });
+      console.warn(this.state.selectedKidAge1);
+    }
+    if (value == 1) {
+      this.setState({
+        selectedKidAge2: position
+      });
+      console.warn("niño 2");
+    }
+    if (value == 2) {
+      this.setState({
+        selectedKidAge3: position
+      });
+      console.warn("niño 3");
+    }
+    if (value == 3) {
+      this.setState({
+        selectedKidAge4: position
+      });
+      console.warn("niño 4");
+    }
+    if (value == 4) {
+      this.setState({
+        selectedKidAge5: position
+      });
+      console.warn("niño 5");
+    }
+  }
+
   onValueChangeAdults(value) {
     this.setState({
       selectedAdults: value
@@ -173,30 +213,37 @@ export default class Booking extends React.Component {
         myloop.push(
           <Item style={{ width: "100%", justifyContent: "space-between" }}>
             <Label style={{ width: "52%" }}>Niño {i + 1}</Label>
-            <Picker
-              mode="dropdown"
-              style={{ width: undefined }}
-              placeholder="Adultos"
-              placeholderStyle={{ color: "#bfc6ea" }}
-              placeholderIconColor="#007aff"
-              selectedValue={this.state.selectedAdults}
-              onValueChange={this.onValueChangeAdults.bind(this)}
-            >
-              <Picker.Item label="0 años" value="0" />
-              <Picker.Item label="1 año" value="1" />
-              <Picker.Item label="2 años" value="2" />
-              <Picker.Item label="3 años" value="3" />
-              <Picker.Item label="4 años" value="4" />
-              <Picker.Item label="5 años" value="5" />
-              <Picker.Item label="6 años" value="6" />
-              <Picker.Item label="7 años" value="7" />
-              <Picker.Item label="8 años" value="8" />
-              <Picker.Item label="9 años" value="9" />
-              <Picker.Item label="10 años" value="10" />
-              <Picker.Item label="11 años" value="11" />
-              <Picker.Item label="12 años" value="12" />
-              <Picker.Item label="13 años" value="13" />
-            </Picker>
+            {this.state.selectedKidAge == 0 && i == 1 ? (
+              <Picker
+                mode="dropdown"
+                style={{ width: undefined }}
+                placeholder="Adultos"
+                placeholderStyle={{ color: "#bfc6ea" }}
+                placeholderIconColor="#007aff"
+                //selectedValue={this.state.selectedKidAge + i}
+                //selectedValue={this.state.selectExample}
+                onValueChange={this.onValueChangeKidAge.bind(this, i)}
+              >
+                <Picker.Item label="0 años" value="0" />
+                <Picker.Item label="1 año" value="1" />
+                <Picker.Item label="2 años" value="2" />
+                <Picker.Item label="3 años" value="3" />
+                <Picker.Item label="4 años" value="4" />
+                <Picker.Item label="5 años" value="5" />
+                <Picker.Item label="6 años" value="6" />
+                <Picker.Item label="7 años" value="7" />
+                <Picker.Item label="8 años" value="8" />
+                <Picker.Item label="9 años" value="9" />
+                <Picker.Item label="10 años" value="10" />
+                <Picker.Item label="11 años" value="11" />
+                <Picker.Item label="12 años" value="12" />
+                <Picker.Item label="13 años" value="13" />
+              </Picker>
+            ) : (
+              <Text>
+                {i} + {this.state.edades[i]}
+              </Text>
+            )}
           </Item>
         );
       }
@@ -385,12 +432,12 @@ export default class Booking extends React.Component {
                     <Picker.Item label="2" value="2" />
                     <Picker.Item label="3" value="3" />
                     <Picker.Item label="4" value="4" />
-                    <Picker.Item label="5" value="5" />
+                    {/* <Picker.Item label="5" value="5" />
                     <Picker.Item label="6" value="6" />
                     <Picker.Item label="7" value="7" />
                     <Picker.Item label="8" value="8" />
                     <Picker.Item label="9" value="9" />
-                    <Picker.Item label="10" value="10" />
+                    <Picker.Item label="10" value="10" /> */}
                   </Picker>
                 </Item>
               </View>
