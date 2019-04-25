@@ -18,23 +18,23 @@ class Api {
   };
 
   _retrieveData = async () => {
-    try {
-      let token = await AsyncStorage.getItem("userToken");
-      USER_TOKEN = token;
-    } catch (error) {
-      console.warn(error);
-    }
-    //USER_TOKEN = 583120;
+    // try {
+    //   let token = await AsyncStorage.getItem("userToken");
+    //   USER_TOKEN = token;
+    // } catch (error) {
+    //   console.warn(error);
+    // }
+    USER_TOKEN = 583120;
   };
 
   _retrieveDataMembership = async () => {
-    try {
-      let membershipStorage = await AsyncStorage.getItem("userMembership");
-      return membershipStorage;
-    } catch (error) {
-      console.warn(error);
-    }
-    //return "GOLD";
+    // try {
+    //   let membershipStorage = await AsyncStorage.getItem("userMembership");
+    //   return membershipStorage;
+    // } catch (error) {
+    //   console.warn(error);
+    // }
+    return "OPERA";
   };
 
   async getLogin(userID, password) {
@@ -131,6 +131,20 @@ class Api {
       })
       .catch(error => console.warn(error));
     return changePass;
+  }
+
+  async getCountries() {
+    await this._retrieveData();
+    let emptyData = "";
+    const countries = await axios
+      .get(
+        `${BASE_API}metodoUbicacion?pais=${emptyData}&provincia=${emptyData}&ciudad=${emptyData}&tipo=1`
+      )
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return countries;
   }
 
   async getHotelList() {
@@ -242,21 +256,52 @@ class Api {
       .catch(error => error);
     return image;
   }
-  async updateImageProfile(newImage) {
-    console.warn("entro al API");
 
+  async updateImageProfile(newImage) {
     await this._retrieveData();
-    const image = await axios
-      .get(
-        `${BASE_API}metodoCambiarImagen?dami=${USER_TOKEN}&imagen=${newImage}`
+    console.warn("API");
+    let test64 = "algo";
+    const respuesta = await axios
+      .post(
+        `${BASE_API}metodoCambiarImagen`,
+        `dami=${USER_TOKEN}&imagen=${newImage}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          }
+        }
+        // `dami=${USER_TOKEN}&imagen=${newImage}`
       )
       .then(response => {
         return response.data;
       })
-      .catch(error => error);
-    console.warn(image);
-    return image;
+      .catch(error => {
+        console.log("un error");
+        return error;
+      });
+    return respuesta;
   }
 }
+
+// .post(
+//   `https://api.cloudinary.com/v1_1/komercia-store/image/upload`,
+//   params,
+//   config
+// )
+// .then(response => {
+//   let photoCloudinary = response.data.secure_url;
+//   let idPhotoCloudinary = response.data.public_id;
+//   API.saveNewProduct(
+//     this.state.name,
+//     photoCloudinary,
+//     `431/products/${idPhotoCloudinary}`,
+//     this.state.barCode,
+//     this.state.description,
+//     this.state.price,
+//     this.state.units
+//   );
+//   this.setState({ showModalLoading: false });
+// });
 
 export default new Api();

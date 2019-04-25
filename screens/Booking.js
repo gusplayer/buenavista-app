@@ -47,16 +47,13 @@ export default class Booking extends React.Component {
     this.setDateFin = this.setDateFin.bind(this);
   }
   async componentDidMount() {
-    // if (this.props.navigation.state.params) {
-    //   let idHotel = this.props.navigation.state.params.hotel;
-    //   this.setState({
-    //     idHotelParams: idHotel
-    //   });
-    //   console.warn(idHotelParams.id_Hotel);
-    // this.onValueChangeHotel(
-    //   this.props.navigation.state.params.hotel.id_Hotel
-    // );
-    // }
+    if (this.props.navigation.state.params) {
+      let idHotel = await this.props.navigation.state.params.hotel;
+      this.setState({
+        idHotelParams: idHotel
+      });
+      this.onValueChangeHotel(idHotel);
+    }
     const hotelAPI = await API.getHotelList();
     this.setState({
       hotelList: hotelAPI,

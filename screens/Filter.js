@@ -8,17 +8,10 @@ export default class Filter extends React.Component {
   constructor() {
     super();
     this.state = {
-      countryList: [
-        {
-          id: 1,
-          name: "Colombia"
-        },
-        {
-          id: 2,
-          name: "Ecuador"
-        }
-      ],
-      selectedCountry: []
+      countryList: [],
+      selectedCountry: [],
+      loading: true,
+      countryList: []
     };
   }
 
@@ -28,9 +21,16 @@ export default class Filter extends React.Component {
     });
   }
 
+  async componentDidMount() {
+    const selectedCountryAPI = await API.getCountries();
+    this.setState({
+      loading: false,
+      countryList: selectedCountryAPI
+    });
+  }
+
   render() {
     const { navigate } = this.props.navigation;
-
     return (
       <View style={styles.container}>
         <View style={styles.contentText}>
@@ -49,16 +49,20 @@ export default class Filter extends React.Component {
               >
                 {this.state.countryList.map(v => {
                   return (
-                    <Picker.Item key={v.id} label={v.name} value={v.name} />
+                    <Picker.Item
+                      key={v.piNombre}
+                      label={v.piNombre}
+                      value={v.piNombre}
+                    />
                   );
                 })}
               </Picker>
             </Item>
 
-            <Item inlineLabel>
+            {/* <Item inlineLabel>
               <Label>Selecciona la ciudad o provincia</Label>
               <Input />
-            </Item>
+            </Item> */}
           </View>
 
           {/* <Text style={styles.textBold}>Ordenar precios:</Text>

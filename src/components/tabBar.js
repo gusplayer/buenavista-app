@@ -111,7 +111,7 @@ const TabBar = ({ navigation, position }) => {
             source={require("../assets/iconos/bar-bottom/active/circle.png")}
             style={{ width: 25, height: 25 }}
           />
-          <Text style={styles.tabTitleActive}> MEMEBRESIA</Text>
+          <Text style={styles.tabTitleActive}> MEMEBRESÍA</Text>
         </TouchableOpacity>
       ) : (
         <TouchableOpacity

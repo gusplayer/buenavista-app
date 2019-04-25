@@ -77,7 +77,7 @@ export default class CouponUsed extends React.Component {
               habitación doble a elegir entre varios hoteles y hosterías
               nacionales.
             </Text> */}
-            <Text style={styles.textCupon}>Disponibles: {x.Ocupados}</Text>
+            <Text style={styles.textCupon}>Usados: {x.Ocupados}</Text>
           </View>
         </View>
       );
