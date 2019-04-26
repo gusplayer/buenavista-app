@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
-import { Colors, Bold } from "../utils/const";
-import { Item, Input, Label, Form, Picker } from "native-base";
+import { Colors } from "../utils/const";
+import { Item, Label, Picker } from "native-base";
 import API from "../utils/api";
 
 export default class Filter extends React.Component {
@@ -11,22 +11,30 @@ export default class Filter extends React.Component {
       countryList: [],
       selectedCountry: [],
       loading: true,
-      countryList: []
+      citiesList: []
     };
   }
 
-  onValueChangeCountry(value) {
+  async onValueChangeCountry(value) {
     this.setState({
       selectedCountry: value
+    });
+    const selectedCitiesAPI = await API.getCities("03");
+    this.setState({
+      loading: false,
+      countryList: selectedCitiesAPI
     });
   }
 
   async componentDidMount() {
     const selectedCountryAPI = await API.getCountries();
+    const selectedCitiesAPI = await API.getCities("03");
     this.setState({
       loading: false,
-      countryList: selectedCountryAPI
+      countryList: selectedCountryAPI,
+      citiesList: selectedCitiesAPI
     });
+    console.warn(selectedCitiesAPI);
   }
 
   render() {
@@ -37,7 +45,7 @@ export default class Filter extends React.Component {
           <Text style={styles.textBold}>Filtrar por:</Text>
           <View style={styles.form}>
             <Item inlineLabel>
-              <Label style={{ width: "50%" }}>Selecciona país</Label>
+              <Label style={{ width: "50%" }}>País</Label>
               <Picker
                 mode="dropdown"
                 style={{ width: "50%" }}
@@ -50,9 +58,33 @@ export default class Filter extends React.Component {
                 {this.state.countryList.map(v => {
                   return (
                     <Picker.Item
-                      key={v.piNombre}
-                      label={v.piNombre}
-                      value={v.piNombre}
+                      key={v.ID_Pais}
+                      label={v.Pais}
+                      value={v.ID_Pais}
+                    />
+                  );
+                })}
+              </Picker>
+            </Item>
+
+            <Item inlineLabel>
+              <Label style={{ width: "50%" }}>Ciudad</Label>
+              <Picker
+                disabled={true}
+                mode="dropdown"
+                style={{ width: "50%" }}
+                placeholder="Ciudades"
+                placeholderStyle={{ color: "#bfc6ea" }}
+                placeholderIconColor="#007aff"
+                selectedValue={this.state.citiesList}
+                onValueChange={this.onValueChangeCountry.bind(this)}
+              >
+                {this.state.citiesList.map(v => {
+                  return (
+                    <Picker.Item
+                      key={v.ciCodigo}
+                      label={v.ciNombre}
+                      value={v.ciCodigo}
                     />
                   );
                 })}

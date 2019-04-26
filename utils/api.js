@@ -135,16 +135,32 @@ class Api {
 
   async getCountries() {
     await this._retrieveData();
-    let emptyData = "";
+
     const countries = await axios
       .get(
-        `${BASE_API}metodoUbicacion?pais=${emptyData}&provincia=${emptyData}&ciudad=${emptyData}&tipo=1`
+        // `${BASE_API}metodoUbicacion?pais=${emptyData}&provincia=${emptyData}&ciudad=${emptyData}&tipo=1`
+        `${BASE_API}metodoListaPaises`
       )
       .then(response => {
         return response.data;
       })
       .catch(error => error);
     return countries;
+  }
+
+  async getCities(idPais) {
+    await this._retrieveData();
+
+    const cities = await axios
+      .get(
+        // `${BASE_API}metodoUbicacion?pais=${emptyData}&provincia=${emptyData}&ciudad=${emptyData}&tipo=1`
+        `${BASE_API}metodoUbicacion?pais=${idPais}`
+      )
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return cities;
   }
 
   async getHotelList() {
@@ -280,6 +296,19 @@ class Api {
         console.log("un error");
         return error;
       });
+    return respuesta;
+  }
+
+  async generarReserva() {
+    await this._retrieveData();
+    const respuesta = await axios
+      .get(
+        `${BASE_API}metodoGeneraResera?dami=${USER_TOKEN}&pais=${pais}&provincia=${provincia}&ciudad=${ciudad}&hotel=${hotel}&tipoHabitacion=${tipoHabitacion}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}&noAdultos=${adultos}&noNiños=${ninis}&edadNino1=${USER_TOKEN}&edadNino2=${USER_TOKEN}&edadNino3=${USER_TOKEN}&edadNino4=${USER_TOKEN}&cupon=${USER_TOKEN}&cantidad=${USER_TOKEN}`
+      )
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
     return respuesta;
   }
 }

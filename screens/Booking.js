@@ -25,14 +25,12 @@ export default class Booking extends React.Component {
       selectedKidAge3: 0,
       selectedKidAge4: 0,
       selectedKidAge5: 0,
-      edades: [2, 4, 12],
-      selectExample: 5,
+      edades: ["0", "0", "0", "0"],
       selectedAdults: 1,
       selectedHotel: 0,
       selectedCupon: 0,
       selectedRoom: 0,
-      //chosenDateInicio: new Date(),
-      chosenDateInicio: "",
+      chosenDateInicio: Date.now(),
       chosenDateFin: "",
       loaderBoton: false,
       hotelList: [],
@@ -43,12 +41,13 @@ export default class Booking extends React.Component {
       loading: true,
       enabledRoom: false,
       enabledCupon: false,
-      disabledFechaFin: true,
       messageError: false,
       messageMissingDates: false,
       loadingHeader: false,
       isModalVisible: false,
-      idHotelParams: ""
+      idHotelParams: "",
+      disabledFechaFin: true,
+      textoFechaFin: "-"
     };
     this.setDateInicio = this.setDateInicio.bind(this);
     this.setDateFin = this.setDateFin.bind(this);
@@ -142,34 +141,34 @@ export default class Booking extends React.Component {
   }
   onValueChangeKidAge(value, position) {
     if (value == 0) {
+      this.state.edades[value] = position;
       this.setState({
         selectedKidAge1: position
       });
-      console.warn(this.state.selectedKidAge1);
     }
     if (value == 1) {
+      this.state.edades[value] = position;
       this.setState({
         selectedKidAge2: position
       });
-      console.warn("niño 2");
     }
     if (value == 2) {
+      this.state.edades[value] = position;
       this.setState({
         selectedKidAge3: position
       });
-      console.warn("niño 3");
     }
     if (value == 3) {
+      this.state.edades[value] = position;
       this.setState({
         selectedKidAge4: position
       });
-      console.warn("niño 4");
     }
     if (value == 4) {
+      this.state.edades[value] = position;
       this.setState({
         selectedKidAge5: position
       });
-      console.warn("niño 5");
     }
   }
 
@@ -184,14 +183,18 @@ export default class Booking extends React.Component {
     });
   }
   setDateInicio(newDate) {
-    this.setState({ chosenDateInicio: newDate });
+    this.setState({
+      chosenDateInicio: newDate,
+      textoFechaFin: "Fecha Fin",
+      disabledFechaFin: false
+    });
   }
 
   setDateFin(newDate) {
     this.setState({ chosenDateFin: newDate });
   }
 
-  onClickSendBooking = () => {
+  onClickSendBooking = async () => {
     if (this.state.enabledCupon == false) {
       //falta seleccionar el hotel
       this.setState({ messageError: true });
@@ -201,6 +204,7 @@ export default class Booking extends React.Component {
         this.setState({ messageMissingDates: true });
       } else {
         //Todos los datos estan bien
+        // await API.generarReserva(dami, pais, provincia);
         this.setState({ isModalVisible: true });
       }
     }
@@ -213,37 +217,32 @@ export default class Booking extends React.Component {
         myloop.push(
           <Item style={{ width: "100%", justifyContent: "space-between" }}>
             <Label style={{ width: "52%" }}>Niño {i + 1}</Label>
-            {this.state.selectedKidAge == 0 && i == 1 ? (
-              <Picker
-                mode="dropdown"
-                style={{ width: undefined }}
-                placeholder="Adultos"
-                placeholderStyle={{ color: "#bfc6ea" }}
-                placeholderIconColor="#007aff"
-                //selectedValue={this.state.selectedKidAge + i}
-                //selectedValue={this.state.selectExample}
-                onValueChange={this.onValueChangeKidAge.bind(this, i)}
-              >
-                <Picker.Item label="0 años" value="0" />
-                <Picker.Item label="1 año" value="1" />
-                <Picker.Item label="2 años" value="2" />
-                <Picker.Item label="3 años" value="3" />
-                <Picker.Item label="4 años" value="4" />
-                <Picker.Item label="5 años" value="5" />
-                <Picker.Item label="6 años" value="6" />
-                <Picker.Item label="7 años" value="7" />
-                <Picker.Item label="8 años" value="8" />
-                <Picker.Item label="9 años" value="9" />
-                <Picker.Item label="10 años" value="10" />
-                <Picker.Item label="11 años" value="11" />
-                <Picker.Item label="12 años" value="12" />
-                <Picker.Item label="13 años" value="13" />
-              </Picker>
-            ) : (
-              <Text>
-                {i} + {this.state.edades[i]}
-              </Text>
-            )}
+
+            <Picker
+              mode="dropdown"
+              style={{ width: undefined }}
+              placeholder="Adultos"
+              placeholderStyle={{ color: "#bfc6ea" }}
+              placeholderIconColor="#007aff"
+              //selectedValue={this.state.selectedKidAge + i}
+              selectedValue={this.state.edades[i]}
+              onValueChange={this.onValueChangeKidAge.bind(this, i)}
+            >
+              <Picker.Item label="0 años" value="0" />
+              <Picker.Item label="1 año" value="1" />
+              <Picker.Item label="2 años" value="2" />
+              <Picker.Item label="3 años" value="3" />
+              <Picker.Item label="4 años" value="4" />
+              <Picker.Item label="5 años" value="5" />
+              <Picker.Item label="6 años" value="6" />
+              <Picker.Item label="7 años" value="7" />
+              <Picker.Item label="8 años" value="8" />
+              <Picker.Item label="9 años" value="9" />
+              <Picker.Item label="10 años" value="10" />
+              <Picker.Item label="11 años" value="11" />
+              <Picker.Item label="12 años" value="12" />
+              <Picker.Item label="13 años" value="13" />
+            </Picker>
           </Item>
         );
       }
@@ -343,8 +342,9 @@ export default class Booking extends React.Component {
               <View style={styles.dates}>
                 <Item inlineLabel style={{ width: "45%" }}>
                   <DatePicker
-                    defaultDate={new Date()}
+                    defaultDate={Date.now()}
                     locale={"es"}
+                    minimumDate={Date.now()}
                     timeZoneOffsetInMinutes={undefined}
                     modalTransparent={false}
                     animationType={"fade"}
@@ -362,18 +362,18 @@ export default class Booking extends React.Component {
                   {/* <Text>
                     Date: {this.state.chosenDate.toString().substr(4, 12)}
                   </Text> */}
-
-                  <Input />
                 </Item>
                 <Item inlineLabel style={{ width: "45%" }}>
                   <DatePicker
-                    defaultDate={new Date()}
+                    defaultDate={Date.now() + 172800000}
                     locale={"es"}
+                    // minimumDate={Date.now() + 172800000}
+                    minimumDate={this.state.chosenDateInicio}
                     timeZoneOffsetInMinutes={undefined}
                     modalTransparent={false}
                     animationType={"fade"}
                     androidMode={"default"}
-                    placeHolderText="Fecha Fin"
+                    placeHolderText={this.state.textoFechaFin}
                     textStyle={{ color: "green" }}
                     placeHolderTextStyle={{
                       color: "#4c4c4c",
@@ -386,8 +386,6 @@ export default class Booking extends React.Component {
                   {/* <Text>
                     Date: {this.state.chosenDate.toString().substr(4, 12)}
                   </Text> */}
-
-                  <Input />
                 </Item>
               </View>
 

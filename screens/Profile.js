@@ -120,13 +120,13 @@ class Profile extends React.Component {
           </TouchableHighlight>
         )}
         <View>
-          <Button
+          {/* <Button
             onPress={() => this.changeImage()}
             bordered
             style={{ paddingHorizontal: 10, marginBottom: 20 }}
           >
             <Text style={{ color: "blue" }}>Guardar cambios</Text>
-          </Button>
+          </Button> */}
         </View>
         <Text style={styles.nameUser}>{this.state.profileData.clNombre}</Text>
         <View style={styles.itemList}>
