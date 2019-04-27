@@ -23,10 +23,24 @@ export default class HotelList extends React.Component {
       hotelList: hotelAPI,
       loading: false
     });
+
+    console.warn(this.props.navigation.state.params);
+    //si trae props de filters
+    const { navigate } = this.props.navigation;
+    if (this.props.navigation.state.params.ciudad) {
+      console.warn(this.props.navigation.state.params.ciudad);
+      const id_ciudad_props = this.props.navigation.state.params.ciudad;
+      let newHotelList = this.state.hotelList.filter(value => {
+        return value.id_Ciudad == id_ciudad_props;
+      });
+      this.setState({
+        hotelList: newHotelList
+      });
+    }
   }
 
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       hotelList: [],
       loading: true
@@ -86,12 +100,17 @@ export default class HotelList extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     const leftHeader = { data: false };
+    const propsFilterCity = this.props.navigation.state.params;
     const rigthHeader = { data: true, icon: "sliders", path: "Filter" };
     if (this.state.loading) {
       return (
         <View style={styles.container}>
           <ActivityIndicator size="large" color="#f14b5a" />
-          <Text>Cargando hoteles</Text>
+          {propsFilterCity ? (
+            <Text>Filtrando Hoteles</Text>
+          ) : (
+            <Text>Cargando hoteles</Text>
+          )}
         </View>
       );
     }

@@ -9,9 +9,10 @@ export default class Filter extends React.Component {
     super();
     this.state = {
       countryList: [],
+      citiesList: [],
       selectedCountry: [],
-      loading: true,
-      citiesList: []
+      selectedCity: [],
+      loading: true
     };
   }
 
@@ -19,22 +20,27 @@ export default class Filter extends React.Component {
     this.setState({
       selectedCountry: value
     });
-    const selectedCitiesAPI = await API.getCities("03");
+    let selectedCitiesAPI = await API.getCities(value);
     this.setState({
-      loading: false,
-      countryList: selectedCitiesAPI
+      citiesList: selectedCitiesAPI
+    });
+  }
+
+  onValueChangeCity(value) {
+    this.setState({
+      selectedCity: value
     });
   }
 
   async componentDidMount() {
     const selectedCountryAPI = await API.getCountries();
-    const selectedCitiesAPI = await API.getCities("03");
+    const selectedCitiesAPI = await API.getCities(
+      selectedCountryAPI[0].ID_Pais
+    );
     this.setState({
-      loading: false,
       countryList: selectedCountryAPI,
       citiesList: selectedCitiesAPI
     });
-    console.warn(selectedCitiesAPI);
   }
 
   render() {
@@ -76,8 +82,8 @@ export default class Filter extends React.Component {
                 placeholder="Ciudades"
                 placeholderStyle={{ color: "#bfc6ea" }}
                 placeholderIconColor="#007aff"
-                selectedValue={this.state.citiesList}
-                onValueChange={this.onValueChangeCountry.bind(this)}
+                selectedValue={this.state.selectedCity}
+                onValueChange={this.onValueChangeCity.bind(this)}
               >
                 {this.state.citiesList.map(v => {
                   return (
@@ -104,7 +110,9 @@ export default class Filter extends React.Component {
           </View> */}
         </View>
         <TouchableOpacity
-          onPress={() => navigate("HotelList")}
+          onPress={() =>
+            navigate("HotelList", { ciudad: this.state.selectedCity })
+          }
           style={styles.buttonLogin}
         >
           <View style={styles.alignButton}>
