@@ -1,12 +1,12 @@
-import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import { Colors } from "../utils/const";
-import Image from "react-native-remote-svg";
-import { Container, Tab, Tabs, TabHeading } from "native-base";
-import TabBar from "../src/components/tabBar";
-import HeaderTab from "../src/components/header";
-import CouponAvalible from "./CouponAvalible";
-import CouponUsed from "./CouponUsed";
+import React from 'react';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Colors } from '../utils/const';
+import Image from 'react-native-remote-svg';
+import { Container, Tab, Tabs, TabHeading } from 'native-base';
+import TabBar from '../src/components/tabBar';
+import HeaderTab from '../src/components/header';
+import CouponAvalible from './CouponAvalible';
+import CouponUsed from './CouponUsed';
 
 export default class Membreship extends React.Component {
   constructor() {
@@ -30,8 +30,8 @@ export default class Membreship extends React.Component {
           <Tabs tabBarUnderlineStyle={{ backgroundColor: Colors.red }}>
             <Tab
               heading={
-                <TabHeading style={{ backgroundColor: "white" }}>
-                  <Text style={{ color: "black" }}>Disponibles</Text>
+                <TabHeading style={{ backgroundColor: 'white' }}>
+                  <Text style={{ color: 'black' }}>Disponibles</Text>
                 </TabHeading>
               }
             >
@@ -39,8 +39,8 @@ export default class Membreship extends React.Component {
             </Tab>
             <Tab
               heading={
-                <TabHeading style={{ backgroundColor: "white" }}>
-                  <Text style={{ color: "black" }}>Usados</Text>
+                <TabHeading style={{ backgroundColor: 'white' }}>
+                  <Text style={{ color: 'black' }}>Usados</Text>
                 </TabHeading>
               }
             >
@@ -57,14 +57,14 @@ export default class Membreship extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
-    backgroundColor: "transparent",
-    alignItems: "center",
-    justifyContent: "space-around",
-    flexDirection: "column",
-    backgroundColor: "#dcf4fb"
+    width: '100%',
+    backgroundColor: 'transparent',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    flexDirection: 'column',
+    backgroundColor: '#dcf4fb'
   },
   imageTop: {
-    width: "100%"
+    width: '100%'
   }
 });

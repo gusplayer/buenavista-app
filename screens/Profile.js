@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,22 +6,23 @@ import {
   Image,
   TouchableHighlight,
   ActivityIndicator
-} from "react-native";
-import Icon from "react-native-vector-icons/Feather";
-import { Colors, Bold } from "../utils/const";
-import API from "../utils/api";
-import ImagePicker from "react-native-image-picker";
-import { Button } from "native-base";
-import { connect } from "react-redux";
-import Moment from "moment";
-import "moment/locale/es";
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Feather';
+import { Colors, Bold } from '../utils/const';
+import API from '../utils/api';
+import ImagePicker from 'react-native-image-picker';
+import { Button } from 'native-base';
+import { connect } from 'react-redux';
+import Moment from 'moment';
+import 'moment/locale/es';
+import axios from 'axios';
 
 const options = {
-  title: "Select Avatar",
-  customButtons: [{ name: "fb", title: "Choose Photo from Facebook" }],
+  title: 'Select Avatar',
+  customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
   storageOptions: {
     skipBackup: true,
-    path: "null"
+    path: 'null'
   }
 };
 
@@ -29,10 +30,10 @@ class Profile extends React.Component {
   constructor() {
     super();
     this.state = {
-      profileData: "",
+      profileData: '',
       loading: true,
       loadingPhoto: true,
-      imageSource: "",
+      imageSource: '',
       saveChangesViews: false
     };
   }
@@ -48,40 +49,74 @@ class Profile extends React.Component {
     });
   }
 
+  fitImage() {
+    return (
+      'https://res.cloudinary.com/komercialatam/image/upload/c_scale,q_90,w_336/' +
+      this.state.imageSource
+    );
+  }
+
+  changeImage = () => {
+    let params = new FormData();
+    params.append('file', this.state.imageSource);
+    params.append('upload_preset', 'czrjxhuj');
+
+    let config = {
+      headers: {
+        Accept: 'application/json',
+        'content-type': 'multipart/form-data'
+      }
+    };
+    axios
+      .post(
+        `https://api.cloudinary.com/v1_1/komercialatam/image/upload`,
+        params,
+        config
+      )
+      .then(response => {
+        let version = response.data.version;
+        let id = response.data.public_id;
+        let newImage = `v${version}/${id}`;
+        this.setState({
+          imageSource: newImage
+        });
+        this.saveNewPhoto(newImage);
+      })
+      .catch(error => console.warn(error));
+  };
+
+  saveNewPhoto = async newImage => {
+    const imageReponse = await API.updateImageProfile(newImage);
+    this.setState({
+      loadingPhoto: false
+    });
+  };
+
   _galery() {
     this.setState({
       loadingPhoto: true
     });
     ImagePicker.launchImageLibrary(options, response => {
       if (response.didCancel) {
-        console.warn("User cancelled image picker");
+        console.warn('User cancelled image picker');
       } else if (response.error) {
-        console.warn("ImagePicker Error: ", response.error);
+        console.warn('ImagePicker Error: ', response.error);
       } else if (response.customButton) {
-        console.warn("User tapped custom button: ", response.customButton);
+        console.warn('User tapped custom button: ', response.customButton);
       } else {
-        const base64img = "data:image/jpeg;base64," + response.data;
+        const base64img = 'data:image/jpeg;base64,' + response.data;
         this.setState({
-          imageSource: base64img,
-          saveChangesViews: true
+          imageSource: base64img
         });
-        this.changeImage(base64img);
+        this.changeImage();
       }
     });
   }
 
-  changeImage = async () => {
-    const imageReponse = await API.updateImageProfile(this.state.imageSource);
-    console.warn(imageReponse);
-    this.setState({
-      loadingPhoto: false
-    });
-  };
-
   logout() {
     const loginData = false;
     this.props.dispatch({
-      type: "LOGIN",
+      type: 'LOGIN',
       payload: {
         loginData
       }
@@ -91,7 +126,7 @@ class Profile extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     var march = Moment(this.state.profileData.faFechaCaducidad);
-    march.locale("es");
+    march.locale('es');
     return (
       <View style={styles.container}>
         {this.state.loadingPhoto == true ? (
@@ -100,9 +135,9 @@ class Profile extends React.Component {
               size="large"
               color="#f14b5a"
               style={{
-                backgroundColor: "white",
-                width: "100%",
-                height: "100%"
+                backgroundColor: 'white',
+                width: '100%',
+                height: '100%'
               }}
             />
           </TouchableHighlight>
@@ -114,7 +149,7 @@ class Profile extends React.Component {
             <Image
               style={styles.photoUser}
               source={{
-                uri: this.state.imageSource
+                uri: this.fitImage()
               }}
             />
           </TouchableHighlight>
@@ -158,7 +193,7 @@ class Profile extends React.Component {
               />
               <Text style={styles.itemText}>
                 <Bold>Fecha Caducidad </Bold>
-                {march.format("d MMMM YYYY")}
+                {march.format('d MMMM YYYY')}
               </Text>
             </View>
           )}
@@ -172,21 +207,21 @@ class Profile extends React.Component {
         </View>
         <TouchableHighlight
           style={styles.webSiteLink}
-          onPress={() => navigate("Terms")}
+          onPress={() => navigate('Terms')}
         >
           <Text style={styles.textLink}>Ver términos y condiciones</Text>
         </TouchableHighlight>
 
         <TouchableHighlight
           style={styles.webSiteLink}
-          onPress={() => navigate("ChangePassword")}
+          onPress={() => navigate('ChangePassword')}
         >
           <Text style={styles.textLink}>Cambiar contraseña</Text>
         </TouchableHighlight>
 
         <TouchableHighlight
           style={styles.bookingButton}
-          onPress={() => navigate("Logout")}
+          onPress={() => navigate('Logout')}
         >
           <Text style={styles.bookingText}>Cerrar Sesión</Text>
         </TouchableHighlight>
@@ -204,9 +239,9 @@ export default connect(mapStateToProps)(Profile);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
-    alignItems: "center",
-    alignContent: "center",
+    width: '100%',
+    alignItems: 'center',
+    alignContent: 'center',
     padding: 20
   },
   contentPhoto: {
@@ -214,9 +249,9 @@ const styles = StyleSheet.create({
     height: 100,
     borderRadius: 50,
     marginBottom: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "white",
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'white',
     elevation: 1
   },
   photoUser: {
@@ -226,53 +261,53 @@ const styles = StyleSheet.create({
   },
   nameUser: {
     width: 180,
-    fontWeight: "600",
+    fontWeight: '600',
     fontSize: 17,
-    textAlign: "center",
+    textAlign: 'center',
     color: Colors.red
   },
   itemList: {
     marginVertical: 20,
-    width: "90%",
-    alignItems: "flex-start",
-    justifyContent: "center"
+    width: '90%',
+    alignItems: 'flex-start',
+    justifyContent: 'center'
   },
   itemInfo: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginBottom: 7
   },
   itemIcon: {
     marginRight: 8
   },
   itemText: {
-    color: "black"
+    color: 'black'
   },
   webSiteLink: {
-    width: "100%",
+    width: '100%',
     height: 45,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center",
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center',
     elevation: 1,
     marginTop: 0,
     marginBottom: 5,
-    backgroundColor: "#F5F5F5"
+    backgroundColor: '#F5F5F5'
   },
   textLink: {
-    color: "gray",
+    color: 'gray',
     fontSize: 16,
-    fontWeight: "400"
+    fontWeight: '400'
   },
   bookingButton: {
-    width: "100%",
+    width: '100%',
     height: 45,
     backgroundColor: Colors.red,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   bookingText: {
-    color: "white",
-    fontWeight: "300",
+    color: 'white',
+    fontWeight: '300',
     fontSize: 16
   }
 });

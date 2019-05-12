@@ -1,18 +1,18 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   Text,
   View,
   ScrollView,
   ActivityIndicator
-} from "react-native";
-import API from "../utils/api";
+} from 'react-native';
+import API from '../utils/api';
 
 export default class Terms extends React.Component {
   constructor() {
     super();
     this.state = {
-      terms: "",
+      terms: '',
       loading: true
     };
   }
@@ -36,7 +36,7 @@ export default class Terms extends React.Component {
     }
     return (
       <ScrollView style={styles.container}>
-        <Text style={{ textAlign: "justify" }}>{this.state.terms}</Text>
+        <Text style={styles.text}>{this.state.terms}</Text>
       </ScrollView>
     );
   }
@@ -45,8 +45,12 @@ export default class Terms extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
-    backgroundColor: "#ffffff",
+    width: '100%',
+    backgroundColor: '#ffffff',
     padding: 25
+  },
+  text: {
+    flex: 1,
+    marginBottom: 40
   }
 });
