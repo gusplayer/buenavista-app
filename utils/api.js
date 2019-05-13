@@ -286,38 +286,33 @@ class Api {
     return respuesta;
   }
 
-  async generarReserva() {
+  async generarReserva(
+    pais,
+    ciudad,
+    hotel,
+    tipoHabitacion,
+    fechaInicio,
+    fechaFin,
+    adultos,
+    ninos,
+    edadNino1,
+    edadNino2,
+    edadNino3,
+    edadNino4,
+    cupon
+  ) {
     await this._retrieveData();
     const respuesta = await axios
       .get(
-        `${BASE_API}metodoGeneraResera?dami=${USER_TOKEN}&pais=${pais}&provincia=${provincia}&ciudad=${ciudad}&hotel=${hotel}&tipoHabitacion=${tipoHabitacion}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}&noAdultos=${adultos}&noNiños=${ninis}&edadNino1=${USER_TOKEN}&edadNino2=${USER_TOKEN}&edadNino3=${USER_TOKEN}&edadNino4=${USER_TOKEN}&cupon=${USER_TOKEN}&cantidad=${USER_TOKEN}`
+        `${BASE_API}metodoGeneraResera?dami=${USER_TOKEN}&pais=${pais}&ciudad=${ciudad}&hotel=${hotel}&tipoHabitacion=${tipoHabitacion}&fechaInicio=${fechaInicio}&fechaFin=${fechaFin}&noAdultos=${adultos}&noNiños=${ninos}&edadNino1=${edadNino1}&edadNino2=${edadNino2}&edadNino3=${edadNino3}&edadNino4=${edadNino4}&cupon=${cupon}&cantidad=1`
       )
       .then(response => {
         return response.data;
       })
       .catch(error => error);
+    console.warn(respuesta);
     return respuesta;
   }
 }
-
-// .post(
-//   `https://api.cloudinary.com/v1_1/komercia-store/image/upload`,
-//   params,
-//   config
-// )
-// .then(response => {
-//   let photoCloudinary = response.data.secure_url;
-//   let idPhotoCloudinary = response.data.public_id;
-//   API.saveNewProduct(
-//     this.state.name,
-//     photoCloudinary,
-//     `431/products/${idPhotoCloudinary}`,
-//     this.state.barCode,
-//     this.state.description,
-//     this.state.price,
-//     this.state.units
-//   );
-//   this.setState({ showModalLoading: false });
-// });
 
 export default new Api();
