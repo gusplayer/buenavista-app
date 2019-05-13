@@ -14,6 +14,7 @@ import { Colors, Bold } from "../utils/const";
 import { Item, Input, Label, Container, DatePicker, Picker } from "native-base";
 import API from "../utils/api";
 import Modal from "react-native-modal";
+import Moment from "moment";
 
 export default class Booking extends React.Component {
   constructor(props) {
@@ -47,7 +48,8 @@ export default class Booking extends React.Component {
       isModalVisible: false,
       idHotelParams: "",
       disabledFechaFin: true,
-      textoFechaFin: "-"
+      textoFechaFin: "-",
+      loadingButton: false
     };
     this.setDateInicio = this.setDateInicio.bind(this);
     this.setDateFin = this.setDateFin.bind(this);
@@ -123,6 +125,7 @@ export default class Booking extends React.Component {
     });
     const hotelRoomsAPI = await API.getHabitaciones(value.id_Hotel);
     const hotelCuponesAPI = await API.getCuponesHotel(value.id_Hotel);
+
     this.setState({
       hotelSelected: value,
       hotelRoomsList: hotelRoomsAPI,
@@ -130,7 +133,8 @@ export default class Booking extends React.Component {
       enabledRoom: true,
       enabledCupon: true,
       loadingHeader: false,
-      messageError: false
+      messageError: false,
+      selectedCupon: hotelCuponesAPI[0].id_Cupon
     });
   };
 
@@ -177,6 +181,11 @@ export default class Booking extends React.Component {
       selectedAdults: value
     });
   }
+  onValueChangeRoom(value) {
+    this.setState({
+      selectedRoom: value
+    });
+  }
   onValueChangeCupon(value) {
     this.setState({
       selectedCupon: value
@@ -195,6 +204,10 @@ export default class Booking extends React.Component {
   }
 
   onClickSendBooking = async () => {
+    this.setState({ loaderButton: true });
+    let fechaInicio = Moment(this.state.chosenDateInicio).format("L");
+    let fechaFin = Moment(this.state.chosenDateFin).format("L");
+
     if (this.state.enabledCupon == false) {
       //falta seleccionar el hotel
       this.setState({ messageError: true });
@@ -205,7 +218,22 @@ export default class Booking extends React.Component {
       } else {
         //Todos los datos estan bien
         // await API.generarReserva(dami, pais, provincia);
-        this.setState({ isModalVisible: true });
+        let responseAPI = await API.generarReserva(
+          this.state.hotelSelected.id_Pais,
+          this.state.hotelSelected.id_Ciudad,
+          this.state.hotelSelected.id_Hotel,
+          this.state.selectedRoom,
+          fechaInicio,
+          fechaFin,
+          this.state.selectedAdults,
+          this.state.selectedKids,
+          this.state.selectedKidAge1,
+          this.state.selectedKidAge2,
+          this.state.selectedKidAge3,
+          this.state.selectedKidAge4,
+          this.state.selectedCupon
+        );
+        this.setState({ isModalVisible: true, loadingButton: false });
       }
     }
   };
@@ -328,8 +356,8 @@ export default class Booking extends React.Component {
                   placeholder="Habitación"
                   placeholderStyle={{ color: "#bfc6ea" }}
                   placeholderIconColor="#007aff"
-                  selectedValue={this.state.roomSelected}
-                  onValueChange={this.onValueChangeAdults.bind(this)}
+                  selectedValue={this.state.selectedRoom}
+                  onValueChange={this.onValueChangeRoom.bind(this)}
                 >
                   {this.state.hotelRoomsList.map(v => {
                     return (
@@ -465,7 +493,7 @@ export default class Booking extends React.Component {
                     onValueChange={this.onValueChangeCupon.bind(this)}
                   >
                     {this.state.hotelCuponesList.map(v => {
-                      return <Picker.Item label={v.Cupon} value={v.Cupon} />;
+                      return <Picker.Item label={v.Cupon} value={v.id_Cupon} />;
                     })}
                   </Picker>
                 </Item>
@@ -486,13 +514,16 @@ export default class Booking extends React.Component {
               </Text>
             </View>
           )}
-
-          <TouchableOpacity
-            onPress={() => this.onClickSendBooking()}
-            style={styles.buttonLogin}
-          >
-            <Text style={styles.buttonText}>ENVIAR SOLICITUD</Text>
-          </TouchableOpacity>
+          {this.state.loaderButton ? (
+            <ActivityIndicator size="large" color="#808080" />
+          ) : (
+            <TouchableOpacity
+              onPress={() => this.onClickSendBooking()}
+              style={styles.buttonLogin}
+            >
+              <Text style={styles.buttonText}>ENVIAR SOLICITUD</Text>
+            </TouchableOpacity>
+          )}
         </ScrollView>
 
         <TabBar navigation={this.props.navigation} position={2} />
