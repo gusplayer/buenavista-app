@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   StyleSheet,
   Text,
@@ -8,7 +8,7 @@ import {
   AsyncStorage,
   TouchableHighlight,
   TouchableOpacity
-} from 'react-native';
+} from "react-native";
 import {
   Colors,
   CuponesBlue,
@@ -16,19 +16,19 @@ import {
   CuponesOpera,
   CuponesPremium,
   Bold
-} from '../utils/const';
-import API from '../utils/api';
-import Modal from 'react-native-modal';
+} from "../utils/const";
+import API from "../utils/api";
+import Modal from "react-native-modal";
 
 export default class CouponAvalible extends React.Component {
   constructor() {
     super();
     this.state = {
-      textCupon: 'cargando..',
+      textCupon: "cargando..",
       isVisible: false,
       cuponList: [],
       loading: true,
-      membership: require('../src/assets/cupones/cupones/BLUE/83270.png')
+      membership: require("../src/assets/cupones/cupones/BLUE/83270.png")
     };
   }
 
@@ -59,12 +59,12 @@ export default class CouponAvalible extends React.Component {
         <View
           style={{
             padding: 15,
-            justifyContent: 'center',
-            alignItems: 'center',
-            textAlign: 'center'
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center"
           }}
         >
-          <Text style={{ padding: 5, fontWeight: '900', fontSize: 18 }}>
+          <Text style={{ padding: 5, fontWeight: "900", fontSize: 18 }}>
             Detalle cupón
           </Text>
           <ScrollView
@@ -74,7 +74,7 @@ export default class CouponAvalible extends React.Component {
             }}
           >
             <Text
-              style={{ textAlign: 'center', fontSize: 16, marginBottom: 15 }}
+              style={{ textAlign: "center", fontSize: 16, marginBottom: 15 }}
             >
               {this.state.textCupon}
             </Text>
@@ -83,7 +83,7 @@ export default class CouponAvalible extends React.Component {
             style={styles.buttonLogin}
             onPress={() => {
               this.setState({ isVisible: false });
-              navigate('Booking');
+              navigate("Booking");
             }}
           >
             <Text style={styles.buttonText}>APLICAR</Text>
@@ -110,19 +110,29 @@ export default class CouponAvalible extends React.Component {
           </View>
           <View style={styles.itemList}>
             <View style={styles.containImage}>
-              {this.state.membership == 'BLUE' && (
-                <Image
-                  style={styles.imageCupon}
-                  source={CuponesBlue[x.id_Cupon]}
-                />
+              {this.state.membership == "BLUE" && (
+                <TouchableOpacity
+                  style={styles.imagePress}
+                  onPress={() => this.onpressImage(x.Descripcion)}
+                >
+                  <Image
+                    style={styles.imageCupon}
+                    source={CuponesBlue[x.id_Cupon]}
+                  />
+                </TouchableOpacity>
               )}
-              {this.state.membership == 'GOLD' && (
-                <Image
-                  style={styles.imageCupon}
-                  source={CuponesGold[x.id_Cupon]}
-                />
+              {this.state.membership == "GOLD" && (
+                <TouchableOpacity
+                  style={styles.imagePress}
+                  onPress={() => this.onpressImage(x.Descripcion)}
+                >
+                  <Image
+                    style={styles.imageCupon}
+                    source={CuponesGold[x.id_Cupon]}
+                  />
+                </TouchableOpacity>
               )}
-              {this.state.membership == 'OPERA' && (
+              {this.state.membership == "OPERA" && (
                 <TouchableOpacity
                   style={styles.imagePress}
                   onPress={() => this.onpressImage(x.Descripcion)}
@@ -133,15 +143,15 @@ export default class CouponAvalible extends React.Component {
                   />
                 </TouchableOpacity>
               )}
-              {this.state.membership == 'PREMIUM' && (
+              {this.state.membership == "PREMIUM" && (
                 <TouchableOpacity
+                  style={styles.imagePress}
                   onPress={() => this.onpressImage(x.Descripcion)}
                 >
                   <Image
                     style={styles.imageCupon}
                     source={CuponesPremium[x.id_Cupon]}
                   />
-                  <Text>algo</Text>
                 </TouchableOpacity>
               )}
             </View>
@@ -165,79 +175,79 @@ export default class CouponAvalible extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%',
-    alignItems: 'center'
+    width: "100%",
+    alignItems: "center"
   },
   bookingButton: {
-    width: '100%',
+    width: "100%",
     height: 35,
     backgroundColor: Colors.green,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center"
   },
   bookingText: {
-    color: 'white',
-    fontWeight: '300',
+    color: "white",
+    fontWeight: "300",
     fontSize: 14
   },
   itemList: {
-    width: '80%'
+    width: "80%"
   },
   containImage: {
     height: 180
   },
   textCupon: {
-    color: 'black',
+    color: "black",
     marginBottom: 20,
-    textAlign: 'center'
+    textAlign: "center"
   },
   imageCupon: {
     flex: 1,
-    width: '100%',
-    height: '100%',
-    resizeMode: 'contain'
+    width: "100%",
+    height: "100%",
+    resizeMode: "contain"
   },
   imagePress: {
-    width: '100%',
-    height: '100%'
+    width: "100%",
+    height: "100%"
   },
   modalContent: {
-    flexDirection: 'column',
-    backgroundColor: 'white',
+    flexDirection: "column",
+    backgroundColor: "white",
     borderRadius: 8,
     height: 370,
-    justifyContent: 'center',
-    alignItems: 'center'
+    justifyContent: "center",
+    alignItems: "center"
   },
   modalIcon: {
-    color: 'gray',
+    color: "gray",
     fontSize: 35,
     marginBottom: 10,
     marginTop: 10
   },
   butonClose: {
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
-    alignContent: 'flex-end',
-    textAlign: 'right'
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
+    alignContent: "flex-end",
+    textAlign: "right"
   },
   buttonLogin: {
     width: 280,
     backgroundColor: Colors.gold,
     height: 50,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
     borderRadius: 25,
     marginTop: 15,
     marginBottom: 15,
-    alignSelf: 'center'
+    alignSelf: "center"
   },
   buttonText: {
-    color: '#fff',
-    textAlign: 'center',
+    color: "#fff",
+    textAlign: "center",
     paddingLeft: 10,
     paddingRight: 10,
     fontSize: 16,
-    fontWeight: '300'
+    fontWeight: "300"
   }
 });

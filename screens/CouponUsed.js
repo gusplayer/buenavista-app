@@ -5,7 +5,8 @@ import {
   View,
   Image,
   ScrollView,
-  AsyncStorage
+  AsyncStorage,
+  TouchableOpacity
 } from "react-native";
 import {
   Colors,
@@ -15,6 +16,7 @@ import {
   CuponesPremium
 } from "../utils/const";
 import API from "../utils/api";
+import Modal from "react-native-modal";
 
 export default class CouponUsed extends React.Component {
   constructor() {
@@ -22,12 +24,14 @@ export default class CouponUsed extends React.Component {
     this.state = {
       cuponList: [],
       loading: true,
+      isVisible: false,
       membership: require("../src/assets/cupones/cupones/BLUE/83270.png")
     };
   }
 
   async componentDidMount() {
     const cuponAPI = await API.getCuponUsed();
+    console.warn(cuponAPI);
     this.setState({
       cuponList: cuponAPI,
       loading: false
@@ -37,6 +41,55 @@ export default class CouponUsed extends React.Component {
       membership: membershipStorage
     });
   }
+
+  onpressImage = description => {
+    this.setState({
+      textCupon: description,
+      isVisible: true
+    });
+    this.modal(description);
+  };
+
+  modal = () => {
+    const { navigate } = this.props.navigation;
+    return (
+      <View style={styles.modalContent}>
+        <View
+          style={{
+            padding: 15,
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center"
+          }}
+        >
+          <Text style={{ padding: 5, fontWeight: "900", fontSize: 18 }}>
+            Detalle cupón
+          </Text>
+          <ScrollView
+            style={{
+              paddingTop: 5,
+              paddingBottom: 10
+            }}
+          >
+            <Text
+              style={{ textAlign: "center", fontSize: 16, marginBottom: 15 }}
+            >
+              {this.state.textCupon}
+            </Text>
+          </ScrollView>
+
+          <Text
+            style={styles.butonClose}
+            onPress={() => {
+              this.setState({ isVisible: false });
+            }}
+          >
+            Cerrar
+          </Text>
+        </View>
+      </View>
+    );
+  };
 
   listComponents() {
     return this.state.cuponList.map(x => {
@@ -48,28 +101,48 @@ export default class CouponUsed extends React.Component {
           <View style={styles.itemList}>
             <View style={styles.containImage}>
               {this.state.membership == "BLUE" && (
-                <Image
-                  style={styles.imageCupon}
-                  source={CuponesBlue[x.id_Cupon]}
-                />
+                <TouchableOpacity
+                  style={styles.imagePress}
+                  onPress={() => this.onpressImage(x.Descripcion)}
+                >
+                  <Image
+                    style={styles.imageCupon}
+                    source={CuponesBlue[x.id_Cupon]}
+                  />
+                </TouchableOpacity>
               )}
               {this.state.membership == "GOLD" && (
-                <Image
-                  style={styles.imageCupon}
-                  source={CuponesGold[x.id_Cupon]}
-                />
+                <TouchableOpacity
+                  style={styles.imagePress}
+                  onPress={() => this.onpressImage(x.Descripcion)}
+                >
+                  <Image
+                    style={styles.imageCupon}
+                    source={CuponesGold[x.id_Cupon]}
+                  />
+                </TouchableOpacity>
               )}
               {this.state.membership == "OPERA" && (
-                <Image
-                  style={styles.imageCupon}
-                  source={CuponesOpera[x.id_Cupon]}
-                />
+                <TouchableOpacity
+                  style={styles.imagePress}
+                  onPress={() => this.onpressImage(x.Descripcion)}
+                >
+                  <Image
+                    style={styles.imageCupon}
+                    source={CuponesOpera[x.id_Cupon]}
+                  />
+                </TouchableOpacity>
               )}
               {this.state.membership == "PREMIUM" && (
-                <Image
-                  style={styles.imageCupon}
-                  source={CuponesPremium[x.id_Cupon]}
-                />
+                <TouchableOpacity
+                  style={styles.imagePress}
+                  onPress={() => this.onpressImage(x.Descripcion)}
+                >
+                  <Image
+                    style={styles.imageCupon}
+                    source={CuponesPremium[x.id_Cupon]}
+                  />
+                </TouchableOpacity>
               )}
             </View>
             {/* <Text style={styles.textCupon}>
@@ -85,7 +158,12 @@ export default class CouponUsed extends React.Component {
   }
 
   render() {
-    return <ScrollView>{this.listComponents()}</ScrollView>;
+    return (
+      <ScrollView>
+        {this.listComponents()}
+        <Modal isVisible={this.state.isVisible}>{this.modal()}</Modal>
+      </ScrollView>
+    );
   }
 }
 
@@ -123,5 +201,29 @@ const styles = StyleSheet.create({
     width: "100%",
     height: "100%",
     resizeMode: "contain"
+  },
+  imagePress: {
+    width: "100%",
+    height: "100%"
+  },
+  modalContent: {
+    flexDirection: "column",
+    backgroundColor: "white",
+    borderRadius: 8,
+    height: 300,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  modalIcon: {
+    color: "gray",
+    fontSize: 35,
+    marginBottom: 10,
+    marginTop: 10
+  },
+  butonClose: {
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
+    alignContent: "flex-end",
+    textAlign: "right"
   }
 });

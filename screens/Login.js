@@ -13,6 +13,7 @@ import { connect } from "react-redux";
 import { CheckBox, Container, Content, Form, Item } from "native-base";
 import { Bold, Colors } from "../utils/const";
 import Image from "react-native-remote-svg";
+import CheckedBox from "./CheckedBox";
 
 class Login extends React.Component {
   constructor() {
@@ -123,12 +124,7 @@ class Login extends React.Component {
             </Text>
           </View>
 
-          <View style={styles.terms}>
-            <CheckBox checked={true} color="#c3b381" />
-            <Text style={styles.termsText} onPress={() => navigate("Terms")}>
-              Al ingresar aceptarás los <Bold>términos y condiciones</Bold>
-            </Text>
-          </View>
+          <CheckedBox navigation={this.props.navigation} />
         </ImageBackground>
       </Container>
     );

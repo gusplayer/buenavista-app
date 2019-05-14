@@ -24,7 +24,7 @@ class Api {
     } catch (error) {
       console.warn(error);
     }
-    //USER_TOKEN = 583120;
+    //USER_TOKEN = 580089;
   };
 
   _retrieveDataMembership = async () => {
@@ -34,7 +34,7 @@ class Api {
     } catch (error) {
       console.warn(error);
     }
-    //return "OPERA";
+    //return "BLUE";
   };
 
   async getLogin(userID, password) {
@@ -57,7 +57,6 @@ class Api {
         return true;
       })
       .catch(error => error);
-
     return loginAPI;
   }
 
@@ -274,6 +273,7 @@ class Api {
   }
 
   async updateImageProfile(newImage) {
+    console.warn(newImage);
     await this._retrieveData();
     const respuesta = await axios
       .get(
@@ -283,6 +283,7 @@ class Api {
         return response.data;
       })
       .catch(error => error);
+    console.warn(respuesta);
     return respuesta;
   }
 

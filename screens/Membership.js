@@ -77,7 +77,7 @@ export default class Membreship extends React.Component {
                 </TabHeading>
               }
             >
-              <CouponInfo />
+              <CouponInfo navigation={this.props.navigation} />
             </Tab>
           </Tabs>
         </ScrollView>

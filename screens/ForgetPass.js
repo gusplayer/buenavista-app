@@ -10,19 +10,10 @@ import {
   ActivityIndicator,
   ImageBackground
 } from "react-native";
-import { connect } from "react-redux";
-import {
-  CheckBox,
-  Container,
-  Header,
-  Content,
-  Form,
-  Item,
-  Input
-} from "native-base";
 import { Bold, Colors } from "../utils/const";
 import Image from "react-native-remote-svg";
 import Modal from "react-native-modal";
+import CheckedBox from "./CheckedBox";
 
 export default class ForgetPass extends React.Component {
   constructor() {
@@ -68,7 +59,8 @@ export default class ForgetPass extends React.Component {
   }
   onPressButton = async () => {
     this.setState({ loading: true });
-    let userExist = await API.getRegister(this.state.idsocio);
+    let userExist = await API.getForgetPass(this.state.idsocio);
+
     this.setState({ loading: false });
     if (userExist == true) {
       this.setState({
@@ -107,10 +99,13 @@ export default class ForgetPass extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <Container>
-        <ImageBackground
-          source={require("../src/assets/fondo.jpg")}
-          style={styles.container}
+      <ImageBackground
+        source={require("../src/assets/fondo.jpg")}
+        style={styles.container}
+      >
+        <KeyboardAvoidingView
+          resetScrollToCoords={{ x: 0, y: 0 }}
+          scrollEnabled={false}
         >
           <View style={styles.header}>
             <Image
@@ -122,9 +117,7 @@ export default class ForgetPass extends React.Component {
           <View style={styles.formForgetPass}>
             {this.state.messageError == true && (
               <View style={styles.errorLogin}>
-                <Text style={styles.textError}>
-                  Error en los datos, intenta de nuevo.
-                </Text>
+                <Text style={styles.textError}>Ingresa un ID válido</Text>
               </View>
             )}
             <View>
@@ -138,16 +131,6 @@ export default class ForgetPass extends React.Component {
               />
             </View>
 
-            {/* <View>
-              <TextInput
-                placeholderTextColor="#59617b"
-                placeholder={"Correo electrónico"}
-                style={styles.input}
-                underlineColorAndroid="transparent"
-                onChangeText={email => this.setState({ email })}
-              />
-            </View> */}
-
             {this._getButtonForgetPass()}
           </View>
 
@@ -157,16 +140,11 @@ export default class ForgetPass extends React.Component {
             </Text>
           </View>
 
-          <View style={styles.terms}>
-            <CheckBox checked={true} color="#c3b381" />
-            <Text style={styles.termsText} onPress={() => navigate("Terms")}>
-              Al ingresar aceptarás los <Bold>términos y condiciones</Bold>
-            </Text>
-          </View>
+          <CheckedBox navigation={this.props.navigation} />
 
           <Modal isVisible={this.state.isModalVisible}>{this.modal()}</Modal>
-        </ImageBackground>
-      </Container>
+        </KeyboardAvoidingView>
+      </ImageBackground>
     );
   }
 }
@@ -189,26 +167,19 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     flexDirection: "column"
   },
-  textWelcome: {
-    flex: 1,
-    width: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 5
-  },
 
   formForgetPass: {
-    flex: 2,
+    flex: 4,
     alignContent: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     alignItems: "center"
   },
   footer: {
-    flex: 1,
+    flex: 2,
     alignItems: "center",
     justifyContent: "center",
     paddingBottom: 5,
-    marginTop: 10,
+    marginTop: 20,
     marginBottom: 10,
     width: 300
   },
@@ -319,7 +290,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     fontSize: 15,
-    fontWeight: "200"
+    fontWeight: "100"
   },
   modalContent: {
     flexDirection: "column",

@@ -122,7 +122,7 @@ const TabBar = ({ navigation, position }) => {
             source={require("../assets/iconos/bar-bottom/gray/circle.png")}
             style={{ width: 25, height: 25 }}
           />
-          <Text style={styles.tabTitle}> MEMEBRESIA</Text>
+          <Text style={styles.tabTitle}> MEMEBRESÍA</Text>
         </TouchableOpacity>
       )}
     </View>
@@ -136,9 +136,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingHorizontal: 4,
+    paddingHorizontal: 3,
     elevation: 4,
-    backgroundColor: "white"
+    backgroundColor: "white",
+    marginLeft: -2
   },
   tabItem: {
     flex: 1,
@@ -151,7 +152,7 @@ const styles = StyleSheet.create({
   },
   tabTitle: {
     marginTop: 3,
-    fontSize: 10,
+    fontSize: 9,
     color: "#90a4ae"
   },
   tabTitleActive: {

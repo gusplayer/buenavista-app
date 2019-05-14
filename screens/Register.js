@@ -14,6 +14,7 @@ import { connect } from "react-redux";
 import { CheckBox } from "native-base";
 import { Bold, Colors } from "../utils/const";
 import Image from "react-native-remote-svg";
+import CheckedBox from "./CheckedBox";
 
 class Register extends React.Component {
   constructor() {
@@ -187,13 +188,7 @@ class Register extends React.Component {
               Ya tengo cuenta <Bold>Iniciar sesión</Bold>
             </Text>
           </View>
-
-          <View style={styles.terms}>
-            <CheckBox checked={true} color="#c3b381" />
-            <Text style={styles.termsText} onPress={() => navigate("Terms")}>
-              Al ingresar aceptarás los <Bold>términos y condiciones</Bold>
-            </Text>
-          </View>
+          <CheckedBox navigation={this.props.navigation} />
         </KeyboardAvoidingView>
       </ImageBackground>
     );
