@@ -14,6 +14,7 @@ import { CheckBox, Container, Content, Form, Item } from "native-base";
 import { Bold, Colors } from "../utils/const";
 import Image from "react-native-remote-svg";
 import CheckedBox from "./CheckedBox";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 class Login extends React.Component {
   constructor() {
@@ -69,64 +70,68 @@ class Login extends React.Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <Container style={{ backgroundColor: "transparent" }}>
-        <ImageBackground
-          source={require("../src/assets/fondo.jpg")}
-          style={styles.container}
-        >
-          <View style={styles.header}>
-            <Image
-              source={require("../src/assets/logoBlanco.png")}
-              style={{ width: 160, height: 93 }}
-            />
-          </View>
+      <KeyboardAwareScrollView
+        style={{ backgroundColor: "transparent", flex: 1, height: "100%" }}
+      >
+        <Container>
+          <ImageBackground
+            source={require("../src/assets/fondo.jpg")}
+            style={styles.container}
+          >
+            <View style={styles.header}>
+              <Image
+                source={require("../src/assets/logoBlanco.png")}
+                style={{ width: 160, height: 93 }}
+              />
+            </View>
 
-          <Form style={styles.form}>
-            {this.state.messageError == true && (
-              <View style={styles.errorLogin}>
-                <Text style={styles.textError}>
-                  Error en los datos, intenta de nuevo.
-                </Text>
+            <Form style={styles.form}>
+              {this.state.messageError == true && (
+                <View style={styles.errorLogin}>
+                  <Text style={styles.textError}>
+                    Error en los datos, intenta de nuevo.
+                  </Text>
+                </View>
+              )}
+              <View>
+                <TextInput
+                  keyboardType="numeric"
+                  placeholderTextColor="#59617b"
+                  placeholder={"Id Socio"}
+                  style={styles.input}
+                  underlineColorAndroid="rgba(0,0,0,0)"
+                  onChangeText={email => this.setState({ email })}
+                />
               </View>
-            )}
-            <View>
-              <TextInput
-                keyboardType="numeric"
-                placeholderTextColor="#59617b"
-                placeholder={"Id Socio"}
-                style={styles.input}
-                underlineColorAndroid="rgba(0,0,0,0)"
-                onChangeText={email => this.setState({ email })}
-              />
-            </View>
-            <View>
-              <TextInput
-                placeholderTextColor="#59617b"
-                placeholder={"Contraseña"}
-                secureTextEntry={true}
-                style={styles.input}
-                underlineColorAndroid="transparent"
-                onChangeText={password => this.setState({ password })}
-              />
-            </View>
-            {this._getButtonLogin()}
-          </Form>
+              <View>
+                <TextInput
+                  placeholderTextColor="#59617b"
+                  placeholder={"Contraseña"}
+                  secureTextEntry={true}
+                  style={styles.input}
+                  underlineColorAndroid="transparent"
+                  onChangeText={password => this.setState({ password })}
+                />
+              </View>
+              {this._getButtonLogin()}
+            </Form>
 
-          <View style={styles.footer}>
-            <Text
-              style={styles.linkForget}
-              onPress={() => navigate("Register")}
-            >
-              No tengo cuenta <Bold>Registrarme</Bold>
-            </Text>
-            <Text style={styles.link} onPress={() => navigate("ForgetPass")}>
-              ¿Olvidé contraseña?
-            </Text>
-          </View>
+            <View style={styles.footer}>
+              <Text
+                style={styles.linkForget}
+                onPress={() => navigate("Register")}
+              >
+                No tengo cuenta <Bold>Registrarme</Bold>
+              </Text>
+              <Text style={styles.link} onPress={() => navigate("ForgetPass")}>
+                ¿Olvidé contraseña?
+              </Text>
+            </View>
 
-          <CheckedBox navigation={this.props.navigation} />
-        </ImageBackground>
-      </Container>
+            <CheckedBox navigation={this.props.navigation} />
+          </ImageBackground>
+        </Container>
+      </KeyboardAwareScrollView>
     );
   }
 }

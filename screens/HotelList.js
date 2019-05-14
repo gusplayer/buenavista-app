@@ -24,11 +24,9 @@ export default class HotelList extends React.Component {
       loading: false
     });
 
-    console.warn(this.props.navigation.state.params);
     //si trae props de filters
     const { navigate } = this.props.navigation;
     if (this.props.navigation.state.params.ciudad) {
-      console.warn(this.props.navigation.state.params.ciudad);
       const id_ciudad_props = this.props.navigation.state.params.ciudad;
       let newHotelList = this.state.hotelList.filter(value => {
         return value.id_Ciudad == id_ciudad_props;

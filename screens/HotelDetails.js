@@ -25,7 +25,7 @@ export default class HotelDetails extends React.Component {
     const { navigate } = this.props.navigation;
     const id_hotel = this.props.navigation.state.params.hotel.id_Hotel;
     const hotelCuponesAPI = await API.getCuponesHotel(id_hotel);
-    console.warn(hotelCuponesAPI);
+
     this.setState({
       hotelCuponesList: hotelCuponesAPI
     });
