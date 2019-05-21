@@ -11,30 +11,24 @@ class Api {
       await AsyncStorage.setItem("userToken", token);
     } catch (error) {}
   };
-  _storeDataMembership = async membership => {
-    try {
-      await AsyncStorage.setItem("userMembership", membership);
-    } catch (error) {}
-  };
 
   _retrieveData = async () => {
-    try {
-      let token = await AsyncStorage.getItem("userToken");
-      USER_TOKEN = token;
-    } catch (error) {
-      console.warn(error);
-    }
-    //USER_TOKEN = 580089;
+    // try {
+    //   let token = await AsyncStorage.getItem("userToken");
+    //   USER_TOKEN = token;
+    // } catch (error) {}
+    USER_TOKEN = 580914;
   };
 
   _retrieveDataMembership = async () => {
-    try {
-      let membershipStorage = await AsyncStorage.getItem("userMembership");
-      return membershipStorage;
-    } catch (error) {
-      console.warn(error);
-    }
-    //return "BLUE";
+    await this._retrieveData();
+    const membresia = await axios
+      .get(`${BASE_API}metodoPerfilUsuario?dami=${USER_TOKEN}`)
+      .then(response => {
+        return response.data[0].TipoProducto;
+      })
+      .catch(error => error);
+    return membresia;
   };
 
   async getLogin(userID, password) {
@@ -50,13 +44,13 @@ class Api {
           return Auth;
         }
       });
-    const Membership = await axios
-      .get(`${BASE_API}metodoPerfilUsuario?dami=${userID}`)
-      .then(response => {
-        this._storeDataMembership(response.data[0].TipoProducto);
-        return true;
-      })
-      .catch(error => error);
+    // const Membership = await axios
+    //   .get(`${BASE_API}metodoPerfilUsuario?dami=${userID}`)
+    //   .then(response => {
+    //     this._storeDataMembership(response.data[0].TipoProducto);
+    //     return true;
+    //   })
+    //   .catch(error => error);
     return loginAPI;
   }
 

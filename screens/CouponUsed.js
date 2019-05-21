@@ -31,7 +31,6 @@ export default class CouponUsed extends React.Component {
 
   async componentDidMount() {
     const cuponAPI = await API.getCuponUsed();
-    console.warn(cuponAPI);
     this.setState({
       cuponList: cuponAPI,
       loading: false

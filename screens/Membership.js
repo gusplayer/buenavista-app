@@ -19,6 +19,7 @@ export default class Membreship extends React.Component {
 
   async componentDidMount() {
     let membershipStorage = await API._retrieveDataMembership();
+
     this.setState({
       membership: membershipStorage
     });

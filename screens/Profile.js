@@ -33,14 +33,15 @@ class Profile extends React.Component {
       loading: true,
       loadingPhoto: true,
       imageSource: "",
-      saveChangesViews: false
+      saveChangesViews: false,
+      dataExpiracion: ""
     };
   }
 
   async componentDidMount() {
     const profileAPI = await API.getProfile();
     const imageProfileAPI = await API.getImageProfile();
-    console.warn(imageProfileAPI);
+    this.fitDataFormat(profileAPI[0].faFechaCaducidad);
     this.setState({
       profileData: profileAPI[0],
       imageSource: imageProfileAPI[0].detInfo,
@@ -74,7 +75,6 @@ class Profile extends React.Component {
         config
       )
       .then(response => {
-        console.warn("cambiar image listo");
         let version = response.data.version;
         let id = response.data.public_id;
         let newImage = `v${version}/${id}`;
@@ -124,10 +124,25 @@ class Profile extends React.Component {
     });
   }
 
+  fitDataFormat = fechaEx => {
+    let divideData = fechaEx.split(" ");
+    // let divideMoreData = divideData[0].split("/");
+    console.warn(divideData[0]);
+    let march = Moment(divideData[0]);
+    march.locale("es");
+    console.warn(march);
+    console.warn(march.format("d MMMM YYYY"));
+    this.setState({
+      dataExpiracion: "algo"
+    });
+    return (
+      divideMoreData[0] + " " + divideMoreData[1] + " " + divideMoreData[2]
+    );
+  };
+
   render() {
     const { navigate } = this.props.navigation;
-    var march = Moment(this.state.profileData.faFechaCaducidad);
-    march.locale("es");
+
     return (
       <View style={styles.container}>
         {this.state.loadingPhoto == true ? (
@@ -194,7 +209,7 @@ class Profile extends React.Component {
               />
               <Text style={styles.itemText}>
                 <Bold>Fecha Caducidad </Bold>
-                {march.format("d MMMM YYYY")}
+                {this.state.dataExpiracion}
               </Text>
             </View>
           )}
@@ -226,6 +241,8 @@ class Profile extends React.Component {
         >
           <Text style={styles.bookingText}>Cerrar Sesión</Text>
         </TouchableHighlight>
+
+        <Text style={{ marginTop: 15 }}>Version Beta 0.7</Text>
       </View>
     );
   }
