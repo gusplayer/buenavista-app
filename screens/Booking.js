@@ -124,7 +124,10 @@ export default class Booking extends React.Component {
       loadingHeader: true
     });
     const hotelRoomsAPI = await API.getHabitaciones(value.id_Hotel);
-    const hotelCuponesAPI = await API.getCuponesHotel(value.id_Hotel);
+    const hotelCuponesAPI = await API.getCuponesDisponiblesHotel(
+      value.id_Hotel
+    );
+    console.warn(hotelCuponesAPI);
 
     this.setState({
       hotelSelected: value,

@@ -13,11 +13,11 @@ class Api {
   };
 
   _retrieveData = async () => {
-    // try {
-    //   let token = await AsyncStorage.getItem("userToken");
-    //   USER_TOKEN = token;
-    // } catch (error) {}
-    USER_TOKEN = 580914;
+    try {
+      let token = await AsyncStorage.getItem("userToken");
+      USER_TOKEN = token;
+    } catch (error) {}
+    //USER_TOKEN = 580914;
   };
 
   _retrieveDataMembership = async () => {
@@ -44,13 +44,6 @@ class Api {
           return Auth;
         }
       });
-    // const Membership = await axios
-    //   .get(`${BASE_API}metodoPerfilUsuario?dami=${userID}`)
-    //   .then(response => {
-    //     this._storeDataMembership(response.data[0].TipoProducto);
-    //     return true;
-    //   })
-    //   .catch(error => error);
     return loginAPI;
   }
 
@@ -193,6 +186,19 @@ class Api {
     return hotelCupones;
   }
 
+  async getCuponesDisponiblesHotel(hotel) {
+    await this._retrieveData();
+    const hotelCupones = await axios
+      .get(
+        `${BASE_API}metodoCuponesDisponiblesHotel?dami=${USER_TOKEN}&hotel=${hotel}`
+      )
+      .then(response => {
+        return response.data;
+      })
+      .catch(error => error);
+    return hotelCupones;
+  }
+
   async getProfile() {
     await this._retrieveData();
     const profile = await axios
@@ -277,7 +283,7 @@ class Api {
         return response.data;
       })
       .catch(error => error);
-    console.warn(respuesta);
+
     return respuesta;
   }
 

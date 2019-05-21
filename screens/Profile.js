@@ -126,18 +126,12 @@ class Profile extends React.Component {
 
   fitDataFormat = fechaEx => {
     let divideData = fechaEx.split(" ");
-    // let divideMoreData = divideData[0].split("/");
-    console.warn(divideData[0]);
     let march = Moment(divideData[0]);
     march.locale("es");
-    console.warn(march);
-    console.warn(march.format("d MMMM YYYY"));
+    let test = Moment(march).format("LL");
     this.setState({
-      dataExpiracion: "algo"
+      dataExpiracion: test
     });
-    return (
-      divideMoreData[0] + " " + divideMoreData[1] + " " + divideMoreData[2]
-    );
   };
 
   render() {
@@ -242,7 +236,7 @@ class Profile extends React.Component {
           <Text style={styles.bookingText}>Cerrar Sesión</Text>
         </TouchableHighlight>
 
-        <Text style={{ marginTop: 15 }}>Version Beta 0.7</Text>
+        <Text style={{ marginTop: 15 }}>Version Beta 0.8</Text>
       </View>
     );
   }
