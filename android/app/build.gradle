@@ -103,8 +103,8 @@ android {
         applicationId "com.buenavista"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 8
-        versionName "8.1"
+        versionCode 9
+        versionName "9.1.2"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }

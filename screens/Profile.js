@@ -236,7 +236,7 @@ class Profile extends React.Component {
           <Text style={styles.bookingText}>Cerrar Sesión</Text>
         </TouchableHighlight>
 
-        <Text style={{ marginTop: 15 }}>Version Beta 0.8</Text>
+        <Text style={{ marginTop: 15 }}>Version Beta 0.9.1</Text>
       </View>
     );
   }

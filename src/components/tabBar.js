@@ -111,7 +111,7 @@ const TabBar = ({ navigation, position }) => {
             source={require("../assets/iconos/bar-bottom/active/circle.png")}
             style={{ width: 25, height: 25 }}
           />
-          <Text style={styles.tabTitleActive}> MEMEBRESÍA</Text>
+          <Text style={styles.tabTitleActive}> MEMBRESÍA</Text>
         </TouchableOpacity>
       ) : (
         <TouchableOpacity
@@ -122,7 +122,7 @@ const TabBar = ({ navigation, position }) => {
             source={require("../assets/iconos/bar-bottom/gray/circle.png")}
             style={{ width: 25, height: 25 }}
           />
-          <Text style={styles.tabTitle}> MEMEBRESÍA</Text>
+          <Text style={styles.tabTitle}> MEMBRESÍA</Text>
         </TouchableOpacity>
       )}
     </View>
