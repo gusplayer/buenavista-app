@@ -127,7 +127,6 @@ export default class Booking extends React.Component {
     const hotelCuponesAPI = await API.getCuponesDisponiblesHotel(
       value.id_Hotel
     );
-    console.warn(hotelCuponesAPI);
 
     this.setState({
       hotelSelected: value,
@@ -197,7 +196,7 @@ export default class Booking extends React.Component {
   setDateInicio(newDate) {
     this.setState({
       chosenDateInicio: newDate,
-      textoFechaFin: "Fecha Fin",
+      textoFechaFin: "Fecha Salida",
       disabledFechaFin: false
     });
   }
@@ -214,10 +213,12 @@ export default class Booking extends React.Component {
     if (this.state.enabledCupon == false) {
       //falta seleccionar el hotel
       this.setState({ messageError: true });
+      this.setState({ loaderButton: false });
     } else {
       if (this.state.chosenDateInicio == "" || this.state.chosenDateFin == "") {
         //Faltan las fechas
         this.setState({ messageMissingDates: true });
+        this.setState({ loaderButton: false });
       } else {
         //Todos los datos estan bien
         // await API.generarReserva(dami, pais, provincia);
@@ -380,7 +381,7 @@ export default class Booking extends React.Component {
                     modalTransparent={false}
                     animationType={"fade"}
                     androidMode={"default"}
-                    placeHolderText="Fecha Inicio"
+                    placeHolderText="Fecha Ingreso"
                     textStyle={{ color: "green" }}
                     placeHolderTextStyle={{
                       color: "#4c4c4c",

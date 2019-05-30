@@ -17,7 +17,7 @@ class Api {
       let token = await AsyncStorage.getItem("userToken");
       USER_TOKEN = token;
     } catch (error) {}
-    //USER_TOKEN = 580914;
+    // USER_TOKEN = 580885;
   };
 
   _retrieveDataMembership = async () => {

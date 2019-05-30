@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  TouchableHighlight
+} from "react-native";
 import HeaderTab from "../src/components/header";
 import {
   Colors,
@@ -134,18 +140,16 @@ export default class HotelDetails extends React.Component {
           {/* <View style={styles.webSiteLink}>
             <Text style={styles.textLink}>Ver mas información del hotel</Text>
           </View> */}
-          <View style={styles.bookingButton}>
-            <Text
-              onPress={() =>
-                navigate("Booking", {
-                  hotel: item
-                })
-              }
-              style={styles.bookingText}
-            >
-              RESERVAR
-            </Text>
-          </View>
+          <TouchableHighlight
+            style={styles.bookingButton}
+            onPress={() =>
+              navigate("Booking", {
+                hotel: item
+              })
+            }
+          >
+            <Text style={styles.bookingText}>RESERVAR</Text>
+          </TouchableHighlight>
         </ScrollView>
       </View>
     );
