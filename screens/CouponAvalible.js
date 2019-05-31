@@ -5,17 +5,15 @@ import {
   View,
   Image,
   ScrollView,
-  AsyncStorage,
-  TouchableHighlight,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import {
   Colors,
   CuponesBlue,
   CuponesGold,
   CuponesOpera,
-  CuponesPremium,
-  Bold
+  CuponesPremium
 } from "../utils/const";
 import API from "../utils/api";
 import Modal from "react-native-modal";
@@ -28,19 +26,19 @@ export default class CouponAvalible extends React.Component {
       isVisible: false,
       cuponList: [],
       loading: true,
-      membership: require("../src/assets/cupones/cupones/BLUE/83270.png")
+      membership:
+        "https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83268.png"
     };
+    this.datainit();
   }
 
-  async componentDidMount() {
+  async datainit() {
     const cuponAPI = await API.getCuponAvalible();
-    this.setState({
-      cuponList: cuponAPI,
-      loading: false
-    });
     let membershipStorage = await API._retrieveDataMembership();
     this.setState({
-      membership: membershipStorage
+      cuponList: cuponAPI,
+      membership: membershipStorage,
+      loading: false
     });
   }
 
@@ -163,6 +161,18 @@ export default class CouponAvalible extends React.Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <View style={styles.container}>
+          <ActivityIndicator
+            size="large"
+            color="#f14b5a"
+            style={{ marginTop: 100 }}
+          />
+          <Text>Cargando Cupones</Text>
+        </View>
+      );
+    }
     return (
       <ScrollView>
         {this.listComponents()}
@@ -176,7 +186,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: "100%",
-    alignItems: "center"
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center"
   },
   bookingButton: {
     width: "100%",

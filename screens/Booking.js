@@ -253,7 +253,7 @@ export default class Booking extends React.Component {
             <Picker
               mode="dropdown"
               style={{ width: undefined }}
-              placeholder="Adultos"
+              placeholder="Niño"
               placeholderStyle={{ color: "#bfc6ea" }}
               placeholderIconColor="#007aff"
               //selectedValue={this.state.selectedKidAge + i}
@@ -309,6 +309,7 @@ export default class Booking extends React.Component {
           ) : (
             <Text style={styles.nameHotel}>
               TE AYUDAMOS A ENCONTRAR TU ALOJAMIENTO IDEAL
+              {this.state.roomSelected}
             </Text>
           )}
         </View>
@@ -351,126 +352,125 @@ export default class Booking extends React.Component {
                 </Item>
               )}
 
-              <Item inlineLabel>
-                <Label style={{ width: "53%" }}>Tipo de habitación</Label>
-                <Picker
-                  mode="dropdown"
-                  enabled={this.state.enabledRoom}
-                  style={{ width: undefined }}
-                  placeholder="Habitación"
-                  placeholderStyle={{ color: "#bfc6ea" }}
-                  placeholderIconColor="#007aff"
-                  selectedValue={this.state.selectedRoom}
-                  onValueChange={this.onValueChangeRoom.bind(this)}
-                >
-                  {this.state.hotelRoomsList.map(v => {
-                    return (
-                      <Picker.Item label={v.thNombre} value={v.haCodigo} />
-                    );
-                  })}
-                </Picker>
-              </Item>
-
-              <View style={styles.dates}>
-                <Item inlineLabel style={{ width: "45%" }}>
-                  <DatePicker
-                    defaultDate={Date.now()}
-                    locale={"es"}
-                    minimumDate={Date.now()}
-                    timeZoneOffsetInMinutes={undefined}
-                    modalTransparent={false}
-                    animationType={"fade"}
-                    androidMode={"default"}
-                    placeHolderText="Fecha Ingreso"
-                    textStyle={{ color: "green" }}
-                    placeHolderTextStyle={{
-                      color: "#4c4c4c",
-                      marginLeft: -10,
-                      paddingLeft: 0
-                    }}
-                    onDateChange={this.setDateInicio}
-                    disabled={false}
-                  />
-                  {/* <Text>
-                    Date: {this.state.chosenDate.toString().substr(4, 12)}
-                  </Text> */}
-                </Item>
-                <Item inlineLabel style={{ width: "45%" }}>
-                  <DatePicker
-                    defaultDate={Date.now() + 172800000}
-                    locale={"es"}
-                    // minimumDate={Date.now() + 172800000}
-                    minimumDate={this.state.chosenDateInicio}
-                    timeZoneOffsetInMinutes={undefined}
-                    modalTransparent={false}
-                    animationType={"fade"}
-                    androidMode={"default"}
-                    placeHolderText={this.state.textoFechaFin}
-                    textStyle={{ color: "green" }}
-                    placeHolderTextStyle={{
-                      color: "#4c4c4c",
-                      marginLeft: -10,
-                      paddingLeft: 0
-                    }}
-                    onDateChange={this.setDateFin}
-                    disabled={false}
-                  />
-                  {/* <Text>
-                    Date: {this.state.chosenDate.toString().substr(4, 12)}
-                  </Text> */}
-                </Item>
-              </View>
-
-              <View picker inlineLabel style={styles.dates}>
-                <Item inlineLabel style={{ width: "48%" }}>
-                  <Label>Adultos</Label>
+              {this.state.enabledCupon == false ? (
+                <View />
+              ) : (
+                <Item inlineLabel>
+                  <Label style={{ width: "53%" }}>Tipo de habitación</Label>
                   <Picker
                     mode="dropdown"
+                    enabled={this.state.enabledRoom}
                     style={{ width: undefined }}
-                    placeholder="Adultos"
+                    placeholder="Habitación"
                     placeholderStyle={{ color: "#bfc6ea" }}
                     placeholderIconColor="#007aff"
-                    selectedValue={this.state.selectedAdults}
-                    onValueChange={this.onValueChangeAdults.bind(this)}
+                    selectedValue={this.state.selectedRoom}
+                    onValueChange={this.onValueChangeRoom.bind(this)}
                   >
-                    <Picker.Item label="1" value="1" />
-                    <Picker.Item label="2" value="2" />
-                    <Picker.Item label="3" value="3" />
-                    <Picker.Item label="4" value="4" />
-                    <Picker.Item label="5" value="5" />
-                    <Picker.Item label="6" value="6" />
-                    <Picker.Item label="7" value="7" />
-                    <Picker.Item label="8" value="8" />
-                    <Picker.Item label="9" value="9" />
-                    <Picker.Item label="10" value="10" />
+                    {this.state.hotelRoomsList.map(v => {
+                      return (
+                        <Picker.Item label={v.thNombre} value={v.haCodigo} />
+                      );
+                    })}
                   </Picker>
                 </Item>
+              )}
 
-                <Item picker inlineLabel style={{ width: "45%" }}>
-                  <Label>Niños</Label>
-                  <Picker
-                    mode="dropdown"
-                    style={{ width: undefined }}
-                    placeholder="Niños"
-                    placeholderStyle={{ color: "#bfc6ea" }}
-                    placeholderIconColor="#007aff"
-                    selectedValue={this.state.selectedKids}
-                    onValueChange={this.onValueChangeKids.bind(this)}
-                  >
-                    <Picker.Item label="0" value="0" />
-                    <Picker.Item label="1" value="1" />
-                    <Picker.Item label="2" value="2" />
-                    <Picker.Item label="3" value="3" />
-                    <Picker.Item label="4" value="4" />
-                    {/* <Picker.Item label="5" value="5" />
-                    <Picker.Item label="6" value="6" />
-                    <Picker.Item label="7" value="7" />
-                    <Picker.Item label="8" value="8" />
-                    <Picker.Item label="9" value="9" />
-                    <Picker.Item label="10" value="10" /> */}
-                  </Picker>
-                </Item>
-              </View>
+              {this.state.selectedRoom == "" ? (
+                <View />
+              ) : (
+                <View style={styles.dates}>
+                  <Item inlineLabel style={{ width: "45%" }}>
+                    <DatePicker
+                      defaultDate={Date.now()}
+                      locale={"es"}
+                      minimumDate={Date.now()}
+                      timeZoneOffsetInMinutes={undefined}
+                      modalTransparent={false}
+                      animationType={"fade"}
+                      androidMode={"default"}
+                      placeHolderText="Fecha Ingreso"
+                      textStyle={{ color: "green" }}
+                      placeHolderTextStyle={{
+                        color: "#4c4c4c",
+                        marginLeft: -10,
+                        paddingLeft: 0
+                      }}
+                      onDateChange={this.setDateInicio}
+                      disabled={false}
+                    />
+                  </Item>
+                  <Item inlineLabel style={{ width: "45%" }}>
+                    <DatePicker
+                      defaultDate={Date.now() + 172800000}
+                      locale={"es"}
+                      minimumDate={this.state.chosenDateInicio}
+                      timeZoneOffsetInMinutes={undefined}
+                      modalTransparent={false}
+                      animationType={"fade"}
+                      androidMode={"default"}
+                      placeHolderText={this.state.textoFechaFin}
+                      textStyle={{ color: "green" }}
+                      placeHolderTextStyle={{
+                        color: "#4c4c4c",
+                        marginLeft: -10,
+                        paddingLeft: 0
+                      }}
+                      onDateChange={this.setDateFin}
+                      disabled={false}
+                    />
+                  </Item>
+                </View>
+              )}
+
+              {this.state.chosenDateFin == "" ? (
+                <View />
+              ) : (
+                <View picker inlineLabel style={styles.dates}>
+                  <Item inlineLabel style={{ width: "48%" }}>
+                    <Label>Adultos</Label>
+                    <Picker
+                      mode="dropdown"
+                      style={{ width: undefined }}
+                      placeholder="Adultos"
+                      placeholderStyle={{ color: "#bfc6ea" }}
+                      placeholderIconColor="#007aff"
+                      selectedValue={this.state.selectedAdults}
+                      onValueChange={this.onValueChangeAdults.bind(this)}
+                    >
+                      <Picker.Item label="1" value="1" />
+                      <Picker.Item label="2" value="2" />
+                      <Picker.Item label="3" value="3" />
+                      <Picker.Item label="4" value="4" />
+                      <Picker.Item label="5" value="5" />
+                      <Picker.Item label="6" value="6" />
+                      <Picker.Item label="7" value="7" />
+                      <Picker.Item label="8" value="8" />
+                      <Picker.Item label="9" value="9" />
+                      <Picker.Item label="10" value="10" />
+                    </Picker>
+                  </Item>
+
+                  <Item picker inlineLabel style={{ width: "45%" }}>
+                    <Label>Niños</Label>
+                    <Picker
+                      mode="dropdown"
+                      style={{ width: undefined }}
+                      placeholder="Niños"
+                      placeholderStyle={{ color: "#bfc6ea" }}
+                      placeholderIconColor="#007aff"
+                      selectedValue={this.state.selectedKids}
+                      onValueChange={this.onValueChangeKids.bind(this)}
+                    >
+                      <Picker.Item label="0" value="0" />
+                      <Picker.Item label="1" value="1" />
+                      <Picker.Item label="2" value="2" />
+                      <Picker.Item label="3" value="3" />
+                      <Picker.Item label="4" value="4" />
+                    </Picker>
+                  </Item>
+                </View>
+              )}
 
               {this.state.selectedKids > 0 && (
                 <View picker inlineLabel style={styles.kidsTextContainer}>
@@ -483,25 +483,31 @@ export default class Booking extends React.Component {
                 {myloop}
               </View>
 
-              <View picker inlineLabel style={styles.dates}>
-                <Item inlineLabel style={{ width: "100%" }}>
-                  <Label style={{ width: "52%" }}>Aplicar cupón</Label>
-                  <Picker
-                    mode="dropdown"
-                    enabled={this.state.enabledCupon}
-                    style={{ width: undefined }}
-                    placeholder="Niños"
-                    placeholderStyle={{ color: "#bfc6ea" }}
-                    placeholderIconColor="#007aff"
-                    selectedValue={this.state.selectedCupon}
-                    onValueChange={this.onValueChangeCupon.bind(this)}
-                  >
-                    {this.state.hotelCuponesList.map(v => {
-                      return <Picker.Item label={v.Cupon} value={v.id_Cupon} />;
-                    })}
-                  </Picker>
-                </Item>
-              </View>
+              {this.state.chosenDateFin == "" ? (
+                <View />
+              ) : (
+                <View picker inlineLabel style={styles.dates}>
+                  <Item inlineLabel style={{ width: "100%" }}>
+                    <Label style={{ width: "52%" }}>Aplicar cupón</Label>
+                    <Picker
+                      mode="dropdown"
+                      enabled={this.state.enabledCupon}
+                      style={{ width: undefined }}
+                      placeholder="Niños"
+                      placeholderStyle={{ color: "#bfc6ea" }}
+                      placeholderIconColor="#007aff"
+                      selectedValue={this.state.selectedCupon}
+                      onValueChange={this.onValueChangeCupon.bind(this)}
+                    >
+                      {this.state.hotelCuponesList.map(v => {
+                        return (
+                          <Picker.Item label={v.Cupon} value={v.id_Cupon} />
+                        );
+                      })}
+                    </Picker>
+                  </Item>
+                </View>
+              )}
             </View>
           </View>
 

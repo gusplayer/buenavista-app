@@ -25,7 +25,8 @@ export default class Benefits extends React.Component {
       cuponList: [],
       loading: true,
       isVisible: false,
-      membership: require("../src/assets/cupones/cupones/BLUE/83270.png")
+      membership:
+        "https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83268.png"
     };
   }
 

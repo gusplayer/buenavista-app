@@ -36,9 +36,10 @@ class Profile extends React.Component {
       saveChangesViews: false,
       dataExpiracion: ""
     };
+    this.dataInit();
   }
 
-  async componentDidMount() {
+  async dataInit() {
     const profileAPI = await API.getProfile();
     const imageProfileAPI = await API.getImageProfile();
     this.fitDataFormat(profileAPI[0].faFechaCaducidad);
@@ -100,10 +101,19 @@ class Profile extends React.Component {
     ImagePicker.launchImageLibrary(options, response => {
       if (response.didCancel) {
         console.warn("User cancelled image picker");
+        this.setState({
+          loadingPhoto: false
+        });
       } else if (response.error) {
         console.warn("ImagePicker Error: ", response.error);
+        this.setState({
+          loadingPhoto: false
+        });
       } else if (response.customButton) {
         console.warn("User tapped custom button: ", response.customButton);
+        this.setState({
+          loadingPhoto: false
+        });
       } else {
         const base64img = "data:image/jpeg;base64," + response.data;
         this.setState({
@@ -236,7 +246,7 @@ class Profile extends React.Component {
           <Text style={styles.bookingText}>Cerrar Sesión</Text>
         </TouchableHighlight>
 
-        <Text style={{ marginTop: 15 }}>Version Beta 0.10.0</Text>
+        <Text style={{ marginTop: 15 }}>Version Beta 0.11.0</Text>
       </View>
     );
   }

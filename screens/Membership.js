@@ -1,5 +1,12 @@
 import React from "react";
-import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ScrollView,
+  Image,
+  ActivityIndicator
+} from "react-native";
 import { Colors, Membresias } from "../utils/const";
 import { Container, Tab, Tabs, TabHeading } from "native-base";
 import TabBar from "../src/components/tabBar";
@@ -13,15 +20,18 @@ export default class Membreship extends React.Component {
   constructor() {
     super();
     this.state = {
-      membership: require("../src/assets/cupones/cupones/BLUE/83270.png")
+      loading: true,
+      membership:
+        "https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83268.png"
     };
+    this.dataInit();
   }
 
-  async componentDidMount() {
+  async dataInit() {
     let membershipStorage = await API._retrieveDataMembership();
-
     this.setState({
-      membership: membershipStorage
+      membership: membershipStorage,
+      loading: false
     });
   }
 
@@ -29,6 +39,17 @@ export default class Membreship extends React.Component {
     const { navigate } = this.props.navigation;
     const leftHeader = { data: false };
     const rigthHeader = { data: false };
+    if (this.state.loading) {
+      return (
+        <View style={styles.container}>
+          <ActivityIndicator
+            size="large"
+            color="gray"
+            style={{ marginTop: 100 }}
+          />
+        </View>
+      );
+    }
 
     return (
       <Container>

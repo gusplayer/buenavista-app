@@ -23,7 +23,8 @@ export default class HotelDetails extends React.Component {
     super();
     this.state = {
       hotelCuponesList: [],
-      membership: require("../src/assets/cupones/cupones/BLUE/83270.png")
+      membership:
+        "https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83268.png"
     };
   }
 
@@ -137,9 +138,7 @@ export default class HotelDetails extends React.Component {
               })}
             </View>
           </View>
-          {/* <View style={styles.webSiteLink}>
-            <Text style={styles.textLink}>Ver mas información del hotel</Text>
-          </View> */}
+
           <TouchableHighlight
             style={styles.bookingButton}
             onPress={() =>

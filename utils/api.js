@@ -13,11 +13,11 @@ class Api {
   };
 
   _retrieveData = async () => {
-    try {
-      let token = await AsyncStorage.getItem("userToken");
-      USER_TOKEN = token;
-    } catch (error) {}
-    // USER_TOKEN = 580885;
+    // try {
+    //   let token = await AsyncStorage.getItem("userToken");
+    //   USER_TOKEN = token;
+    // } catch (error) {}
+    USER_TOKEN = 580885;
   };
 
   _retrieveDataMembership = async () => {
@@ -27,7 +27,7 @@ class Api {
       .then(response => {
         return response.data[0].TipoProducto;
       })
-      .catch(error => error);
+      .catch(error => console.warn(error));
     return membresia;
   };
 

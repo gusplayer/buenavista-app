@@ -15,29 +15,89 @@ export const Colors = {
 };
 
 export const CuponesBlue = {
-  1: require(`../src/assets/cupones/cupones/BLUE/1.png`),
-  2: require("../src/assets/cupones/cupones/BLUE/2.png"),
-  3: require("../src/assets/cupones/cupones/BLUE/3.png"),
-  4: require("../src/assets/cupones/cupones/BLUE/4.png"),
-  5: require("../src/assets/cupones/cupones/BLUE/5.png"),
-  83266: require("../src/assets/cupones/cupones/BLUE/83266.png"),
-  83267: require("../src/assets/cupones/cupones/BLUE/83267.png"),
-  83268: require("../src/assets/cupones/cupones/BLUE/83268.png"),
-  83269: require("../src/assets/cupones/cupones/BLUE/83269.png"),
-  83270: require("../src/assets/cupones/cupones/BLUE/83270.png")
+  1: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559332868/cupones/blue/1.png"
+  },
+  2: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559332868/cupones/blue/2.png"
+  },
+  3: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559332868/cupones/blue/3.png"
+  },
+  4: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559332868/cupones/blue/4.png"
+  },
+  5: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559332868/cupones/blue/5.png"
+  },
+  83266: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83266.png"
+  },
+  83267: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83267.png"
+  },
+  83268: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83267.png"
+  },
+  83269: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83267.png"
+  },
+  83270: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83267.png"
+  }
 };
 
 export const IconosCuponesBlue = {
-  1: require(`../src/assets/cupones/iconoscupones/BLUE/1.png`),
-  2: require("../src/assets/cupones/iconoscupones/BLUE/2.png"),
-  3: require("../src/assets/cupones/iconoscupones/BLUE/3.png"),
-  4: require("../src/assets/cupones/iconoscupones/BLUE/4.png"),
-  5: require("../src/assets/cupones/iconoscupones/BLUE/5.png"),
-  83266: require("../src/assets/cupones/iconoscupones/BLUE/83266.png"),
-  83267: require("../src/assets/cupones/iconoscupones/BLUE/83267.png"),
-  83268: require("../src/assets/cupones/iconoscupones/BLUE/83268.png"),
-  83269: require("../src/assets/cupones/iconoscupones/BLUE/83269.png"),
-  83270: require("../src/assets/cupones/iconoscupones/BLUE/83270.png")
+  1: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333762/iconoscupones/blue/1.png"
+  },
+  2: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333762/iconoscupones/blue/2.png"
+  },
+  3: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333762/iconoscupones/blue/3.png"
+  },
+  4: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333762/iconoscupones/blue/4.png"
+  },
+  5: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333762/iconoscupones/blue/5.png"
+  },
+  83266: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333762/iconoscupones/blue/83266.png"
+  },
+  83267: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333762/iconoscupones/blue/83267.png"
+  },
+  83268: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333762/iconoscupones/blue/83268.png"
+  },
+  83269: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333762/iconoscupones/blue/83269.png"
+  },
+  83270: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333762/iconoscupones/blue/83270.png"
+  }
 };
 
 export const CuponesGold = {
@@ -119,8 +179,20 @@ export const IconosCuponesPremium = {
 };
 
 export const Membresias = {
-  BLUE: require(`../src/assets/membresias/BLUE.png`),
-  OPERA: require("../src/assets/membresias/OPERA.png"),
-  GOLD: require("../src/assets/membresias/GOLD.png"),
-  PREMIUM: require("../src/assets/membresias/PREMIUM.png")
+  BLUE: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333802/membresias/blue.png"
+  },
+  OPERA: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333802/membresias/opera.png"
+  },
+  GOLD: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333802/membresias/gold.png"
+  },
+  PREMIUM: {
+    uri:
+      "https://res.cloudinary.com/komercialatam/image/upload/v1559333802/membresias/premium.png"
+  }
 };

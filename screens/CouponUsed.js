@@ -5,8 +5,8 @@ import {
   View,
   Image,
   ScrollView,
-  AsyncStorage,
-  TouchableOpacity
+  TouchableOpacity,
+  ActivityIndicator
 } from "react-native";
 import {
   Colors,
@@ -25,19 +25,19 @@ export default class CouponUsed extends React.Component {
       cuponList: [],
       loading: true,
       isVisible: false,
-      membership: require("../src/assets/cupones/cupones/BLUE/83270.png")
+      membership:
+        "https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83268.png"
     };
+    this.dataInit();
   }
 
-  async componentDidMount() {
+  async dataInit() {
     const cuponAPI = await API.getCuponUsed();
-    this.setState({
-      cuponList: cuponAPI,
-      loading: false
-    });
     let membershipStorage = await API._retrieveDataMembership();
     this.setState({
-      membership: membershipStorage
+      cuponList: cuponAPI,
+      membership: membershipStorage,
+      loading: false
     });
   }
 
@@ -157,6 +157,18 @@ export default class CouponUsed extends React.Component {
   }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <View style={styles.container}>
+          <ActivityIndicator
+            size="large"
+            color="#f14b5a"
+            style={{ marginTop: 100 }}
+          />
+          <Text>Cargando Cupones</Text>
+        </View>
+      );
+    }
     return (
       <ScrollView>
         {this.listComponents()}
