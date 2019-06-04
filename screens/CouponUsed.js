@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,16 +7,17 @@ import {
   ScrollView,
   TouchableOpacity,
   ActivityIndicator
-} from "react-native";
+} from 'react-native';
 import {
   Colors,
   CuponesBlue,
   CuponesGold,
   CuponesOpera,
   CuponesPremium
-} from "../utils/const";
-import API from "../utils/api";
-import Modal from "react-native-modal";
+} from '../utils/const';
+import API from '../utils/api';
+import Modal from 'react-native-modal';
+import FastImage from 'react-native-fast-image';
 
 export default class CouponUsed extends React.Component {
   constructor() {
@@ -26,7 +27,7 @@ export default class CouponUsed extends React.Component {
       loading: true,
       isVisible: false,
       membership:
-        "https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83268.png"
+        'https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83268.png'
     };
     this.dataInit();
   }
@@ -56,12 +57,12 @@ export default class CouponUsed extends React.Component {
         <View
           style={{
             padding: 15,
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center"
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center'
           }}
         >
-          <Text style={{ padding: 5, fontWeight: "900", fontSize: 18 }}>
+          <Text style={{ padding: 5, fontWeight: '900', fontSize: 18 }}>
             Detalle cupón
           </Text>
           <ScrollView
@@ -71,7 +72,7 @@ export default class CouponUsed extends React.Component {
             }}
           >
             <Text
-              style={{ textAlign: "center", fontSize: 16, marginBottom: 15 }}
+              style={{ textAlign: 'center', fontSize: 16, marginBottom: 15 }}
             >
               {this.state.textCupon}
             </Text>
@@ -99,47 +100,51 @@ export default class CouponUsed extends React.Component {
           </View>
           <View style={styles.itemList}>
             <View style={styles.containImage}>
-              {this.state.membership == "BLUE" && (
+              {this.state.membership == 'BLUE' && (
                 <TouchableOpacity
                   style={styles.imagePress}
                   onPress={() => this.onpressImage(x.Descripcion)}
                 >
-                  <Image
+                  <FastImage
                     style={styles.imageCupon}
                     source={CuponesBlue[x.id_Cupon]}
+                    resizeMode={FastImage.resizeMode.contain}
                   />
                 </TouchableOpacity>
               )}
-              {this.state.membership == "GOLD" && (
+              {this.state.membership == 'GOLD' && (
                 <TouchableOpacity
                   style={styles.imagePress}
                   onPress={() => this.onpressImage(x.Descripcion)}
                 >
-                  <Image
+                  <FastImage
                     style={styles.imageCupon}
                     source={CuponesGold[x.id_Cupon]}
+                    resizeMode={FastImage.resizeMode.contain}
                   />
                 </TouchableOpacity>
               )}
-              {this.state.membership == "OPERA" && (
+              {this.state.membership == 'OPERA' && (
                 <TouchableOpacity
                   style={styles.imagePress}
                   onPress={() => this.onpressImage(x.Descripcion)}
                 >
-                  <Image
+                  <FastImage
                     style={styles.imageCupon}
                     source={CuponesOpera[x.id_Cupon]}
+                    resizeMode={FastImage.resizeMode.contain}
                   />
                 </TouchableOpacity>
               )}
-              {this.state.membership == "PREMIUM" && (
+              {this.state.membership == 'PREMIUM' && (
                 <TouchableOpacity
                   style={styles.imagePress}
                   onPress={() => this.onpressImage(x.Descripcion)}
                 >
-                  <Image
+                  <FastImage
                     style={styles.imageCupon}
                     source={CuponesPremium[x.id_Cupon]}
+                    resizeMode={FastImage.resizeMode.contain}
                   />
                 </TouchableOpacity>
               )}
@@ -181,60 +186,60 @@ export default class CouponUsed extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
-    alignItems: "center"
+    width: '100%',
+    alignItems: 'center'
   },
   bookingButton: {
-    width: "100%",
+    width: '100%',
     height: 35,
     backgroundColor: Colors.green,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   bookingText: {
-    color: "white",
-    fontWeight: "300",
+    color: 'white',
+    fontWeight: '300',
     fontSize: 14
   },
   itemList: {
-    width: "80%"
+    width: '80%'
   },
   containImage: {
     height: 180
   },
   textCupon: {
-    color: "black",
+    color: 'black',
     marginBottom: 20,
-    textAlign: "center"
+    textAlign: 'center'
   },
   imageCupon: {
     flex: 1,
-    width: "100%",
-    height: "100%",
-    resizeMode: "contain"
+    width: '100%',
+    height: '100%',
+    resizeMode: 'contain'
   },
   imagePress: {
-    width: "100%",
-    height: "100%"
+    width: '100%',
+    height: '100%'
   },
   modalContent: {
-    flexDirection: "column",
-    backgroundColor: "white",
+    flexDirection: 'column',
+    backgroundColor: 'white',
     borderRadius: 8,
     height: 300,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   modalIcon: {
-    color: "gray",
+    color: 'gray',
     fontSize: 35,
     marginBottom: 10,
     marginTop: 10
   },
   butonClose: {
-    alignItems: "flex-end",
-    justifyContent: "flex-end",
-    alignContent: "flex-end",
-    textAlign: "right"
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    alignContent: 'flex-end',
+    textAlign: 'right'
   }
 });

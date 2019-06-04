@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,12 +9,13 @@ import {
   TouchableHighlight,
   Image,
   ActivityIndicator
-} from "react-native";
-import HeaderTab from "../src/components/header";
-import TabBar from "../src/components/tabBar";
-import { Colors } from "../utils/const";
-import { Container } from "native-base";
-import API from "../utils/api";
+} from 'react-native';
+import HeaderTab from '../src/components/header';
+import TabBar from '../src/components/tabBar';
+import { Colors } from '../utils/const';
+import { Container } from 'native-base';
+import API from '../utils/api';
+import FastImage from 'react-native-fast-image';
 
 export default class HotelList extends React.Component {
   async componentDidMount() {
@@ -56,17 +57,18 @@ export default class HotelList extends React.Component {
         renderItem={({ item }) => (
           <TouchableHighlight
             onPress={() =>
-              navigate("HotelDetails", {
+              navigate('HotelDetails', {
                 hotel: item
               })
             }
           >
             <View style={styles.itemList}>
-              {item.imagen1 != "" && (
+              {item.imagen1 != '' && (
                 <View style={styles.infoProduct}>
-                  <Image
+                  <FastImage
                     style={styles.imageHotel}
                     source={{ uri: item.imagen1 }}
+                    // resizeMode={FastImage.resizeMode.contain}
                   />
 
                   <View style={styles.itemListText}>
@@ -99,7 +101,7 @@ export default class HotelList extends React.Component {
     const { navigate } = this.props.navigation;
     const leftHeader = { data: false };
     const propsFilterCity = this.props.navigation.state.params;
-    const rigthHeader = { data: true, icon: "sliders", path: "Filter" };
+    const rigthHeader = { data: true, icon: 'sliders', path: 'Filter' };
     if (this.state.loading) {
       return (
         <View style={styles.container}>
@@ -130,60 +132,61 @@ export default class HotelList extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   body: {
     flex: 1,
-    backgroundColor: "#F5F5F5"
+    backgroundColor: '#F5F5F5'
   },
   flatList: {
-    width: "100%",
+    width: '100%',
     marginTop: 10
   },
   itemList: {
-    width: "100%",
-    flexDirection: "column",
+    width: '100%',
+    flexDirection: 'column',
     marginTop: 5,
-    alignItems: "center"
+    alignItems: 'center'
   },
   infoProduct: {
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    width: "90%",
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    width: '90%',
     height: 300,
     elevation: 3,
     marginBottom: 15
   },
   itemListText: {
-    justifyContent: "flex-start",
-    backgroundColor: "white",
-    width: "100%",
+    justifyContent: 'flex-start',
+    backgroundColor: 'white',
+    width: '100%',
     padding: 12,
     elevation: 2
   },
   imageHotel: {
     flex: 1,
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover"
+    width: '100%',
+    height: '100%',
+    //    resizeMode: 'cover',
+    marginBottom: -14
   },
   nameHotel: {
-    fontWeight: "600",
-    color: "black",
+    fontWeight: '600',
+    color: 'black',
     fontSize: 17
   },
   nameCity: {
-    fontWeight: "300",
-    color: "black",
+    fontWeight: '300',
+    color: 'black',
     fontSize: 13
   },
   priceHotel: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    width: "100%",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
     padding: 12,
     paddingVertical: 5,
     backgroundColor: Colors.red,
@@ -192,22 +195,22 @@ const styles = StyleSheet.create({
     marginTop: -2
   },
   nitePriceText: {
-    color: "white",
-    fontWeight: "600",
+    color: 'white',
+    fontWeight: '600',
     fontSize: 16
   },
   preciosContent: {
-    alignItems: "flex-end"
+    alignItems: 'flex-end'
   },
   precioText: {
     fontSize: 14,
-    fontWeight: "400",
-    color: "white",
-    textDecorationLine: "line-through"
+    fontWeight: '400',
+    color: 'white',
+    textDecorationLine: 'line-through'
   },
   precioBuenavista: {
-    color: "white",
+    color: 'white',
     fontSize: 22,
-    fontWeight: "500"
+    fontWeight: '500'
   }
 });

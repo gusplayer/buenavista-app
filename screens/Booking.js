@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -7,14 +7,14 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Image
-} from "react-native";
-import HeaderTab from "../src/components/header";
-import TabBar from "../src/components/tabBar";
-import { Colors, Bold } from "../utils/const";
-import { Item, Input, Label, Container, DatePicker, Picker } from "native-base";
-import API from "../utils/api";
-import Modal from "react-native-modal";
-import Moment from "moment";
+} from 'react-native';
+import HeaderTab from '../src/components/header';
+import TabBar from '../src/components/tabBar';
+import { Colors, Bold } from '../utils/const';
+import { Item, Input, Label, Container, DatePicker, Picker } from 'native-base';
+import API from '../utils/api';
+import Modal from 'react-native-modal';
+import Moment from 'moment';
 
 export default class Booking extends React.Component {
   constructor(props) {
@@ -26,29 +26,31 @@ export default class Booking extends React.Component {
       selectedKidAge3: 0,
       selectedKidAge4: 0,
       selectedKidAge5: 0,
-      edades: ["0", "0", "0", "0"],
+      edades: ['0', '0', '0', '0'],
       selectedAdults: 1,
       selectedHotel: 0,
       selectedCupon: 0,
       selectedRoom: 0,
+      messageMissingDatesText: '',
       chosenDateInicio: Date.now(),
-      chosenDateFin: "",
+      chosenDateFin: '',
       loaderBoton: false,
       hotelList: [],
       hotelRoomsList: [],
       hotelCuponesList: [],
-      hotelSelected: "",
-      roomSelected: "",
+      hotelSelected: '',
+      // roomSelected: '',
       loading: true,
       enabledRoom: false,
       enabledCupon: false,
       messageError: false,
       messageMissingDates: false,
+      messageMissingRoom: false,
       loadingHeader: false,
       isModalVisible: false,
-      idHotelParams: "",
+      idHotelParams: '',
       disabledFechaFin: true,
-      textoFechaFin: "-",
+      textoFechaFin: '-',
       loadingButton: false
     };
     this.setDateInicio = this.setDateInicio.bind(this);
@@ -77,18 +79,18 @@ export default class Booking extends React.Component {
         <View
           style={{
             padding: 28,
-            justifyContent: "center",
-            alignItems: "center",
-            textAlign: "center"
+            justifyContent: 'center',
+            alignItems: 'center',
+            textAlign: 'center'
           }}
         >
           <Image
-            source={require("../src/assets/Logo.png")}
+            source={require('../src/assets/Logo.png')}
             style={{ width: 150, height: 20, marginLeft: -15 }}
           />
           <Text
             style={{
-              textAlign: "center",
+              textAlign: 'center',
               fontSize: 16,
               marginBottom: 15,
               marginTop: 20
@@ -100,7 +102,7 @@ export default class Booking extends React.Component {
             style={styles.linkForgetModal}
             onPress={() => {
               this.setState({ isModalVisible: false });
-              navigate("HotelList");
+              navigate('HotelList');
             }}
           >
             <Bold>Continuar</Bold>
@@ -185,7 +187,8 @@ export default class Booking extends React.Component {
   }
   onValueChangeRoom(value) {
     this.setState({
-      selectedRoom: value
+      selectedRoom: value,
+      messageMissingDates: false
     });
   }
   onValueChangeCupon(value) {
@@ -196,28 +199,50 @@ export default class Booking extends React.Component {
   setDateInicio(newDate) {
     this.setState({
       chosenDateInicio: newDate,
-      textoFechaFin: "Fecha Salida",
+      textoFechaFin: 'Fecha Salida',
       disabledFechaFin: false
     });
   }
 
   setDateFin(newDate) {
-    this.setState({ chosenDateFin: newDate });
+    this.setState({
+      chosenDateFin: newDate,
+      messageMissingDates: false
+    });
   }
 
   onClickSendBooking = async () => {
     this.setState({ loaderButton: true });
-    let fechaInicio = Moment(this.state.chosenDateInicio).format("L");
-    let fechaFin = Moment(this.state.chosenDateFin).format("L");
+    let fechaInicio = Moment(this.state.chosenDateInicio).format('L');
+    let fechaFin = Moment(this.state.chosenDateFin).format('L');
 
     if (this.state.enabledCupon == false) {
       //falta seleccionar el hotel
       this.setState({ messageError: true });
       this.setState({ loaderButton: false });
     } else {
-      if (this.state.chosenDateInicio == "" || this.state.chosenDateFin == "") {
-        //Faltan las fechas
+      if (this.state.selectedRoom == 0) {
         this.setState({ messageMissingDates: true });
+        this.setState({
+          messageMissingDatesText: 'Por favor selecciona una habitación'
+        });
+        this.setState({ loaderButton: false });
+      } else if (
+        this.state.chosenDateInicio == '' ||
+        this.state.chosenDateFin == ''
+      ) {
+        //Faltan las fechas
+
+        this.setState({ messageMissingDates: true });
+        this.setState({
+          messageMissingDatesText: 'Por favor selecciona las fechas'
+        });
+        this.setState({ loaderButton: false });
+      } else if (this.state.selectedCupon == 0) {
+        this.setState({ messageMissingDates: true });
+        this.setState({
+          messageMissingDatesText: 'Por favor selecciona un cupón'
+        });
         this.setState({ loaderButton: false });
       } else {
         //Todos los datos estan bien
@@ -247,14 +272,14 @@ export default class Booking extends React.Component {
     if (this.state.selectedKids > 0) {
       for (let i = 0; i < this.state.selectedKids; i++) {
         myloop.push(
-          <Item style={{ width: "100%", justifyContent: "space-between" }}>
-            <Label style={{ width: "52%" }}>Niño {i + 1}</Label>
+          <Item style={{ width: '100%', justifyContent: 'space-between' }}>
+            <Label style={{ width: '52%' }}>Niño {i + 1}</Label>
 
             <Picker
               mode="dropdown"
               style={{ width: undefined }}
               placeholder="Niño"
-              placeholderStyle={{ color: "#bfc6ea" }}
+              placeholderStyle={{ color: '#bfc6ea' }}
               placeholderIconColor="#007aff"
               //selectedValue={this.state.selectedKidAge + i}
               selectedValue={this.state.edades[i]}
@@ -298,7 +323,7 @@ export default class Booking extends React.Component {
         />
         <View style={styles.redSeparator}>
           {this.state.loadingHeader ? (
-            <View style={{ flexDirection: "row" }}>
+            <View style={{ flexDirection: 'row' }}>
               <ActivityIndicator
                 size="small"
                 color="#fff"
@@ -315,7 +340,7 @@ export default class Booking extends React.Component {
         </View>
 
         <ScrollView style={styles.body}>
-          <View style={{ alignItems: "center" }}>
+          <View style={{ alignItems: 'center' }}>
             <View style={styles.form}>
               {/* <Item inlineLabel>
                 <Label>Selecciona el país</Label>
@@ -326,14 +351,14 @@ export default class Booking extends React.Component {
                 <Input />
               </Item> */}
 
-              {this.state.idHotelParams == "" ? (
+              {this.state.idHotelParams == '' ? (
                 <Item inlineLabel>
-                  <Label style={{ width: "53%" }}>Hotel a reservar</Label>
+                  <Label style={{ width: '53%' }}>Hotel a reservar</Label>
                   <Picker
                     mode="dropdown"
                     style={{ width: undefined }}
                     placeholder="Hotel"
-                    placeholderStyle={{ color: "#bfc6ea" }}
+                    placeholderStyle={{ color: '#bfc6ea' }}
                     placeholderIconColor="#007aff"
                     selectedValue={this.state.hotelSelected}
                     onValueChange={this.onValueChangeHotel.bind(this)}
@@ -346,7 +371,7 @@ export default class Booking extends React.Component {
                 </Item>
               ) : (
                 <Item inlineLabel>
-                  <Label style={{ width: "100%" }}>
+                  <Label style={{ width: '100%' }}>
                     {this.state.idHotelParams.Hotel}
                   </Label>
                 </Item>
@@ -356,17 +381,19 @@ export default class Booking extends React.Component {
                 <View />
               ) : (
                 <Item inlineLabel>
-                  <Label style={{ width: "53%" }}>Tipo de habitación</Label>
+                  <Label style={{ width: '53%' }}>Tipo de habitación</Label>
                   <Picker
                     mode="dropdown"
                     enabled={this.state.enabledRoom}
                     style={{ width: undefined }}
                     placeholder="Habitación"
-                    placeholderStyle={{ color: "#bfc6ea" }}
+                    placeholderStyle={{ color: '#bfc6ea' }}
                     placeholderIconColor="#007aff"
                     selectedValue={this.state.selectedRoom}
                     onValueChange={this.onValueChangeRoom.bind(this)}
                   >
+                    <Picker.Item label="Seleccionar Habitación" value=" " />
+
                     {this.state.hotelRoomsList.map(v => {
                       return (
                         <Picker.Item label={v.thNombre} value={v.haCodigo} />
@@ -376,23 +403,23 @@ export default class Booking extends React.Component {
                 </Item>
               )}
 
-              {this.state.selectedRoom == "" ? (
+              {this.state.selectedRoom == '' ? (
                 <View />
               ) : (
                 <View style={styles.dates}>
-                  <Item inlineLabel style={{ width: "45%" }}>
+                  <Item inlineLabel style={{ width: '45%' }}>
                     <DatePicker
                       defaultDate={Date.now()}
-                      locale={"es"}
+                      locale={'es'}
                       minimumDate={Date.now()}
                       timeZoneOffsetInMinutes={undefined}
                       modalTransparent={false}
-                      animationType={"fade"}
-                      androidMode={"default"}
+                      animationType={'fade'}
+                      androidMode={'default'}
                       placeHolderText="Fecha Ingreso"
-                      textStyle={{ color: "green" }}
+                      textStyle={{ color: 'green' }}
                       placeHolderTextStyle={{
-                        color: "#4c4c4c",
+                        color: '#4c4c4c',
                         marginLeft: -10,
                         paddingLeft: 0
                       }}
@@ -400,19 +427,19 @@ export default class Booking extends React.Component {
                       disabled={false}
                     />
                   </Item>
-                  <Item inlineLabel style={{ width: "45%" }}>
+                  <Item inlineLabel style={{ width: '45%' }}>
                     <DatePicker
                       defaultDate={Date.now() + 172800000}
-                      locale={"es"}
+                      locale={'es'}
                       minimumDate={this.state.chosenDateInicio}
                       timeZoneOffsetInMinutes={undefined}
                       modalTransparent={false}
-                      animationType={"fade"}
-                      androidMode={"default"}
+                      animationType={'fade'}
+                      androidMode={'default'}
                       placeHolderText={this.state.textoFechaFin}
-                      textStyle={{ color: "green" }}
+                      textStyle={{ color: 'green' }}
                       placeHolderTextStyle={{
-                        color: "#4c4c4c",
+                        color: '#4c4c4c',
                         marginLeft: -10,
                         paddingLeft: 0
                       }}
@@ -423,17 +450,17 @@ export default class Booking extends React.Component {
                 </View>
               )}
 
-              {this.state.chosenDateFin == "" ? (
+              {this.state.chosenDateFin == '' ? (
                 <View />
               ) : (
                 <View picker inlineLabel style={styles.dates}>
-                  <Item inlineLabel style={{ width: "48%" }}>
+                  <Item inlineLabel style={{ width: '48%' }}>
                     <Label>Adultos</Label>
                     <Picker
                       mode="dropdown"
                       style={{ width: undefined }}
                       placeholder="Adultos"
-                      placeholderStyle={{ color: "#bfc6ea" }}
+                      placeholderStyle={{ color: '#bfc6ea' }}
                       placeholderIconColor="#007aff"
                       selectedValue={this.state.selectedAdults}
                       onValueChange={this.onValueChangeAdults.bind(this)}
@@ -451,13 +478,13 @@ export default class Booking extends React.Component {
                     </Picker>
                   </Item>
 
-                  <Item picker inlineLabel style={{ width: "45%" }}>
+                  <Item picker inlineLabel style={{ width: '45%' }}>
                     <Label>Niños</Label>
                     <Picker
                       mode="dropdown"
                       style={{ width: undefined }}
                       placeholder="Niños"
-                      placeholderStyle={{ color: "#bfc6ea" }}
+                      placeholderStyle={{ color: '#bfc6ea' }}
                       placeholderIconColor="#007aff"
                       selectedValue={this.state.selectedKids}
                       onValueChange={this.onValueChangeKids.bind(this)}
@@ -483,22 +510,24 @@ export default class Booking extends React.Component {
                 {myloop}
               </View>
 
-              {this.state.chosenDateFin == "" ? (
+              {this.state.chosenDateFin == '' ? (
                 <View />
               ) : (
                 <View picker inlineLabel style={styles.dates}>
-                  <Item inlineLabel style={{ width: "100%" }}>
-                    <Label style={{ width: "52%" }}>Aplicar cupón</Label>
+                  <Item inlineLabel style={{ width: '100%' }}>
+                    <Label style={{ width: '52%' }}>Aplicar cupón</Label>
                     <Picker
                       mode="dropdown"
                       enabled={this.state.enabledCupon}
                       style={{ width: undefined }}
                       placeholder="Niños"
-                      placeholderStyle={{ color: "#bfc6ea" }}
+                      placeholderStyle={{ color: '#bfc6ea' }}
                       placeholderIconColor="#007aff"
                       selectedValue={this.state.selectedCupon}
                       onValueChange={this.onValueChangeCupon.bind(this)}
                     >
+                      <Picker.Item label="Seleccionar Cupón" value=" " />
+
                       {this.state.hotelCuponesList.map(v => {
                         return (
                           <Picker.Item label={v.Cupon} value={v.id_Cupon} />
@@ -520,7 +549,7 @@ export default class Booking extends React.Component {
           {this.state.messageMissingDates == true && (
             <View style={styles.errorLogin}>
               <Text style={styles.textError}>
-                Debes elegir fechas de reservación.
+                {this.state.messageMissingDatesText}
               </Text>
             </View>
           )}
@@ -546,94 +575,94 @@ export default class Booking extends React.Component {
 const styles = StyleSheet.create({
   body: {
     flex: 1,
-    backgroundColor: "white"
+    backgroundColor: 'white'
   },
   form: {
     padding: 20,
-    alignItems: "center",
-    width: "100%"
+    alignItems: 'center',
+    width: '100%'
   },
   dates: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between"
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   kidsTextContainer: {
-    width: "100%",
+    width: '100%',
     paddingVertical: 15,
-    flexDirection: "row",
-    justifyContent: "space-between"
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   },
   kidsText: {
     fontSize: 16,
-    color: "black",
-    fontWeight: "500"
+    color: 'black',
+    fontWeight: '500'
   },
   redSeparator: {
-    width: "100%",
+    width: '100%',
     height: 35,
     backgroundColor: Colors.red,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   nameHotel: {
-    color: "white",
+    color: 'white',
     fontSize: 12,
-    fontWeight: "400"
+    fontWeight: '400'
   },
   buttonLogin: {
     width: 280,
     backgroundColor: Colors.gold,
     height: 50,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 25,
     marginTop: 10,
     marginBottom: 15,
-    alignSelf: "center"
+    alignSelf: 'center'
   },
   buttonText: {
-    color: "#fff",
-    textAlign: "center",
+    color: '#fff',
+    textAlign: 'center',
     paddingLeft: 10,
     paddingRight: 10,
     fontSize: 16,
-    fontWeight: "300"
+    fontWeight: '300'
   },
   containerLoading: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   ageKids: {
-    width: "100%",
-    flexWrap: "wrap"
+    width: '100%',
+    flexWrap: 'wrap'
   },
   errorLogin: {
-    backgroundColor: "white",
+    backgroundColor: 'white',
     marginBottom: 10,
-    width: "100%",
+    width: '100%',
     height: 20,
     borderRadius: 5,
-    fontWeight: "500",
-    justifyContent: "center",
-    alignItems: "center"
+    fontWeight: '500',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   textError: {
-    color: "#B1180F",
+    color: '#B1180F',
     fontSize: 14,
-    fontWeight: "500"
+    fontWeight: '500'
   },
   modalContent: {
-    flexDirection: "column",
-    backgroundColor: "white",
+    flexDirection: 'column',
+    backgroundColor: 'white',
     borderRadius: 8,
     height: 190,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   modalIcon: {
-    color: "gray",
+    color: 'gray',
     fontSize: 35,
     marginBottom: 10,
     marginTop: 10

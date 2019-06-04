@@ -103,8 +103,8 @@ android {
         applicationId "com.buenavista"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 12
-        versionName "12"
+        versionCode 11
+        versionName "11"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -150,6 +150,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-fast-image')
     compile project(':react-native-svg')
     compile project(':react-native-image-picker')
     compile project(':react-native-vector-icons')

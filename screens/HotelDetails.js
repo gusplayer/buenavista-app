@@ -1,22 +1,22 @@
-import React from "react";
+import React from 'react';
 import {
   StyleSheet,
   Text,
   View,
   ScrollView,
   TouchableHighlight
-} from "react-native";
-import HeaderTab from "../src/components/header";
+} from 'react-native';
+import HeaderTab from '../src/components/header';
 import {
   Colors,
   IconosCuponesBlue,
   IconosCuponesGold,
   IconosCuponesOpera,
   IconosCuponesPremium
-} from "../utils/const";
-import Image from "react-native-remote-svg";
-import Swiper from "react-native-web-swiper";
-import API from "../utils/api";
+} from '../utils/const';
+import Image from 'react-native-remote-svg';
+import Swiper from 'react-native-web-swiper';
+import API from '../utils/api';
 
 export default class HotelDetails extends React.Component {
   constructor() {
@@ -24,7 +24,7 @@ export default class HotelDetails extends React.Component {
     this.state = {
       hotelCuponesList: [],
       membership:
-        "https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83268.png"
+        'https://res.cloudinary.com/komercialatam/image/upload/v1559332869/cupones/blue/83268.png'
     };
   }
 
@@ -44,7 +44,7 @@ export default class HotelDetails extends React.Component {
 
   render() {
     const { navigate } = this.props.navigation;
-    const leftHeader = { data: true, icon: "arrow-left", path: "HotelList" };
+    const leftHeader = { data: true, icon: 'arrow-left', path: 'HotelList' };
     const rigthHeader = { data: false };
     const item = this.props.navigation.state.params.hotel;
     return (
@@ -59,9 +59,9 @@ export default class HotelDetails extends React.Component {
           <View style={styles.infoHotel}>
             <View style={styles.imageHotel}>
               <Swiper
-                autoplayTimeout={1}
-                dotStyle={{ backgroundColor: "rgba(0,0,0,.2)" }}
-                style={{ backgroundColor: "rgba(0,0,0,.2)" }}
+                autoplayTimeout={6}
+                dotStyle={{ backgroundColor: 'rgba(0,0,0,.2)' }}
+                style={{ backgroundColor: 'rgba(0,0,0,.2)' }}
               >
                 <View style={styles.slideContainer}>
                   <Image
@@ -109,25 +109,25 @@ export default class HotelDetails extends React.Component {
               {this.state.hotelCuponesList.map(v => {
                 return (
                   <View style={styles.imageCupon}>
-                    {this.state.membership == "BLUE" && (
+                    {this.state.membership == 'BLUE' && (
                       <Image
                         style={{ width: 55, height: 55, marginRight: 5 }}
                         source={IconosCuponesBlue[v.id_Cupon]}
                       />
                     )}
-                    {this.state.membership == "GOLD" && (
+                    {this.state.membership == 'GOLD' && (
                       <Image
                         style={{ width: 55, height: 55, marginRight: 5 }}
                         source={IconosCuponesGold[v.id_Cupon]}
                       />
                     )}
-                    {this.state.membership == "OPERA" && (
+                    {this.state.membership == 'OPERA' && (
                       <Image
                         style={{ width: 55, height: 55, marginRight: 5 }}
                         source={IconosCuponesOpera[v.id_Cupon]}
                       />
                     )}
-                    {this.state.membership == "PREMIUM" && (
+                    {this.state.membership == 'PREMIUM' && (
                       <Image
                         style={{ width: 55, height: 55, marginRight: 5 }}
                         source={IconosCuponesPremium[v.id_Cupon]}
@@ -142,7 +142,7 @@ export default class HotelDetails extends React.Component {
           <TouchableHighlight
             style={styles.bookingButton}
             onPress={() =>
-              navigate("Booking", {
+              navigate('Booking', {
                 hotel: item
               })
             }
@@ -158,38 +158,38 @@ export default class HotelDetails extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: "100%",
-    justifyContent: "flex-start"
+    width: '100%',
+    justifyContent: 'flex-start'
   },
   body: {
     flex: 1,
-    backgroundColor: "white"
+    backgroundColor: 'white'
   },
   infoHotel: {
     flex: 1,
-    flexDirection: "column",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
     height: 200,
     marginTop: -5
   },
   imageHotel: {
     flex: 1,
-    width: "100%",
-    height: "100%",
-    resizeMode: "cover"
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover'
   },
   redSeparator: {
-    width: "100%",
+    width: '100%',
     height: 35,
     backgroundColor: Colors.red,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   nameHotel: {
-    color: "white",
+    color: 'white',
     fontSize: 16,
-    fontWeight: "600"
+    fontWeight: '600'
   },
   descriptionContainer: {
     padding: 20
@@ -197,72 +197,72 @@ const styles = StyleSheet.create({
   descriptionTitle: {
     fontSize: 18,
     marginBottom: 8,
-    color: "black",
-    fontWeight: "600"
+    color: 'black',
+    fontWeight: '600'
   },
   descriptionText: {
-    color: "black",
-    textAlign: "justify"
+    color: 'black',
+    textAlign: 'justify'
   },
   priceContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
     height: 50,
     backgroundColor: Colors.red
   },
   priceContainerLeft: {
     padding: 10,
     paddingHorizontal: 20,
-    backgroundColor: "#F5F5F5",
-    width: "55%",
-    height: "100%"
+    backgroundColor: '#F5F5F5',
+    width: '55%',
+    height: '100%'
   },
   priceContainerRight: {
     padding: 4,
     paddingHorizontal: 25,
     backgroundColor: Colors.red,
-    alignItems: "flex-end",
-    width: "45%",
-    height: "100%"
+    alignItems: 'flex-end',
+    width: '45%',
+    height: '100%'
   },
   precioText: {
     fontSize: 12,
-    fontWeight: "400",
-    color: "white",
-    textDecorationLine: "line-through"
+    fontWeight: '400',
+    color: 'white',
+    textDecorationLine: 'line-through'
   },
   precioBuenavista: {
-    color: "white",
+    color: 'white',
     fontSize: 18,
-    fontWeight: "500"
+    fontWeight: '500'
   },
   webSiteLink: {
-    width: "100%",
+    width: '100%',
     height: 45,
-    backgroundColor: "white",
-    justifyContent: "center",
-    alignItems: "center"
+    backgroundColor: 'white',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   textLink: {
-    color: "gray",
+    color: 'gray',
     fontSize: 16,
-    fontWeight: "600"
+    fontWeight: '600'
   },
   bookingButton: {
-    width: "100%",
+    width: '100%',
     height: 45,
     backgroundColor: Colors.red,
-    justifyContent: "center",
-    alignItems: "center"
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   bookingText: {
-    color: "white",
-    fontWeight: "300",
+    color: 'white',
+    fontWeight: '300',
     fontSize: 18
   },
   couponContainer: {
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   imageCoupon: {
     marginTop: 2,
@@ -277,16 +277,16 @@ const styles = StyleSheet.create({
   },
   slideContainer: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   slide1: {
-    backgroundColor: "rgba(20,20,200,0.3)"
+    backgroundColor: 'rgba(20,20,200,0.3)'
   },
   slide2: {
-    backgroundColor: "rgba(20,200,20,0.3)"
+    backgroundColor: 'rgba(20,200,20,0.3)'
   },
   slide3: {
-    backgroundColor: "rgba(200,20,20,0.3)"
+    backgroundColor: 'rgba(200,20,20,0.3)'
   }
 });
