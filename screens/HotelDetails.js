@@ -59,7 +59,7 @@ export default class HotelDetails extends React.Component {
           <View style={styles.infoHotel}>
             <View style={styles.imageHotel}>
               <Swiper
-                autoplayTimeout={6}
+                autoplayTimeout={8}
                 dotStyle={{ backgroundColor: 'rgba(0,0,0,.2)' }}
                 style={{ backgroundColor: 'rgba(0,0,0,.2)' }}
               >
