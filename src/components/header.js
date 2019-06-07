@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, TouchableOpacity, Image } from "react-native";
 import { Header, Left, Body, Right, View } from "native-base";
 import Icon from "react-native-vector-icons/Feather";
+import FastImage from "react-native-fast-image";
 
 const HeaderTab = ({ navigation, left, right }) => {
   return (
@@ -16,7 +17,7 @@ const HeaderTab = ({ navigation, left, right }) => {
         )}
       </Left>
       <Body>
-        <Image
+        <FastImage
           source={require("../assets/Logo.png")}
           style={{ width: 200, height: 30 }}
         />

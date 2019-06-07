@@ -3,9 +3,7 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   ScrollView,
-  AsyncStorage,
   TouchableOpacity
 } from "react-native";
 import {
@@ -17,6 +15,7 @@ import {
 } from "../utils/const";
 import API from "../utils/api";
 import Modal from "react-native-modal";
+import FastImage from "react-native-fast-image";
 
 export default class Benefits extends React.Component {
   constructor() {
@@ -57,9 +56,10 @@ export default class Benefits extends React.Component {
                   style={styles.imagePress}
                   onPress={() => this.onpressImage(x.Descripcion)}
                 >
-                  <Image
+                  <FastImage
                     style={styles.imageCupon}
                     source={CuponesBlue[x.id_Cupon]}
+                    resizeMode={FastImage.resizeMode.contain}
                   />
                 </TouchableOpacity>
               )}
@@ -68,9 +68,10 @@ export default class Benefits extends React.Component {
                   style={styles.imagePress}
                   onPress={() => this.onpressImage(x.Descripcion)}
                 >
-                  <Image
+                  <FastImage
                     style={styles.imageCupon}
                     source={CuponesGold[x.id_Cupon]}
+                    resizeMode={FastImage.resizeMode.contain}
                   />
                 </TouchableOpacity>
               )}
@@ -79,9 +80,10 @@ export default class Benefits extends React.Component {
                   style={styles.imagePress}
                   onPress={() => this.onpressImage(x.Descripcion)}
                 >
-                  <Image
+                  <FastImage
                     style={styles.imageCupon}
                     source={CuponesOpera[x.id_Cupon]}
+                    resizeMode={FastImage.resizeMode.contain}
                   />
                 </TouchableOpacity>
               )}
@@ -90,9 +92,10 @@ export default class Benefits extends React.Component {
                   style={styles.imagePress}
                   onPress={() => this.onpressImage(x.Descripcion)}
                 >
-                  <Image
+                  <FastImage
                     style={styles.imageCupon}
                     source={CuponesPremium[x.id_Cupon]}
+                    resizeMode={FastImage.resizeMode.contain}
                   />
                 </TouchableOpacity>
               )}

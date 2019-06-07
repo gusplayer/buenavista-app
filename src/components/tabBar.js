@@ -1,7 +1,7 @@
 import * as React from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
-import Icon from "react-native-vector-icons/Feather";
 import { Colors } from "../../utils/const";
+import FastImage from "react-native-fast-image";
 
 const TabBar = ({ navigation, position }) => {
   return (
@@ -11,7 +11,7 @@ const TabBar = ({ navigation, position }) => {
           style={styles.tabItem}
           onPress={() => navigation.navigate("HotelList")}
         >
-          <Image
+          <FastImage
             source={require("../assets/iconos/bar-bottom/active/domain.png")}
             style={styles.imageIcon}
           />
@@ -22,7 +22,7 @@ const TabBar = ({ navigation, position }) => {
           style={styles.tabItem}
           onPress={() => navigation.navigate("HotelList")}
         >
-          <Image
+          <FastImage
             source={require("../assets/iconos/bar-bottom/gray/domain.png")}
             style={styles.imageIcon}
           />
@@ -35,7 +35,7 @@ const TabBar = ({ navigation, position }) => {
           style={styles.tabItem}
           onPress={() => navigation.navigate("Booking")}
         >
-          <Image
+          <FastImage
             source={require("../assets/iconos/bar-bottom/active/search.png")}
             style={{ width: 25, height: 25 }}
           />
@@ -46,7 +46,7 @@ const TabBar = ({ navigation, position }) => {
           style={styles.tabItem}
           onPress={() => navigation.navigate("Booking")}
         >
-          <Image
+          <FastImage
             source={require("../assets/iconos/bar-bottom/gray/search.png")}
             style={{ width: 25, height: 25 }}
           />
@@ -59,7 +59,7 @@ const TabBar = ({ navigation, position }) => {
           style={styles.tabItem}
           onPress={() => navigation.navigate("CouponsView")}
         >
-          <Image
+          <FastImage
             source={require("../assets/iconos/bar-bottom/active/cupon.png")}
             style={{ width: 25, height: 25 }}
           />
@@ -70,7 +70,7 @@ const TabBar = ({ navigation, position }) => {
           style={styles.tabItem}
           onPress={() => navigation.navigate("CouponsView")}
         >
-          <Image
+          <FastImage
             source={require("../assets/iconos/bar-bottom/gray/cupon.png")}
             style={{ width: 25, height: 25 }}
           />
@@ -83,7 +83,7 @@ const TabBar = ({ navigation, position }) => {
           style={styles.tabItem}
           onPress={() => navigation.navigate("Notification")}
         >
-          <Image
+          <FastImage
             source={require("../assets/iconos/bar-bottom/active/notifications.png")}
             style={{ width: 25, height: 25 }}
           />
@@ -94,7 +94,7 @@ const TabBar = ({ navigation, position }) => {
           style={styles.tabItem}
           onPress={() => navigation.navigate("Notification")}
         >
-          <Image
+          <FastImage
             source={require("../assets/iconos/bar-bottom/gray/notifications.png")}
             style={{ width: 25, height: 25 }}
           />
@@ -107,7 +107,7 @@ const TabBar = ({ navigation, position }) => {
           style={styles.tabItem}
           onPress={() => navigation.navigate("Membership")}
         >
-          <Image
+          <FastImage
             source={require("../assets/iconos/bar-bottom/active/circle.png")}
             style={{ width: 25, height: 25 }}
           />
@@ -118,7 +118,7 @@ const TabBar = ({ navigation, position }) => {
           style={styles.tabItem}
           onPress={() => navigation.navigate("Membership")}
         >
-          <Image
+          <FastImage
             source={require("../assets/iconos/bar-bottom/gray/circle.png")}
             style={{ width: 25, height: 25 }}
           />

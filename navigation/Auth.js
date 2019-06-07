@@ -1,6 +1,6 @@
-import React from 'react';
-import { LoginNavigator, DashNavigator } from './Router';
-import { connect } from 'react-redux';
+import React from "react";
+import { LoginNavigator, DashNavigator } from "./Router";
+import { connect } from "react-redux";
 
 class Auth extends React.Component {
   render() {

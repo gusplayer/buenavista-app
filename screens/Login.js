@@ -10,11 +10,11 @@ import {
   ImageBackground
 } from "react-native";
 import { connect } from "react-redux";
-import { CheckBox, Container, Content, Form, Item } from "native-base";
+import { Container, Form } from "native-base";
 import { Bold, Colors } from "../utils/const";
-import Image from "react-native-remote-svg";
 import CheckedBox from "./CheckedBox";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import FastImage from "react-native-fast-image";
 
 class Login extends React.Component {
   constructor() {
@@ -79,7 +79,7 @@ class Login extends React.Component {
             style={styles.container}
           >
             <View style={styles.header}>
-              <Image
+              <FastImage
                 source={require("../src/assets/logoBlanco.png")}
                 style={{ width: 160, height: 93 }}
               />
