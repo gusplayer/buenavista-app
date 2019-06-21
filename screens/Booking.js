@@ -409,9 +409,9 @@ export default class Booking extends React.Component {
                 <View style={styles.dates}>
                   <Item inlineLabel style={{ width: '45%' }}>
                     <DatePicker
-                      defaultDate={Date.now()}
+                      // defaultDate={Date.now()}
                       locale={'es'}
-                      minimumDate={Date.now()}
+                      // minimumDate={Date.now()}
                       timeZoneOffsetInMinutes={undefined}
                       modalTransparent={false}
                       animationType={'fade'}
@@ -429,9 +429,9 @@ export default class Booking extends React.Component {
                   </Item>
                   <Item inlineLabel style={{ width: '45%' }}>
                     <DatePicker
-                      defaultDate={Date.now() + 172800000}
+                      // defaultDate={Date.now() + 172800000}
                       locale={'es'}
-                      minimumDate={this.state.chosenDateInicio}
+                      // minimumDate={this.state.chosenDateInicio}
                       timeZoneOffsetInMinutes={undefined}
                       modalTransparent={false}
                       animationType={'fade'}
