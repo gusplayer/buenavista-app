@@ -13,11 +13,11 @@ class Api {
   };
 
   _retrieveData = async () => {
-    // try {
-    //   let token = await AsyncStorage.getItem("userToken");
-    //   USER_TOKEN = token;
-    // } catch (error) {}
-    USER_TOKEN = 580885;
+    try {
+      let token = await AsyncStorage.getItem("userToken");
+      USER_TOKEN = token;
+    } catch (error) {}
+    //USER_TOKEN = 580885;
   };
 
   _retrieveDataMembership = async () => {
