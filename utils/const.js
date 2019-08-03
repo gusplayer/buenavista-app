@@ -101,81 +101,81 @@ export const IconosCuponesBlue = {
 };
 
 export const CuponesGold = {
-  1: require(`../src/assets/cupones/cupones/GOLD/1.png`),
-  2: require("../src/assets/cupones/cupones/GOLD/2.png"),
-  3: require("../src/assets/cupones/cupones/GOLD/3.png"),
-  4: require("../src/assets/cupones/cupones/GOLD/4.png"),
-  5: require("../src/assets/cupones/cupones/GOLD/5.png"),
-  83266: require("../src/assets/cupones/cupones/GOLD/83266.png"),
-  83267: require("../src/assets/cupones/cupones/GOLD/83267.png"),
-  83268: require("../src/assets/cupones/cupones/GOLD/83268.png"),
-  83269: require("../src/assets/cupones/cupones/GOLD/83269.png"),
-  83270: require("../src/assets/cupones/cupones/GOLD/83270.png")
+  1: require(`../src/assets/cupones/cupones/gold/1.png`),
+  2: require("../src/assets/cupones/cupones/gold/2.png"),
+  3: require("../src/assets/cupones/cupones/gold/3.png"),
+  4: require("../src/assets/cupones/cupones/gold/4.png"),
+  5: require("../src/assets/cupones/cupones/gold/5.png"),
+  83266: require("../src/assets/cupones/cupones/gold/83266.png"),
+  83267: require("../src/assets/cupones/cupones/gold/83267.png"),
+  83268: require("../src/assets/cupones/cupones/gold/83268.png"),
+  83269: require("../src/assets/cupones/cupones/gold/83269.png"),
+  83270: require("../src/assets/cupones/cupones/gold/83270.png")
 };
 
 export const IconosCuponesGold = {
-  1: require(`../src/assets/cupones/iconoscupones/GOLD/1.png`),
-  2: require("../src/assets/cupones/iconoscupones/GOLD/2.png"),
-  3: require("../src/assets/cupones/iconoscupones/GOLD/3.png"),
-  4: require("../src/assets/cupones/iconoscupones/GOLD/4.png"),
-  5: require("../src/assets/cupones/iconoscupones/GOLD/5.png"),
-  83266: require("../src/assets/cupones/iconoscupones/GOLD/83266.png"),
-  83267: require("../src/assets/cupones/iconoscupones/GOLD/83267.png"),
-  83268: require("../src/assets/cupones/iconoscupones/GOLD/83268.png"),
-  83269: require("../src/assets/cupones/iconoscupones/GOLD/83269.png"),
-  83270: require("../src/assets/cupones/iconoscupones/GOLD/83270.png")
+  1: require(`../src/assets/cupones/iconoscupones/gold/1.png`),
+  2: require("../src/assets/cupones/iconoscupones/gold/2.png"),
+  3: require("../src/assets/cupones/iconoscupones/gold/3.png"),
+  4: require("../src/assets/cupones/iconoscupones/gold/4.png"),
+  5: require("../src/assets/cupones/iconoscupones/gold/5.png"),
+  83266: require("../src/assets/cupones/iconoscupones/gold/83266.png"),
+  83267: require("../src/assets/cupones/iconoscupones/gold/83267.png"),
+  83268: require("../src/assets/cupones/iconoscupones/gold/83268.png"),
+  83269: require("../src/assets/cupones/iconoscupones/gold/83269.png"),
+  83270: require("../src/assets/cupones/iconoscupones/gold/83270.png")
 };
 
 export const CuponesOpera = {
-  1: require(`../src/assets/cupones/cupones/OPERA/1.png`),
-  2: require("../src/assets/cupones/cupones/OPERA/2.png"),
-  3: require("../src/assets/cupones/cupones/OPERA/3.png"),
-  4: require("../src/assets/cupones/cupones/OPERA/4.png"),
-  5: require("../src/assets/cupones/cupones/OPERA/5.png"),
-  83266: require("../src/assets/cupones/cupones/OPERA/83266.png"),
-  83267: require("../src/assets/cupones/cupones/OPERA/83267.png"),
-  83268: require("../src/assets/cupones/cupones/OPERA/83268.png"),
-  83269: require("../src/assets/cupones/cupones/OPERA/83269.png"),
-  83270: require("../src/assets/cupones/cupones/OPERA/83270.png")
+  1: require(`../src/assets/cupones/cupones/opera/1.png`),
+  2: require("../src/assets/cupones/cupones/opera/2.png"),
+  3: require("../src/assets/cupones/cupones/opera/3.png"),
+  4: require("../src/assets/cupones/cupones/opera/4.png"),
+  5: require("../src/assets/cupones/cupones/opera/5.png"),
+  83266: require("../src/assets/cupones/cupones/opera/83266.png"),
+  83267: require("../src/assets/cupones/cupones/opera/83267.png"),
+  83268: require("../src/assets/cupones/cupones/opera/83268.png"),
+  83269: require("../src/assets/cupones/cupones/opera/83269.png"),
+  83270: require("../src/assets/cupones/cupones/opera/83270.png")
 };
 
 export const IconosCuponesOpera = {
-  1: require(`../src/assets/cupones/iconoscupones/OPERA/1.png`),
-  2: require("../src/assets/cupones/iconoscupones/OPERA/2.png"),
-  3: require("../src/assets/cupones/iconoscupones/OPERA/3.png"),
-  4: require("../src/assets/cupones/iconoscupones/OPERA/4.png"),
-  5: require("../src/assets/cupones/iconoscupones/OPERA/5.png"),
-  83266: require("../src/assets/cupones/iconoscupones/OPERA/83266.png"),
-  83267: require("../src/assets/cupones/iconoscupones/OPERA/83267.png"),
-  83268: require("../src/assets/cupones/iconoscupones/OPERA/83268.png"),
-  83269: require("../src/assets/cupones/iconoscupones/OPERA/83269.png"),
-  83270: require("../src/assets/cupones/iconoscupones/OPERA/83270.png")
+  1: require(`../src/assets/cupones/iconoscupones/opera/1.png`),
+  2: require("../src/assets/cupones/iconoscupones/opera/2.png"),
+  3: require("../src/assets/cupones/iconoscupones/opera/3.png"),
+  4: require("../src/assets/cupones/iconoscupones/opera/4.png"),
+  5: require("../src/assets/cupones/iconoscupones/opera/5.png"),
+  83266: require("../src/assets/cupones/iconoscupones/opera/83266.png"),
+  83267: require("../src/assets/cupones/iconoscupones/opera/83267.png"),
+  83268: require("../src/assets/cupones/iconoscupones/opera/83268.png"),
+  83269: require("../src/assets/cupones/iconoscupones/opera/83269.png"),
+  83270: require("../src/assets/cupones/iconoscupones/opera/83270.png")
 };
 
 export const CuponesPremium = {
-  1: require(`../src/assets/cupones/cupones/PREMIUM/1.png`),
-  2: require("../src/assets/cupones/cupones/PREMIUM/2.png"),
-  3: require("../src/assets/cupones/cupones/PREMIUM/3.png"),
-  4: require("../src/assets/cupones/cupones/PREMIUM/4.png"),
-  5: require("../src/assets/cupones/cupones/PREMIUM/5.png"),
-  83266: require("../src/assets/cupones/cupones/PREMIUM/83266.png"),
-  83267: require("../src/assets/cupones/cupones/PREMIUM/83267.png"),
-  83268: require("../src/assets/cupones/cupones/PREMIUM/83268.png"),
-  83269: require("../src/assets/cupones/cupones/PREMIUM/83269.png"),
-  83270: require("../src/assets/cupones/cupones/PREMIUM/83270.png")
+  1: require(`../src/assets/cupones/cupones/premium/1.png`),
+  2: require("../src/assets/cupones/cupones/premium/2.png"),
+  3: require("../src/assets/cupones/cupones/premium/3.png"),
+  4: require("../src/assets/cupones/cupones/premium/4.png"),
+  5: require("../src/assets/cupones/cupones/premium/5.png"),
+  83266: require("../src/assets/cupones/cupones/premium/83266.png"),
+  83267: require("../src/assets/cupones/cupones/premium/83267.png"),
+  83268: require("../src/assets/cupones/cupones/premium/83268.png"),
+  83269: require("../src/assets/cupones/cupones/premium/83269.png"),
+  83270: require("../src/assets/cupones/cupones/premium/83270.png")
 };
 
 export const IconosCuponesPremium = {
-  1: require(`../src/assets/cupones/iconoscupones/PREMIUM/1.png`),
-  2: require("../src/assets/cupones/iconoscupones/PREMIUM/2.png"),
-  3: require("../src/assets/cupones/iconoscupones/PREMIUM/3.png"),
-  4: require("../src/assets/cupones/iconoscupones/PREMIUM/4.png"),
-  5: require("../src/assets/cupones/iconoscupones/PREMIUM/5.png"),
-  83266: require("../src/assets/cupones/iconoscupones/PREMIUM/83266.png"),
-  83267: require("../src/assets/cupones/iconoscupones/PREMIUM/83267.png"),
-  83268: require("../src/assets/cupones/iconoscupones/PREMIUM/83268.png"),
-  83269: require("../src/assets/cupones/iconoscupones/PREMIUM/83269.png"),
-  83270: require("../src/assets/cupones/iconoscupones/PREMIUM/83270.png")
+  1: require(`../src/assets/cupones/iconoscupones/premium/1.png`),
+  2: require("../src/assets/cupones/iconoscupones/premium/2.png"),
+  3: require("../src/assets/cupones/iconoscupones/premium/3.png"),
+  4: require("../src/assets/cupones/iconoscupones/premium/4.png"),
+  5: require("../src/assets/cupones/iconoscupones/premium/5.png"),
+  83266: require("../src/assets/cupones/iconoscupones/premium/83266.png"),
+  83267: require("../src/assets/cupones/iconoscupones/premium/83267.png"),
+  83268: require("../src/assets/cupones/iconoscupones/premium/83268.png"),
+  83269: require("../src/assets/cupones/iconoscupones/premium/83269.png"),
+  83270: require("../src/assets/cupones/iconoscupones/premium/83270.png")
 };
 
 export const Membresias = {

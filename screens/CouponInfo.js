@@ -171,15 +171,19 @@ export default class Benefits extends React.Component {
 
   render() {
     return (
-      <ScrollView>
+      <View style={styles.body}>
         {this.listComponents()}
         <Modal isVisible={this.state.isVisible}>{this.modal()}</Modal>
-      </ScrollView>
+      </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  body: {
+    flex: 1,
+    backgroundColor: "#F5F5F5"
+  },
   container: {
     flex: 1,
     width: "100%",

@@ -107,7 +107,7 @@ export default class CouponAvalible extends React.Component {
           <View style={styles.bookingButton}>
             <Text style={styles.bookingText}>{x.Cupon}</Text>
           </View>
-          <ScrollView style={styles.itemList}>
+          <View style={styles.itemList}>
             <View style={styles.containImage}>
               {this.state.membership == "BLUE" && (
                 <TouchableOpacity
@@ -159,7 +159,7 @@ export default class CouponAvalible extends React.Component {
               )}
             </View>
             <Text style={styles.textCupon}>Disponibles: {x.Disponibles}</Text>
-          </ScrollView>
+          </View>
         </View>
       );
     });
