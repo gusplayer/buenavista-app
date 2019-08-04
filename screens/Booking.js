@@ -77,6 +77,7 @@ export default class Booking extends React.Component {
       loading: false,
       loadingHeader: false
     });
+    console.warn(this.state.chosenDateInicio);
   }
 
   modal() {
@@ -197,15 +198,17 @@ export default class Booking extends React.Component {
     });
   }
   setDateInicio(newDate) {
-    console.warn(newDate)
-    let formatDate = Moment(newDate).format("x");
+    console.warn(newDate);
+    // let formatDate = Moment(newDate).format("x");
     // formatDate = parseInt(formatDate);
-    // this.setState({
-    //   chosenDateInicio: formatDate,
-    //   chosenDateFin: "",
-    //   textoFechaFin: "Fecha Salida",
-    //   disabledFechaFin: false
-    // });
+    let formatDate = newDate;
+    console.warn(formatDate);
+    this.setState({
+      chosenDateInicio: formatDate,
+      chosenDateFin: "",
+      textoFechaFin: "Fecha Salida",
+      disabledFechaFin: false
+    });
   }
 
   setDateFin(newDate) {
@@ -438,7 +441,7 @@ export default class Booking extends React.Component {
               {this.state.selectedCupon == 0 ? (
                 <View />
               ) : (
-                <Item inlineLabel style={{ width: "45%" }}>
+                <Item inlineLabel style={styles.itemDate}>
                   <DatePicker
                     defaultDate={this.state.chosenDateInicio}
                     locale={"es"}
@@ -462,14 +465,17 @@ export default class Booking extends React.Component {
 
               {this.state.selectedCupon == 1 &&
               this.state.selectedRoom != "" ? (
-                <Item inlineLabel style={{ width: "45%" }}>
+                <Item inlineLabel style={styles.itemDate}>
                   <DatePicker
-                    defaultDate={this.state.chosenDateInicio + 86400000}
+                    // defaultDate={this.state.chosenDateInicio + 86400000}
+                    defaultDate={this.state.chosenDateInicio + 1}
                     locale={"es"}
+                    minimumDate={this.state.chosenDateInicio}
+                    maximumDate={this.state.chosenDateInicio}
                     minimumDate={this.state.chosenDateInicio + 86400000}
-                    maximumDate={this.state.chosenDateInicio + 86400000}
+                    // maximumDate={this.state.chosenDateInicio + 86400000}
                     timeZoneOffsetInMinutes={undefined}
-                    modalTransparent={false}
+                    modalTransparent={true}
                     animationType={"fade"}
                     androidMode={"default"}
                     placeHolderText={this.state.textoFechaFin}
@@ -481,6 +487,7 @@ export default class Booking extends React.Component {
                     }}
                     onDateChange={this.setDateFin}
                     disabled={false}
+                    style={{ alignItems: "center", alignContent: "center" }}
                   />
                 </Item>
               ) : (
@@ -489,14 +496,14 @@ export default class Booking extends React.Component {
 
               {this.state.selectedCupon == 3 &&
               this.state.selectedRoom != "" ? (
-                <Item inlineLabel style={{ width: "45%" }}>
+                <Item inlineLabel style={styles.itemDate}>
                   <DatePicker
                     defaultDate={this.state.chosenDateInicio + 172800000}
                     locale={"es"}
                     minimumDate={this.state.chosenDateInicio + 172800000}
                     maximumDate={this.state.chosenDateInicio + 172800000}
                     timeZoneOffsetInMinutes={undefined}
-                    modalTransparent={false}
+                    modalTransparent={true}
                     animationType={"fade"}
                     androidMode={"default"}
                     placeHolderText={this.state.textoFechaFin}
@@ -517,14 +524,14 @@ export default class Booking extends React.Component {
               {this.state.selectedCupon != 3 &&
               this.state.selectedCupon != 1 &&
               this.state.selectedRoom != "" ? (
-                <Item inlineLabel style={{ width: "45%" }}>
+                <Item inlineLabel style={styles.itemDate}>
                   <DatePicker
                     defaultDate={this.state.chosenDateInicio + 86400000}
                     locale={"es"}
                     minimumDate={this.state.chosenDateInicio + 86400000}
                     // maximumDate={this.state.chosenDateInicio + 172800000}
                     timeZoneOffsetInMinutes={undefined}
-                    modalTransparent={false}
+                    modalTransparent={true}
                     animationType={"fade"}
                     androidMode={"default"}
                     placeHolderText={this.state.textoFechaFin}
@@ -541,7 +548,6 @@ export default class Booking extends React.Component {
               ) : (
                 <View />
               )}
-
             </View>
 
             {this.state.chosenDateFin == "" ? (
@@ -644,6 +650,12 @@ const styles = StyleSheet.create({
   },
   form: {
     padding: 20,
+    alignItems: "center"
+  },
+  itemDate: {
+    width: "45%",
+    justifyContent: "center",
+    alignContent: "center",
     alignItems: "center"
   },
   item: {
