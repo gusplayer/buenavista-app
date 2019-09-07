@@ -628,37 +628,6 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@react-native-firebase/analytics@^6.0.0-alpha.25":
-  version "6.0.0-alpha.25"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/analytics/-/analytics-6.0.0-alpha.25.tgz#0c298eb154dc6c697a0e5420f532dc99938f5915"
-  integrity sha512-ZiCgELkFKps0P5UStRdyFsO9lsc9YTuXKXEV2yW4dyWwCzTmOEK4vJlp5lQkQggiV/NwcDALHbgn11yeoyd9Sw==
-  dependencies:
-    "@react-native-firebase/app-types" "6.0.0-alpha.25"
-    "@react-native-firebase/common" "6.0.0-alpha.25"
-
-"@react-native-firebase/app-types@0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app-types/-/app-types-0.3.0.tgz#311e0b5f604da0b34f9ccb845daf6a737764cece"
-  integrity sha512-38J35TVe0zaok4V35MgFGO+jLIJWdVVZbTji9xBfX4KSHBanKiLGHlG6Xb5JFcTkbive8gfRZXz4Mw7u/hWbKw==
-
-"@react-native-firebase/app-types@6.0.0-alpha.25":
-  version "6.0.0-alpha.25"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app-types/-/app-types-6.0.0-alpha.25.tgz#b3da34754c06ad035499aa2e8372747ca413d295"
-  integrity sha512-GEGnfxEtfFPwU7ex8mRRPpJepStT3pDPRFwnkV237zCCYt+iaM7jniqN0xVGVfywo7A09j9jTfgLeyPHWrX/uQ==
-
-"@react-native-firebase/app@^0.3.0":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/app/-/app-0.3.0.tgz#9e124b651dd4fbfdddb13243cef78a812e30f2e4"
-  integrity sha512-dbHeIC+fZ9SP1A+mf/hJ0HozO6Gwv6kY4t4/+JjYSJ19AhW9uU1r4nbLb5kkuaiu6sKUyHSUg4TUkDQZpEPXSA==
-  dependencies:
-    "@react-native-firebase/app-types" "0.3.0"
-    opencollective-postinstall "^2.0.1"
-
-"@react-native-firebase/common@6.0.0-alpha.25":
-  version "6.0.0-alpha.25"
-  resolved "https://registry.yarnpkg.com/@react-native-firebase/common/-/common-6.0.0-alpha.25.tgz#e35b308a6ec90a3b27c59ff43bf92ba8e5c47f71"
-  integrity sha512-79UDyLaH19400Amuh4jTb4M6JpS8eZNOd2+SejV3HcjdTvg6dM77d4Cjz+/Wzp9gUv4KVnhvrkBka9STAIQ+wA==
-
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0":
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/@types/istanbul-lib-coverage/-/istanbul-lib-coverage-2.0.1.tgz#42995b446db9a48a11a07ec083499a860e9138ff"
@@ -4401,7 +4370,7 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-opencollective-postinstall@^2.0.0, opencollective-postinstall@^2.0.1:
+opencollective-postinstall@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.2.tgz#5657f1bede69b6e33a45939b061eb53d3c6c3a89"
   integrity sha512-pVOEP16TrAO2/fjej1IdOyupJY8KDUM1CvsaScRbw6oddvpQoOfGk4ywha0HKKVAD6RkW4x6Q+tNBwhf3Bgpuw==
