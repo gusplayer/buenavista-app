@@ -351,7 +351,7 @@ export default class BookingIOS extends React.Component {
             </View>
           ) : (
             <Text style={styles.nameHotel}>
-              TE AYUDAMOS A ENCONTRAR TU ALOJAMIENTO IDEAL
+              TE AYUDAMOS A ENCONTRAR TU ALOJAMIENTO IDEAL 
               {this.state.roomSelected}
             </Text>
           )}

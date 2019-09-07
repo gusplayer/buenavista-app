@@ -1,0 +1,57 @@
+# Uncomment the next line to define a global platform for your project
+platform :ios, '9.0'
+
+target 'Buenavista' do
+  pod 'AppCenter/Push', '~> 2.3.0'
+  pod 'AppCenter/Crashes', '~> 2.3.0'
+  pod 'AppCenter/Analytics', '~> 2.3.0'
+  pod 'AppCenterReactNativeShared', '~> 2.3.0'
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Buenavista
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
+  # pod 'React', :path => '../node_modules/react-native'
+  # pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+  
+
+  # pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
+
+  pod 'appcenter', :path => '../node_modules/appcenter'
+
+  pod 'appcenter-analytics', :path => '../node_modules/appcenter-analytics'
+
+  pod 'appcenter-crashes', :path => '../node_modules/appcenter-crashes'
+
+  pod 'appcenter-push', :path => '../node_modules/appcenter-push'
+
+  post_install do |installer|
+    rnfirebase = installer.pods_project.targets.find { |target| target.name == 'RNFirebase' }
+    rnfirebase.build_configurations.each do |config|
+      config.build_settings['HEADER_SEARCH_PATHS'] = '$(inherited) ${PODS_ROOT}/Headers/Public/**'
+    end
+  end
+
+  target 'BuenavistaTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+target 'Buenavista-tvOS' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Buenavista-tvOS
+
+  target 'Buenavista-tvOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
+
+
