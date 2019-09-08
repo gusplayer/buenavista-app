@@ -2,31 +2,35 @@
 platform :ios, '9.0'
 
 target 'Buenavista' do
-  pod 'AppCenter/Push', '~> 2.3.0'
-  pod 'AppCenter/Crashes', '~> 2.3.0'
-  pod 'AppCenter/Analytics', '~> 2.3.0'
-  pod 'AppCenterReactNativeShared', '~> 2.3.0'
   # Comment the next line if you don't want to use dynamic frameworks
-  use_frameworks!
+  #use_frameworks!
+  pod 'React', :path => '../node_modules/react-native', :subspecs => [
+    'Core',
+    'CxxBridge', # Include this for RN >= 0.47
+    'DevSupport', # Include this to enable In-App Devmenu if RN >= 0.43
+    'RCTText',
+    'RCTNetwork',
+    'RCTWebSocket', # Needed for debugging
+    'RCTAnimation', # Needed for FlatList and animations running on native UI thread
+    # Add any other subspecs you want to use in your project
+  ]
+  # Explicitly include Yoga if you are using RN >= 0.42.0
+  pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
 
+  # Third party deps podspec link
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  
   # Pods for Buenavista
-  pod 'Firebase/Core'
+  pod 'Firebase/Analytics'
+  pod 'Firebase/Core', '~> 6.3.0'
   pod 'Firebase/Messaging'
   # Hotfix Push Notifications
-  #pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
-  # pod 'React', :path => '../node_modules/react-native'
-  # pod 'yoga', :path => '../node_modules/react-native/ReactCommon/yoga'
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase/ios'
   
 
   # pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
-
-  pod 'appcenter', :path => '../node_modules/appcenter'
-
-  pod 'appcenter-analytics', :path => '../node_modules/appcenter-analytics'
-
-  pod 'appcenter-crashes', :path => '../node_modules/appcenter-crashes'
-
-  pod 'appcenter-push', :path => '../node_modules/appcenter-push'
 
   post_install do |installer|
     rnfirebase = installer.pods_project.targets.find { |target| target.name == 'RNFirebase' }

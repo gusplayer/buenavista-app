@@ -9,10 +9,6 @@
     "android": "react-native run-android"
   },
   "dependencies": {
-    "appcenter": "2.3.0",
-    "appcenter-analytics": "2.3.0",
-    "appcenter-crashes": "2.3.0",
-    "appcenter-push": "^2.3.0",
     "axios": "^0.18.0",
     "metro": "^0.55.0",
     "moment": "^2.24.0",

@@ -1,0 +1,6 @@
+framework module Pods_BuenavistaTests {
+  umbrella header "Pods-BuenavistaTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

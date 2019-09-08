@@ -1,0 +1,6 @@
+framework module Pods_Buenavista_tvOS {
+  umbrella header "Pods-Buenavista-tvOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
