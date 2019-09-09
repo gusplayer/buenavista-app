@@ -148,28 +148,19 @@ android {
 }
 
 dependencies {
-    compile project(':appcenter-push')
-    compile project(':appcenter-crashes')
-    compile project(':appcenter-analytics')
-    compile project(':appcenter')
-    compile project(':react-native-firebase')
-    compile(project(':react-native-firebase')) {
-    transitive = false
-  }
-    compile project(':react-native-fast-image')
-    compile project(':react-native-svg')
-    compile project(':react-native-image-picker')
-    compile project(':react-native-vector-icons')
+    implementation project(':react-native-firebase')
+    implementation project(':react-native-fast-image')
+    implementation project(':react-native-svg')
+    implementation project(':react-native-image-picker')
+    implementation project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"
     implementation "com.facebook.react:react-native:+"  // From node_modules
     implementation project(':react-native-firebase')
     implementation "com.google.android.gms:play-services-base:16.1.0"
     implementation "com.google.firebase:firebase-core:16.0.9"
-     implementation 'com.google.firebase:firebase-core:+'
-    implementation ('com.google.firebase:firebase-messaging:+') {
-        force = true;
-    }
+    implementation ('com.google.firebase:firebase-messaging:18.0.0')
+    implementation 'me.leolin:ShortcutBadger:1.1.21@aar'
 }
 
 // Run this once to be able to run the application with BUCK

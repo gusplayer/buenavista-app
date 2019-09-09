@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { AsyncStorage, Alert } from 'react-native';
 import Auth from "./navigation/Auth";
 import { Provider } from "react-redux";
 import createStore from "./redux/store/store";

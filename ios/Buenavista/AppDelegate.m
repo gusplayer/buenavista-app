@@ -6,34 +6,17 @@
  */
 
 #import "AppDelegate.h"
-#import <AppCenterReactNativePush/AppCenterReactNativePush.h>
-#import <AppCenterReactNativeCrashes/AppCenterReactNativeCrashes.h>
-#import <AppCenterReactNativeAnalytics/AppCenterReactNativeAnalytics.h>
-#import <AppCenterReactNative/AppCenterReactNative.h>
 
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 #import <Firebase.h>
-#import <AppCenterReactNativeShared/AppCenterReactNativeShared.h>
-#import <AppCenterReactNative.h>
-#import <AppCenterReactNativeAnalytics.h>
-#import <AppCenterReactNativeCrashes.h>
-#import <AppCenterReactNativePush.h>
-#import <AppCenterReactNativePush.h>
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [AppCenterReactNativePush register];  // Initialize AppCenter push
-  [AppCenterReactNative register];  // Initialize AppCenter
   [FIRApp configure];
   NSURL *jsCodeLocation;
-  [AppCenterReactNative register];
-[AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];
-[AppCenterReactNativeCrashes registerWithAutomaticProcessing];
-[AppCenterReactNativePush register];
-[AppCenterReactNativePush register];
 
   #ifdef DEBUG
     jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index" fallbackResource:nil];

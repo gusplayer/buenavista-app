@@ -4,15 +4,11 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
+    "test": "jest",
+    "ios": "react-native run-ios",
+    "android": "react-native run-android"
   },
   "dependencies": {
-    "@react-native-firebase/analytics": "^6.0.0-alpha.25",
-    "@react-native-firebase/app": "^0.3.0",
-    "appcenter": "2.3.0",
-    "appcenter-analytics": "2.3.0",
-    "appcenter-crashes": "2.3.0",
-    "appcenter-push": "^2.3.0",
     "axios": "^0.18.0",
     "metro": "^0.55.0",
     "moment": "^2.24.0",
