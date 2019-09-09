@@ -23,7 +23,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		145EA0DB2325B76C004B4002 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 145EA0DA2325B76C004B4002 /* GoogleService-Info.plist */; };
+		145EA150232604C3004B4002 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 145EA14F232604C3004B4002 /* GoogleService-Info.plist */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		194592CD1907414F9EC31DA7 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F63A69A86B8A4E6EA1998E8C /* FontAwesome5_Regular.ttf */; };
 		1E20940817CF46CFBD802BC7 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B9F8319552F94260A43B6FEE /* FontAwesome5_Brands.ttf */; };
@@ -410,7 +410,7 @@
 		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = Buenavista/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Buenavista/main.m; sourceTree = "<group>"; };
-		145EA0DA2325B76C004B4002 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		145EA14F232604C3004B4002 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		15D88D6713BA4B558D148844 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		166DF67B91B746D1A97B9F32 /* Pods_Buenavista_tvOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Buenavista_tvOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -618,7 +618,7 @@
 		13B07FAE1A68108700A75B9A /* Buenavista */ = {
 			isa = PBXGroup;
 			children = (
-				145EA0DA2325B76C004B4002 /* GoogleService-Info.plist */,
+				145EA14F232604C3004B4002 /* GoogleService-Info.plist */,
 				D634BCD32322B2CF009909B5 /* Buenavista.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -1401,7 +1401,7 @@
 				6F1227AB6ECC4BFC8BBDDBA9 /* FontAwesome5_Solid.ttf in Resources */,
 				5A04AD619A37424A825C8899 /* Roboto_medium.ttf in Resources */,
 				319558B099E7487AAF460C4C /* Roboto.ttf in Resources */,
-				145EA0DB2325B76C004B4002 /* GoogleService-Info.plist in Resources */,
+				145EA150232604C3004B4002 /* GoogleService-Info.plist in Resources */,
 				8DA6ED1699ED41029BD17A4B /* rubicon-icon-font.ttf in Resources */,
 				BF75040503414E38AE49456A /* AppCenter-Config.plist in Resources */,
 			);
@@ -1703,7 +1703,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.buenavista;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.Buenavista;
 				PRODUCT_NAME = Buenavista;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1732,7 +1732,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.buenavista;
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.Buenavista;
 				PRODUCT_NAME = Buenavista;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
