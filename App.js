@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { AsyncStorage, Alert } from 'react-native';
+import { AsyncStorage, Alert } from "react-native";
 import Auth from "./navigation/Auth";
 import { Provider } from "react-redux";
 import createStore from "./redux/store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import API from "./utils/api";
 import {
   CheckPermission,
   CreateChannel,
@@ -12,6 +13,11 @@ import {
 import firebase from "react-native-firebase";
 
 export default class App extends Component {
+  async componentWillMount() {
+    fcmToken = await this.getToken();
+    // API.GuardarDatosNotificacion();
+  }
+
   async componentDidMount() {
     this.checkPermission();
     this.createNotificationListeners(); //add this line
@@ -32,7 +38,9 @@ export default class App extends Component {
     let fcmToken = await AsyncStorage.getItem("fcmToken");
     if (!fcmToken) {
       fcmToken = await firebase.messaging().getToken();
+      console.warn("pedir token");
       if (fcmToken) {
+        console.warn("token existe");
         // user has a device token
         await AsyncStorage.setItem("fcmToken", fcmToken);
       }
@@ -67,6 +75,7 @@ export default class App extends Component {
       .notifications()
       .onNotification(notification => {
         const { title, body } = notification;
+        console.warn(title);
         this.showAlert(title, body);
       });
 
@@ -77,6 +86,8 @@ export default class App extends Component {
       .notifications()
       .onNotificationOpened(notificationOpen => {
         const { title, body } = notificationOpen.notification;
+        console.warn(notificationOpen);
+        console.warn(title);
         this.showAlert(title, body);
       });
 
@@ -88,7 +99,8 @@ export default class App extends Component {
       .getInitialNotification();
     if (notificationOpen) {
       const { title, body } = notificationOpen.notification;
-      this.showAlert(title, body);
+      console.warn(title);
+      // this.showAlert(title, body);
     }
     /*
      * Triggered for data only payload in foreground
@@ -103,7 +115,7 @@ export default class App extends Component {
     Alert.alert(
       title,
       body,
-      [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+      [{ text: "Continuar", onPress: () => console.log("OK Pressed") }],
       { cancelable: false }
     );
   }

@@ -97,6 +97,15 @@ export default class HotelList extends React.Component {
     );
   }
 
+  async tokenView() {
+    let fcmToken = await AsyncStorage.getItem("fcmToken");
+    return (
+      <View>
+        <Text>Hola</Text>
+      </View>
+    );
+  }
+
   render() {
     const { navigate } = this.props.navigation;
     const leftHeader = { data: false };
@@ -121,7 +130,7 @@ export default class HotelList extends React.Component {
           left={leftHeader}
           right={rigthHeader}
         />
-
+        {/* <View>{this.tokenView()}</View> */}
         <View style={styles.body}>{this._getHotels()}</View>
         <TabBar navigation={this.props.navigation} position={1} />
       </Container>

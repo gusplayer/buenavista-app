@@ -1,14 +1,50 @@
-import axios from 'axios';
-import { AsyncStorage } from 'react-native';
+import axios from "axios";
+import { AsyncStorage } from "react-native";
 
 let USER_TOKEN = null;
+let FIREBASE_TOKEN = null;
 const BASE_API =
-  'http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/';
+  "http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/";
 
 class Api {
+  async GuardarDatosNotificacion() {
+    await this._retrieveData();
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "post",
+        url: "http://18.224.182.106/api/set/fcm/",
+        data: {
+          user_id: USER_TOKEN,
+          registration_id: FIREBASE_TOKEN,
+          type_so: "android"
+        },
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+        .then(response => {
+          resolve(response);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  listaNotificaciones = async () => {
+    await this._retrieveData();
+    const data = await axios
+      .get(`http://18.224.182.106/api/notification_history/?user_id=583120`)
+      .then(response => {
+        return response;
+      })
+      .catch(error => console.warn(error));
+    return data;
+  };
+
   _storeData = async token => {
     try {
-      await AsyncStorage.setItem('userToken', token);
+      await AsyncStorage.setItem("userToken", token);
     } catch (error) {}
   };
 
@@ -16,6 +52,8 @@ class Api {
     try {
       let token = await AsyncStorage.getItem("userToken");
       USER_TOKEN = token;
+      let fcmToken = await AsyncStorage.getItem("fcmToken");
+      FIREBASE_TOKEN = fcmToken;
     } catch (error) {}
     //USER_TOKEN = 580885;
   };
@@ -36,7 +74,7 @@ class Api {
       .get(`${BASE_API}metodoLogin?dami=${userID}&clave=${password}`)
       .then(response => {
         this._storeData(userID);
-        if (response.data[0].codError == '200') {
+        if (response.data[0].codError == "200") {
           let Auth = true;
           return Auth;
         } else {
@@ -52,7 +90,7 @@ class Api {
       .get(`${BASE_API}metodoOvidoClave?dami=${dami}`)
       .then(response => {
         let Auth = false;
-        if (response.data[0].codError == '200') {
+        if (response.data[0].codError == "200") {
           let Auth = true;
           return Auth;
         } else {
@@ -70,7 +108,7 @@ class Api {
       .then(response => {
         this._storeData(dami);
         let Auth = false;
-        if (response.data[0].codError == '200') {
+        if (response.data[0].codError == "200") {
           let Auth = true;
           return Auth;
         } else {
@@ -87,7 +125,7 @@ class Api {
       .get(`${BASE_API}metodoRegistrate?dami=${dami}`)
       .then(response => {
         let Auth = false;
-        if (response.data[0].codError == '200') {
+        if (response.data[0].codError == "200") {
           let Auth = true;
           return Auth;
         } else {
@@ -107,7 +145,7 @@ class Api {
       .get(`${BASE_API}metodoCambioClave?dami=${USER_TOKEN}&clave=${clave}`)
       .then(response => {
         let Auth = false;
-        if (response.data[0].codError == '200') {
+        if (response.data[0].codError == "200") {
           let Auth = true;
           return Auth;
         } else {
@@ -150,6 +188,7 @@ class Api {
   }
 
   async getHotelList() {
+    this.GuardarDatosNotificacion();
     await this._retrieveData();
     const hotelList = await axios
       .get(`${BASE_API}metodoHotelMembresiaCupon?dami=${USER_TOKEN}`)
