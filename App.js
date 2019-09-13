@@ -4,23 +4,60 @@ import Auth from "./navigation/Auth";
 import { Provider } from "react-redux";
 import createStore from "./redux/store/store";
 import { PersistGate } from "redux-persist/integration/react";
-import API from "./utils/api";
 import {
   CheckPermission,
   CreateChannel,
   notificationOpenBackListener
 } from "./src/PushNotifications";
 import firebase from "react-native-firebase";
+import type { Notification, NotificationOpen } from "react-native-firebase";
 
 export default class App extends Component {
-  async componentWillMount() {
-    fcmToken = await this.getToken();
-    // API.GuardarDatosNotificacion();
-  }
-
   async componentDidMount() {
     this.checkPermission();
-    this.createNotificationListeners(); //add this line
+    this.createNotificationListeners();
+    const notificationOpen: NotificationOpen = await firebase
+      .notifications()
+      .getInitialNotification(); //add this line
+    //   if (notificationOpen) {
+    //     const action = notificationOpen.action;
+    //     const notification: Notification = notificationOpen.notification;
+    //     var seen = [];
+    //     alert(
+    //       JSON.stringify(notification.data, function(key, val) {
+    //         if (val != null && typeof val == "object") {
+    //           if (seen.indexOf(val) >= 0) {
+    //             return;
+    //           }
+    //           seen.push(val);
+    //         }
+    //         return val;
+    //       })
+    //     );
+    //   }
+    //   this.notificationOpenedListener = firebase
+    //     .notifications()
+    //     .onNotificationOpened((notificationOpen: NotificationOpen) => {
+    //       // Get the action triggered by the notification being opened
+    //       const action = notificationOpen.action;
+    //       // Get information about the notification that was opened
+    //       const notification: Notification = notificationOpen.notification;
+    //       var seen = [];
+    //       alert(
+    //         JSON.stringify(notification.data, function(key, val) {
+    //           if (val != null && typeof val == "object") {
+    //             if (seen.indexOf(val) >= 0) {
+    //               return;
+    //             }
+    //             seen.push(val);
+    //           }
+    //           return val;
+    //         })
+    //       );
+    //       firebase
+    //         .notifications()
+    //         .removeDeliveredNotification(notification.notificationId);
+    //     });
   }
 
   //1
@@ -38,9 +75,7 @@ export default class App extends Component {
     let fcmToken = await AsyncStorage.getItem("fcmToken");
     if (!fcmToken) {
       fcmToken = await firebase.messaging().getToken();
-      console.warn("pedir token");
       if (fcmToken) {
-        console.warn("token existe");
         // user has a device token
         await AsyncStorage.setItem("fcmToken", fcmToken);
       }
@@ -75,8 +110,8 @@ export default class App extends Component {
       .notifications()
       .onNotification(notification => {
         const { title, body } = notification;
-        console.warn(title);
         this.showAlert(title, body);
+        console.warn("foregroun");
       });
 
     /*
@@ -86,10 +121,32 @@ export default class App extends Component {
       .notifications()
       .onNotificationOpened(notificationOpen => {
         const { title, body } = notificationOpen.notification;
-        console.warn(notificationOpen);
-        console.warn(title);
-        this.showAlert(title, body);
+        // this.showAlert(title, body);
+        // console.warn("background");
+        // console.warn(notificationOpen);
       });
+
+    // this.notificationOpenedListener = firebase
+    //   .notifications()
+    //   .onNotificationOpened((notificationOpen: NotificationOpen) => {
+    //     // Get the action triggered by the notification being opened
+    //     console.warn(notificationOpen);
+    //     const action = notificationOpen.action;
+    //     // Get information about the notification that was opened
+    //     const notification: Notification = notificationOpen.notification;
+    //     var seen = [];
+    //     alert(
+    //       JSON.stringify(notificationOpen, function(key, val) {
+    //         if (val != null && typeof val === "object") {
+    //           if (seen.indexOf(val) >= 0) {
+    //             return;
+    //           }
+    //           seen.push(val);
+    //         }
+    //         return val;
+    //       })
+    //     );
+    //   });
 
     /*
      * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
@@ -99,8 +156,7 @@ export default class App extends Component {
       .getInitialNotification();
     if (notificationOpen) {
       const { title, body } = notificationOpen.notification;
-      console.warn(title);
-      // this.showAlert(title, body);
+      this.showAlert(title, body);
     }
     /*
      * Triggered for data only payload in foreground
@@ -110,6 +166,10 @@ export default class App extends Component {
       console.log(JSON.stringify(message));
     });
   }
+
+  // const notificationOpenedListener = () =>
+  // firebase.notifications().onNotificationOpened(notificationOpen => {
+  // });
 
   showAlert(title, body) {
     Alert.alert(

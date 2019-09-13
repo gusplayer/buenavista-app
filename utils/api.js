@@ -1,5 +1,7 @@
 import axios from "axios";
-import { AsyncStorage } from "react-native";
+import { AsyncStorage, Platform } from "react-native";
+
+// delete GLOBAL.XMLHttpRequest;
 
 let USER_TOKEN = null;
 let FIREBASE_TOKEN = null;
@@ -16,6 +18,7 @@ class Api {
         data: {
           user_id: USER_TOKEN,
           registration_id: FIREBASE_TOKEN,
+          // type_so: Platform.OS === "ios" ? "ios" : "android"
           type_so: "android"
         },
         headers: {
@@ -73,6 +76,7 @@ class Api {
     const loginAPI = await axios
       .get(`${BASE_API}metodoLogin?dami=${userID}&clave=${password}`)
       .then(response => {
+        console.log("response");
         this._storeData(userID);
         if (response.data[0].codError == "200") {
           let Auth = true;
@@ -81,7 +85,8 @@ class Api {
           let Auth = false;
           return Auth;
         }
-      });
+      })
+      .catch(error => console.warn(error));
     return loginAPI;
   }
 

@@ -28,11 +28,28 @@
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
-		<key>NSAllowsArbitraryLoadsInWebContent</key>
-		<true/>
-		<key>NSAllowsLocalNetworking</key>
-		<true/>
+		 <key>NSExceptionDomains</key>
+          <dict>
+    		 <key>buenavista.com.ec</key>
+              <dict>
+		        <key>NSIncludesSubdomains</key>
+                <true/>
+      			<!--Include to allow HTTP requests-->
+      			<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+      			<true/>
+      			<!--Include to specify minimum TLS version-->
+      			<key>NSTemporaryExceptionMinimumTLSVersion</key>
+      			<string>TLSv1.1</string>
+ 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+        		<false/>
+               </dict>
+		    </dict>
+		   <key>NSAllowsArbitraryLoadsInWebContent</key>
+		   <true/>
+		   <key>NSAllowsLocalNetworking</key>
+		   <true/>
 	</dict>
+
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Need location access to find hotels nearby</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
