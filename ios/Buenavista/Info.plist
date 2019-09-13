@@ -17,39 +17,36 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.6.1</string>
+	<string>1.6.3</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>3</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
-		 <key>NSExceptionDomains</key>
-          <dict>
-    		 <key>buenavista.com.ec</key>
-              <dict>
-		        <key>NSIncludesSubdomains</key>
-                <true/>
-      			<!--Include to allow HTTP requests-->
-      			<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-      			<true/>
-      			<!--Include to specify minimum TLS version-->
-      			<key>NSTemporaryExceptionMinimumTLSVersion</key>
-      			<string>TLSv1.1</string>
- 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-        		<false/>
-               </dict>
-		    </dict>
-		   <key>NSAllowsArbitraryLoadsInWebContent</key>
-		   <true/>
-		   <key>NSAllowsLocalNetworking</key>
-		   <true/>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
+		<key>NSAllowsLocalNetworking</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>buenavista.com.ec</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.1</string>
+			</dict>
+		</dict>
 	</dict>
-
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Need location access to find hotels nearby</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

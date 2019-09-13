@@ -18,8 +18,8 @@ class Api {
         data: {
           user_id: USER_TOKEN,
           registration_id: FIREBASE_TOKEN,
-          // type_so: Platform.OS === "ios" ? "ios" : "android"
-          type_so: "android"
+          type_so: Platform.OS === "ios" ? "ios" : "android"
+          // type_so: "android"
         },
         headers: {
           "Content-Type": "application/json"
