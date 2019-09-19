@@ -12,6 +12,7 @@ import {
 import firebase from "react-native-firebase";
 import type { Notification, NotificationOpen } from "react-native-firebase";
 
+//console.disableYellowBox = true;
 export default class App extends Component {
   async componentDidMount() {
     this.checkPermission();

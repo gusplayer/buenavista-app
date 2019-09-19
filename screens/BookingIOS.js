@@ -38,8 +38,9 @@ export default class BookingIOS extends React.Component {
       selectedCupon: 0,
       selectedRoom: 0,
       messageMissingDatesText: "",
-      // chosenDateInicio: Date.now(),
+      //chosenDateInicio: Date.now(),
       chosenDateInicio: new Date(),
+      //chosenDateFin: "",
       chosenDateFin: "",
       loaderBoton: false,
       hotelList: [],
@@ -193,6 +194,7 @@ export default class BookingIOS extends React.Component {
     });
   }
   onValueChangeCupon(value) {
+    console.warn(value);
     this.setState({
       selectedCupon: value
     });
@@ -351,7 +353,7 @@ export default class BookingIOS extends React.Component {
             </View>
           ) : (
             <Text style={styles.nameHotel}>
-              TE AYUDAMOS A ENCONTRAR TU ALOJAMIENTO IDEAL 
+              TE AYUDAMOS A ENCONTRAR TU ALOJAMIENTO IDEAL
               {this.state.roomSelected}
             </Text>
           )}
@@ -462,18 +464,21 @@ export default class BookingIOS extends React.Component {
                   />
                 </Item>
               )}
-
+              {/* Cupon dos noches gratis */}
               {this.state.selectedCupon == 1 &&
               this.state.selectedRoom != "" ? (
                 <Item inlineLabel style={styles.itemDate}>
                   <DatePicker
-                    // defaultDate={this.state.chosenDateInicio + 86400000}
-                    defaultDate={this.state.chosenDateInicio + 1}
+                    defaultDate={
+                      new Date(this.state.chosenDateInicio.getTime() + 86400000)
+                    }
                     locale={"es"}
-                    minimumDate={this.state.chosenDateInicio}
-                    maximumDate={this.state.chosenDateInicio}
-                    minimumDate={this.state.chosenDateInicio + 86400000}
-                    // maximumDate={this.state.chosenDateInicio + 86400000}
+                    minimumDate={
+                      new Date(this.state.chosenDateInicio.getTime() + 86400000)
+                    }
+                    maximumDate={
+                      new Date(this.state.chosenDateInicio.getTime() + 86400000)
+                    }
                     timeZoneOffsetInMinutes={undefined}
                     modalTransparent={true}
                     animationType={"fade"}
@@ -493,15 +498,30 @@ export default class BookingIOS extends React.Component {
               ) : (
                 <View />
               )}
-
+              {/* Es cupon 2X1 */}
               {this.state.selectedCupon == 3 &&
               this.state.selectedRoom != "" ? (
                 <Item inlineLabel style={styles.itemDate}>
                   <DatePicker
-                    defaultDate={this.state.chosenDateInicio + 172800000}
+                    defaultDate={
+                      new Date(
+                        this.state.chosenDateInicio.getTime() + 172800000
+                      )
+                    }
                     locale={"es"}
-                    minimumDate={this.state.chosenDateInicio + 172800000}
-                    maximumDate={this.state.chosenDateInicio + 172800000}
+                    // minimumDate={
+                    //   this.state.chosenDateInicio.getTime() + 172800000
+                    // }
+                    minimumDate={
+                      new Date(
+                        this.state.chosenDateInicio.getTime() + 172800000
+                      )
+                    }
+                    maximumDate={
+                      new Date(
+                        this.state.chosenDateInicio.getTime() + 172800000
+                      )
+                    }
                     timeZoneOffsetInMinutes={undefined}
                     modalTransparent={true}
                     animationType={"fade"}
@@ -520,16 +540,48 @@ export default class BookingIOS extends React.Component {
               ) : (
                 <View />
               )}
-
+              {/* No es cupon 2x1 */}
               {this.state.selectedCupon != 3 &&
               this.state.selectedCupon != 1 &&
               this.state.selectedRoom != "" ? (
                 <Item inlineLabel style={styles.itemDate}>
-                  <DatePicker
+                  {/* <DatePicker
                     defaultDate={this.state.chosenDateInicio + 86400000}
                     locale={"es"}
                     minimumDate={this.state.chosenDateInicio + 86400000}
                     // maximumDate={this.state.chosenDateInicio + 172800000}
+                    timeZoneOffsetInMinutes={undefined}
+                    modalTransparent={true}
+                    animationType={"fade"}
+                    androidMode={"default"}
+                    placeHolderText={this.state.textoFechaFin}
+                    textStyle={{ color: "green" }}
+                    placeHolderTextStyle={{
+                      color: "#4c4c4c",
+                      marginLeft: -10,
+                      paddingLeft: 0
+                    }}
+                    onDateChange={this.setDateFin}
+                    disabled={false}
+                  /> */}
+
+                  <DatePicker
+                    // defaultDate={this.state.chosenDateInicio + 86400000}
+                    locale={"es"}
+                    // minimumDate={this.state.chosenDateInicio + 86400000}
+                    // maximumDate={this.state.chosenDateInicio + 172800000}
+                    defaultDate={
+                      new Date(this.state.chosenDateInicio.getTime() + 86400000)
+                    }
+                    minimumDate={
+                      new Date(this.state.chosenDateInicio.getTime() + 86400000)
+                    }
+                    // minimumDate={
+                    //   new Date(
+                    //     this.state.chosenDateInicio.getTime() + 172800000
+                    //   )
+                    // }
+
                     timeZoneOffsetInMinutes={undefined}
                     modalTransparent={true}
                     animationType={"fade"}

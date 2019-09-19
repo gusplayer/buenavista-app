@@ -4,19 +4,18 @@ import { AsyncStorage, Platform } from "react-native";
 // delete GLOBAL.XMLHttpRequest;
 
 let USER_TOKEN = null;
-let FIREBASE_TOKEN = null;
 const BASE_API =
   "http://app.buenavista.com.ec/wsreservaciones/WebServiceReservaciones.asmx/";
 
 class Api {
-  async GuardarDatosNotificacion() {
+  async GuardarDatosNotificacion(userID) {
     await this._retrieveData();
     return new Promise((resolve, reject) => {
       axios({
         method: "post",
-        url: "http://18.224.182.106/api/set/fcm/",
+        url: "https://push.buenavista.com.ec/api/set/fcm/",
         data: {
-          user_id: USER_TOKEN,
+          user_id: userID,
           registration_id: FIREBASE_TOKEN,
           type_so: Platform.OS === "ios" ? "ios" : "android"
           // type_so: "android"
@@ -37,7 +36,9 @@ class Api {
   listaNotificaciones = async () => {
     await this._retrieveData();
     const data = await axios
-      .get(`http://18.224.182.106/api/notification_history/?user_id=583120`)
+      .get(
+        `https://push.buenavista.com.ec/api/notification_history/?user_id=${USER_TOKEN}`
+      )
       .then(response => {
         return response;
       })
@@ -79,6 +80,7 @@ class Api {
         console.log("response");
         this._storeData(userID);
         if (response.data[0].codError == "200") {
+          this.GuardarDatosNotificacion(userID);
           let Auth = true;
           return Auth;
         } else {
@@ -193,7 +195,6 @@ class Api {
   }
 
   async getHotelList() {
-    this.GuardarDatosNotificacion();
     await this._retrieveData();
     const hotelList = await axios
       .get(`${BASE_API}metodoHotelMembresiaCupon?dami=${USER_TOKEN}`)
