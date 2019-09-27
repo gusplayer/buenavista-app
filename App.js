@@ -157,7 +157,7 @@ export default class App extends Component {
       .getInitialNotification();
     if (notificationOpen) {
       const { title, body } = notificationOpen.notification;
-      this.showAlert(title, body);
+      // this.showAlert(title, body);
     }
     /*
      * Triggered for data only payload in foreground
