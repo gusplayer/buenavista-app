@@ -7,10 +7,12 @@
     "test": "jest",
     "ios": "react-native run-ios",
     "android": "react-native run-android",
-    "android:clean": "cd android && ./gradlew clean && cd .."
+    "android:clean": "cd android && ./gradlew clean && cd ..",
+    "android:install": "cd android && ./gradlew installRelease && cd ..",
+    "android:release": "cd android && ./gradlew assembleRelease && cd .."
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.19.0",
     "metro": "^0.55.0",
     "moment": "^2.24.0",
     "native-base": "^2.8.1",
