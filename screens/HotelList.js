@@ -5,7 +5,8 @@ import {
   View,
   FlatList,
   TouchableHighlight,
-  ActivityIndicator
+  ActivityIndicator,
+  AsyncStorage
 } from "react-native";
 import HeaderTab from "../src/components/header";
 import TabBar from "../src/components/tabBar";
