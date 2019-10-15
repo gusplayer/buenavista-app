@@ -15,17 +15,11 @@ import { Item, Input, Label, Container, DatePicker, Picker } from "native-base";
 import API from "../utils/api";
 import Modal from "react-native-modal";
 import Moment from "moment";
-
-// Son dos validaciones
-// Javir Molina: Y un cambio de posición de un campo en el formulario
-// Cupón metrópoli nacional la fecha final sea automáticamente 1 día después de colocar la inicial == ID cupon 1
-// Cupón 2x1 la fecha final sea automáticamente 2 días después de la fecha inicial == ID cupon 3
-// Y colocar los campos fechas antes de la selección de cupones
-
 export default class BookingAndroid extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      membresiaAlert: false,
       selectedKids: 0,
       selectedKidAge1: 0,
       selectedKidAge2: 0,
@@ -38,7 +32,7 @@ export default class BookingAndroid extends React.Component {
       selectedCupon: 0,
       selectedRoom: 0,
       messageMissingDatesText: "",
-      // chosenDateInicio: Date.now(),
+      today: Date.now(),
       chosenDateInicio: new Date(),
       chosenDateFin: "",
       loaderBoton: false,
@@ -46,7 +40,6 @@ export default class BookingAndroid extends React.Component {
       hotelRoomsList: [],
       hotelCuponesList: [],
       hotelSelected: "",
-      // roomSelected: '',
       loading: true,
       enabledRoom: false,
       enabledCupon: false,
@@ -58,11 +51,22 @@ export default class BookingAndroid extends React.Component {
       idHotelParams: "",
       disabledFechaFin: true,
       textoFechaFin: "-",
-      loadingButton: false
+      loadingButton: false,
+      fechaCaducidad: "no data"
     };
     this.setDateInicio = this.setDateInicio.bind(this);
     this.setDateFin = this.setDateFin.bind(this);
+    this.dataInit();
   }
+
+  async dataInit() {
+    const profileAPI = await API.getProfile();
+    const fechaCaducidad = await profileAPI[0].faFechaCaducidad;
+    this.setState({
+      fechaCaducidad: fechaCaducidad
+    });
+  }
+
   async componentDidMount() {
     if (this.props.navigation.state.params) {
       let idHotel = await this.props.navigation.state.params.hotel;
@@ -197,15 +201,24 @@ export default class BookingAndroid extends React.Component {
     });
   }
   setDateInicio(newDate) {
-    // let formatDate = Moment(newDate).add(1, "days");
-    // let formatDate = Moment(newDate).format("x");
-    // formatDate = parseInt(formatDate);
-    this.setState({
-      chosenDateInicio: newDate,
-      chosenDateFin: "",
-      textoFechaFin: "Fecha Salida",
-      disabledFechaFin: false
-    });
+    let caducidad = Moment(this.state.fechaCaducidad);
+    let fechaInicio = Moment(newDate);
+
+    if (fechaInicio > caducidad) {
+      console.warn("la membresia estaria vencida");
+      this.setState({
+        membresiaAlert: true
+      });
+    } else {
+      console.warn("reserva exitosa");
+      this.setState({
+        chosenDateInicio: newDate,
+        chosenDateFin: "",
+        textoFechaFin: "Fecha Salida",
+        disabledFechaFin: false,
+        membresiaAlert: false
+      });
+    }
   }
 
   setDateFin(newDate) {
@@ -215,6 +228,21 @@ export default class BookingAndroid extends React.Component {
       chosenDateFin: newDate,
       messageMissingDates: false
     });
+  }
+
+  buttonSendBooking() {
+    if (this.state.membresiaAlert) {
+      return <View></View>;
+    } else {
+      return (
+        <TouchableOpacity
+          onPress={() => this.onClickSendBooking()}
+          style={styles.buttonLogin}
+        >
+          <Text style={styles.buttonText}>ENVIAR SOLICITUD</Text>
+        </TouchableOpacity>
+      );
+    }
   }
 
   onClickSendBooking = async () => {
@@ -350,7 +378,6 @@ export default class BookingAndroid extends React.Component {
           ) : (
             <Text style={styles.nameHotel}>
               TE AYUDAMOS A ENCONTRAR TU ALOJAMIENTO IDEAL
-              {this.state.roomSelected}
             </Text>
           )}
         </View>
@@ -439,11 +466,11 @@ export default class BookingAndroid extends React.Component {
               {this.state.selectedCupon == 0 ? (
                 <View />
               ) : (
-                <Item inlineLabel style={{ width: "45%" }}>
+                <Item inlineLabel style={{ width: "45%", overflow: "hidden" }}>
                   <DatePicker
                     defaultDate={this.state.chosenDateInicio}
                     locale={"es"}
-                    minimumDate={this.state.chosenDateInicio}
+                    minimumDate={this.state.today}
                     timeZoneOffsetInMinutes={undefined}
                     modalTransparent={true}
                     animationType={"fade"}
@@ -452,7 +479,7 @@ export default class BookingAndroid extends React.Component {
                     textStyle={{ color: "green" }}
                     placeHolderTextStyle={{
                       color: "#4c4c4c",
-                      marginLeft: -10,
+                      marginLeft: 0,
                       paddingLeft: 0
                     }}
                     onDateChange={this.setDateInicio}
@@ -460,40 +487,6 @@ export default class BookingAndroid extends React.Component {
                   />
                 </Item>
               )}
-
-              {/* <Item inlineLabel style={{ width: "45%" }}>
-                <DatePicker
-                  defaultDate={
-                    new Date(this.state.chosenDateInicio.getTime() + 86400000)
-                  }
-                  locale={"es"}
-                  defaultDate={
-                    new Date(this.state.chosenDateInicio.getTime() + 86400000)
-                  }
-                  minimumDate={
-                    new Date(this.state.chosenDateInicio.getTime() + 172800000)
-                  }
-                  minimumDate={
-                    new Date(this.state.chosenDateInicio.getTime() + 172800000)
-                  }
-                  // minimumDate={new Date(this.state.chosenDateInicio)}
-                  // maximumDate={new Date(this.state.chosenDateInicio)}
-                  timeZoneOffsetInMinutes={undefined}
-                  modalTransparent={true}
-                  mode={"datetime"}
-                  animationType={"fade"}
-                  androidMode={"default"}
-                  placeHolderText={"fecha fin"}
-                  textStyle={{ color: "red" }}
-                  placeHolderTextStyle={{
-                    color: "#4c4c4c",
-                    marginLeft: -10,
-                    paddingLeft: 0
-                  }}
-                  onDateChange={this.setDateFin}
-                  disabled={false}
-                />
-              </Item> */}
 
               {this.state.selectedCupon == 1 &&
               this.state.selectedRoom != "" ? (
@@ -684,6 +677,15 @@ export default class BookingAndroid extends React.Component {
             </View>
           )}
 
+          {this.state.membresiaAlert == true && (
+            <View style={styles.errorLogin}>
+              <Text style={styles.textError}>
+                Tu membresía caduca el{" "}
+                {Moment(this.state.fechaCaducidad).format("LL")}
+              </Text>
+            </View>
+          )}
+
           {this.state.messageMissingDates == true && (
             <View style={styles.errorLogin}>
               <Text style={styles.textError}>
@@ -691,15 +693,11 @@ export default class BookingAndroid extends React.Component {
               </Text>
             </View>
           )}
+
           {this.state.loaderButton ? (
             <ActivityIndicator size="large" color="#808080" />
           ) : (
-            <TouchableOpacity
-              onPress={() => this.onClickSendBooking()}
-              style={styles.buttonLogin}
-            >
-              <Text style={styles.buttonText}>ENVIAR SOLICITUD</Text>
-            </TouchableOpacity>
+            this.buttonSendBooking()
           )}
         </ScrollView>
 
@@ -782,18 +780,22 @@ const styles = StyleSheet.create({
   },
   errorLogin: {
     backgroundColor: "white",
-    marginBottom: 10,
-    width: "100%",
-    height: 20,
+    marginBottom: 25,
+    marginTop: 15,
+    width: "94%",
     borderRadius: 5,
+    borderColor: "gray",
     fontWeight: "500",
+    alignSelf: "center",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    padding: 5
   },
   textError: {
     color: "#B1180F",
-    fontSize: 14,
-    fontWeight: "500"
+    fontSize: 13,
+    fontWeight: "500",
+    textAlign: "center"
   },
   modalContent: {
     flexDirection: "column",

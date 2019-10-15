@@ -26,6 +26,9 @@ export default class BookingIOS extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      membresiaAlert: false,
+      // today: Date.now(),
+      today: new Date(),
       selectedKids: 0,
       selectedKidAge1: 0,
       selectedKidAge2: 0,
@@ -63,7 +66,17 @@ export default class BookingIOS extends React.Component {
     };
     this.setDateInicio = this.setDateInicio.bind(this);
     this.setDateFin = this.setDateFin.bind(this);
+    this.dataInit();
   }
+
+  async dataInit() {
+    const profileAPI = await API.getProfile();
+    const fechaCaducidad = await profileAPI[0].faFechaCaducidad;
+    this.setState({
+      fechaCaducidad: fechaCaducidad
+    });
+  }
+
   async componentDidMount() {
     if (this.props.navigation.state.params) {
       let idHotel = await this.props.navigation.state.params.hotel;
@@ -78,7 +91,6 @@ export default class BookingIOS extends React.Component {
       loading: false,
       loadingHeader: false
     });
-    console.warn(this.state.chosenDateInicio);
   }
 
   modal() {
@@ -194,23 +206,27 @@ export default class BookingIOS extends React.Component {
     });
   }
   onValueChangeCupon(value) {
-    console.warn(value);
     this.setState({
       selectedCupon: value
     });
   }
   setDateInicio(newDate) {
-    console.warn(newDate);
-    // let formatDate = Moment(newDate).format("x");
-    // formatDate = parseInt(formatDate);
-    let formatDate = newDate;
-    console.warn(formatDate);
-    this.setState({
-      chosenDateInicio: formatDate,
-      chosenDateFin: "",
-      textoFechaFin: "Fecha Salida",
-      disabledFechaFin: false
-    });
+    let caducidad = Moment(this.state.fechaCaducidad);
+    let fechaInicio = Moment(newDate);
+
+    if (fechaInicio > caducidad) {
+      this.setState({
+        membresiaAlert: true
+      });
+    } else {
+      this.setState({
+        chosenDateInicio: newDate,
+        chosenDateFin: "",
+        textoFechaFin: "Fecha Salida",
+        disabledFechaFin: false,
+        membresiaAlert: false
+      });
+    }
   }
 
   setDateFin(newDate) {
@@ -220,6 +236,21 @@ export default class BookingIOS extends React.Component {
       chosenDateFin: formatDate,
       messageMissingDates: false
     });
+  }
+
+  buttonSendBooking() {
+    if (this.state.membresiaAlert) {
+      return <View></View>;
+    } else {
+      return (
+        <TouchableOpacity
+          onPress={() => this.onClickSendBooking()}
+          style={styles.buttonLogin}
+        >
+          <Text style={styles.buttonText}>ENVIAR SOLICITUD</Text>
+        </TouchableOpacity>
+      );
+    }
   }
 
   onClickSendBooking = async () => {
@@ -447,7 +478,7 @@ export default class BookingIOS extends React.Component {
                   <DatePicker
                     defaultDate={this.state.chosenDateInicio}
                     locale={"es"}
-                    minimumDate={this.state.chosenDateInicio}
+                    minimumDate={this.state.today}
                     timeZoneOffsetInMinutes={undefined}
                     modalTransparent={true}
                     animationType={"fade"}
@@ -669,7 +700,30 @@ export default class BookingIOS extends React.Component {
             </View>
           )}
 
+          {this.state.membresiaAlert == true && (
+            <View style={styles.errorLogin}>
+              <Text style={styles.textError}>
+                Tu membresía caduca el{" "}
+                {Moment(this.state.fechaCaducidad).format("LL")}
+              </Text>
+            </View>
+          )}
+
           {this.state.messageMissingDates == true && (
+            <View style={styles.errorLogin}>
+              <Text style={styles.textError}>
+                {this.state.messageMissingDatesText}
+              </Text>
+            </View>
+          )}
+
+          {this.state.loaderButton ? (
+            <ActivityIndicator size="large" color="#808080" />
+          ) : (
+            this.buttonSendBooking()
+          )}
+
+          {/* {this.state.messageMissingDates == true && (
             <View style={styles.errorLogin}>
               <Text style={styles.textError}>
                 {this.state.messageMissingDatesText}
@@ -685,7 +739,7 @@ export default class BookingIOS extends React.Component {
             >
               <Text style={styles.buttonText}>ENVIAR SOLICITUD</Text>
             </TouchableOpacity>
-          )}
+          )} */}
         </View>
 
         <TabBar navigation={this.props.navigation} position={2} />

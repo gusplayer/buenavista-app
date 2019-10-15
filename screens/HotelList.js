@@ -78,8 +78,9 @@ export default class HotelList extends React.Component {
                       {item.Ciudad}, {item.Pais}
                     </Text>
                   </View>
+
                   <View style={styles.priceHotel}>
-                    <Text style={styles.nitePriceText}>Precio por noche</Text>
+                    {/* <Text style={styles.nitePriceText}>Precio por noche</Text>
                     <View style={styles.preciosContent}>
                       <Text style={styles.precioText}>
                         USD {item.Precio_Hotel}
@@ -87,7 +88,7 @@ export default class HotelList extends React.Component {
                       <Text style={styles.precioBuenavista}>
                         USD {item.Precio_Buenavista}
                       </Text>
-                    </View>
+                    </View> */}
                   </View>
                 </View>
               )}

@@ -91,7 +91,7 @@ export default class HotelDetails extends React.Component {
             <Text style={styles.descriptionTitle}>Descripción</Text>
             <Text style={styles.descriptionText}>{item.Descripcion}</Text>
           </View>
-          <View style={styles.priceContainer}>
+          {/* <View style={styles.priceContainer}>
             <View style={styles.priceContainerLeft}>
               <Text style={styles.descriptionTitle}>Precio por noche</Text>
             </View>
@@ -101,7 +101,7 @@ export default class HotelDetails extends React.Component {
                 USD {item.Precio_Buenavista}
               </Text>
             </View>
-          </View>
+          </View> */}
           <View style={styles.descriptionContainer}>
             <Text style={styles.descriptionTitle}>Cupones</Text>
 
